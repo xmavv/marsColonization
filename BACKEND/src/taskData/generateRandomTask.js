@@ -17,15 +17,29 @@ function generateRandomTask() {
 
   const type = faker.helpers.arrayElement(types);
 
-  //these need to be manipulated well,
-  //if we get more coins, duration should be equally big,
-  //and number of workers too
-  //if we get more coins, we should not get lots of resources
-  //other way, if we get lots of resources, we get less coins
   const coins = faker.number.int({ min: 10, max: 1000 });
-  const resources = faker.number.int({ min: 100, max: 500 });
-  const workers = faker.number.int({ min: 1, max: 10 });
-  const duration = faker.number.int({ min: 60, max: 60 * 5 }); //1min to 5mins
+  let extraMultiplayer = 1;
+
+  if (coins < 300) {
+    extraMultiplayer = 1;
+  } else if (coins < 700) {
+    extraMultiplayer = 2;
+  } else {
+    extraMultiplayer = 3;
+  }
+
+  const resources = faker.number.int({
+    min: 100 * extraMultiplayer,
+    max: 200 * extraMultiplayer,
+  });
+  const workers = faker.number.int({
+    min: 1 * extraMultiplayer * 2,
+    max: 3 * extraMultiplayer,
+  });
+  const duration = faker.number.int({
+    min: 60 * extraMultiplayer * 2,
+    max: 60 * 3 * extraMultiplayer,
+  }); //seconds
 
   const task = {
     name,
