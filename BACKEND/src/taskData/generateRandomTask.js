@@ -17,28 +17,20 @@ function generateRandomTask() {
 
   const type = faker.helpers.arrayElement(types);
 
-  const coins = faker.number.int({ min: 10, max: 1000 });
-  let extraMultiplayer = 1;
-
-  if (coins < 300) {
-    extraMultiplayer = 1;
-  } else if (coins < 700) {
-    extraMultiplayer = 2;
-  } else {
-    extraMultiplayer = 3;
-  }
+  const coins = faker.number.int({ min: 50, max: 1000 });
+  const extraMultiplayer = coins/300;
 
   const resources = faker.number.int({
-    min: 100 * extraMultiplayer,
-    max: 200 * extraMultiplayer,
+    min: Math.ceil(100 * extraMultiplayer),
+    max: Math.ceil(200 * extraMultiplayer),
   });
   const workers = faker.number.int({
-    min: 1 * extraMultiplayer * 2,
-    max: 3 * extraMultiplayer,
+    min: Math.ceil(3 * extraMultiplayer),
+    max: Math.ceil(5 * extraMultiplayer),
   });
   const duration = faker.number.int({
-    min: 60 * extraMultiplayer * 2,
-    max: 60 * 3 * extraMultiplayer,
+    min: Math.ceil(60 * extraMultiplayer * 2),
+    max: Math.ceil(60 * extraMultiplayer * 3),
   }); //seconds
 
   const task = {
