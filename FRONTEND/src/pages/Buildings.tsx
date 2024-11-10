@@ -1,5 +1,11 @@
+import Island from "../features/buildings/Island";
+
 function Buildings() {
-  return <div>BUILDINGS</div>;
+  return (
+    <div>
+      <Island />
+    </div>
+  );
 }
 
 export default Buildings;
