@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 const Img = styled.img`
-  display: inline;
-  width: 3rem;
+  display: inline-block;
+  width: 2.5rem;
   aspect-ratio: 1/1;
+
+  margin: 0 .5rem;
 `;
 
-const Quantity = styled.span`
+const Quantity = styled.span<{color: string}>`
   color: ${(props) => props.color};
 `;
 
@@ -22,7 +24,7 @@ const colors = {
   water: "#62DDFC",
   oxygen: "#F5F5F5",
   temperature: "#FF405C",
-};
+} as const;
 
 function Resource({ type, children }: ResourceProps) {
   const color = colors[type];

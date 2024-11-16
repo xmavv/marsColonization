@@ -7,12 +7,15 @@ const StyledHeader = styled.header`
 
   font-size: 1rem;
   padding: 1rem;
+
+  background-color: rgba(0, 0, 0, 0.85);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 `;
 
 const Nickname = styled.span`
   font-size: 1.5rem;
   margin: 0 0.5rem;
-  color: blue;
+  color: white;
 `;
 
 const Level = styled.span`
@@ -39,7 +42,7 @@ function Header() {
         <Resource type="food">FOOD</Resource>
         <Resource type="water">WATER</Resource>
         <Resource type="oxygen">OXYGEN</Resource>
-        <Resource type="temperature">TEMP</Resource>
+        <Resource type="temperature">TEMPERATURE</Resource>
       </Ul>
 
       <div>

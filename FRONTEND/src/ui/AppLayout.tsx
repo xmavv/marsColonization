@@ -5,6 +5,9 @@ import styled from "styled-components";
 const StyledAppLayout = styled.main`
   display: grid;
   grid-template-rows: auto 1fr;
+  height: 100vh;
+
+  background-image: url('bg.png');
 `;
 
 function AppLayout() {
