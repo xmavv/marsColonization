@@ -5,10 +5,10 @@ const Img = styled.img`
   width: 2.5rem;
   aspect-ratio: 1/1;
 
-  margin: 0 .5rem;
+  margin: 0 0.5rem;
 `;
 
-const Quantity = styled.span<{color: string}>`
+const Quantity = styled.span<{ color: string }>`
   color: ${(props) => props.color};
 `;
 

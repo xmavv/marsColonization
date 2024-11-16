@@ -6,8 +6,10 @@ const StyledAppLayout = styled.main`
   display: grid;
   grid-template-rows: auto 1fr;
   height: 100vh;
+  overflow: hidden;
 
-  background-image: url('bg.png');
+  background-image: url("bg.png");
+  background-size: cover;
 `;
 
 function AppLayout() {
