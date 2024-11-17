@@ -3,7 +3,7 @@ import styled from "styled-components";
 import LogoType from "./LogoType";
 
 const StyledHomeLayout = styled.main`
-  background-image: url("backgrounds/bg-homepage.jpg");
+  background-image: url("backgrounds/bg-homepage.gif");
   background-size: cover;
   background-position: center;
 

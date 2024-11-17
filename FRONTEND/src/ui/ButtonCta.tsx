@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledButtonCta = styled.button`
-  font-size: 3rem;
+  font-size: 2rem;
   font-family: "Krona One", sans-serif;
   font-weight: bold;
   text-transform: uppercase;
 
   width: 25rem;
   margin: 1rem;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
 
   background-color: #ff00fb;
   border-radius: 2rem;

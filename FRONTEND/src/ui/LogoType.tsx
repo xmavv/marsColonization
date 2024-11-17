@@ -13,7 +13,7 @@ function LogoType() {
   return (
     <StyledLogoType>
       <a target="_blank" href="https://www.textstudio.com/">
-        <Img src="/logotype.gif" alt="" />
+        <Img src="/logotype.png" alt="" />
       </a>
     </StyledLogoType>
   );
