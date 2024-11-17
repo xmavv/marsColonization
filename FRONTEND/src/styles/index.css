@@ -7,6 +7,9 @@
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
 
+@import url("https://fonts.googleapis.com/css2?family=Krona+One&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Krona+One&family=Kumar+One&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+
 *,
 ::before,
 ::after {
@@ -66,6 +69,8 @@ body {
   /* 1 */
   line-height: inherit;
   /* 2 */
+  /* font-family: "Krona One", sans-serif; */
+  /* font-family: "Kumar One", serif; */
 }
 
 /*

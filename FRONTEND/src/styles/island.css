@@ -1,0 +1,21 @@
+.building {
+  filter: grayscale(100) brightness(80%);
+
+  transition: all 0.3s ease;
+}
+
+.building:hover {
+  filter: grayscale(0) brightness(100%);
+}
+
+.building-label {
+  opacity: 0;
+  visibility: hidden;
+
+  transition: all 0.3s ease;
+}
+
+.building:hover ~ * {
+  opacity: 1;
+  visibility: visible;
+}
