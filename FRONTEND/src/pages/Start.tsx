@@ -26,11 +26,11 @@ function Start() {
       </IslandWrapper>
 
       <Card3D>
-        <LinkCard to="/workers">WORKERS</LinkCard>
+        <LinkCard to="/app/workers">WORKERS</LinkCard>
       </Card3D>
 
       <Card3D>
-        <LinkCard to="/tasks">TASKS</LinkCard>
+        <LinkCard to="/app/tasks">TASKS</LinkCard>
       </Card3D>
     </StyledStart>
   );

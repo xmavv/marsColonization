@@ -3,12 +3,14 @@ import Header from "./Header";
 import styled from "styled-components";
 
 const StyledAppLayout = styled.main`
+  font-family: "Krona One", sans-serif;
+
   display: grid;
   grid-template-rows: auto 1fr;
   height: 100vh;
   overflow: hidden;
 
-  background-image: url("bg.png");
+  background-image: url("backgrounds/bg-app.png");
   background-size: cover;
 `;
 
