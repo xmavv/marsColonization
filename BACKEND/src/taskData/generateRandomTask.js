@@ -4,9 +4,9 @@ import { verbs as galacticVerbs } from "./galacticVerbs.js";
 import { adjectives as galacticAdjectives } from "./galacticAdjectives.js";
 import { nouns as galacticNouns } from "./galacticNouns.js";
 import { locations as galacticLocations } from "./galacticLocations.js";
-const types = ["energy", "food", "water", "oxygen"];
+const types = ["energy", "food", "water", "oxygen"]
 
-function generateRandomTask() {
+export function generateRandomTask() {
   const verb = faker.helpers.arrayElement(galacticVerbs);
   const adj = faker.helpers.arrayElement(galacticAdjectives);
   const noun = faker.helpers.arrayElement(galacticNouns);
@@ -44,7 +44,5 @@ function generateRandomTask() {
   };
 
   return task;
-}
+};
 
-const task = generateRandomTask();
-console.log(task);

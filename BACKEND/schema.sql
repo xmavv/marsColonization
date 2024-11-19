@@ -44,6 +44,7 @@ CREATE TABLE Resources (
 CREATE TABLE Tasks (
     id integer NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
     coins integer NOT NULL,
     workers integer NOT NULL,
     duration integer NOT NULL,

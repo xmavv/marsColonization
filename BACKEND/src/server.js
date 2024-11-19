@@ -6,8 +6,6 @@ import {default as app} from './app.js';
 
 const port = process.env.PORT || 8000;
 
-console.log(process.env);
-
 app.listen(port, () => {
     console.log(`App running on port ${port}...`)
 })

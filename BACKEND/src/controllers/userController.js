@@ -71,12 +71,14 @@ export const checkUsername = async function (req, res, next) {
 export const createUser = async function(req,res) {
     try {
         const result = await pool.query(`INSERT INTO Users(username, password) VALUES(?, ?)`,[req.body.username, req.body.password])
+        const userID =  result[0].insertId * 1;
+        createBuildings(userID);
         res.status(201).json({
             status: 'success',
             requestedAt: req.requestTime,
             data: {
                 user: {
-                    userID: result[0].insertId,
+                    userID,
                     username: req.body.username,
                     password: req.body.password,
                 }
@@ -89,4 +91,11 @@ export const createUser = async function(req,res) {
                 message: err,
             })
         }
+}
+
+const createBuildings = async function(userID) { 
+    const types = ['laboratory', 'farm', 'powerhouse', 'central', 'hydropolis'];   
+    
+    await Promise.all(types.map((type) => pool.query(`INSERT INTO Buildings(user_id, type) VALUES(?, ?)`,[userID, type]))
+);
 }
