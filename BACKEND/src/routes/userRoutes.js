@@ -6,4 +6,3 @@ router.route('/').get(getAllUsers).post(checkBody,checkUsernameIsTaken,createUse
 
 router.route('/:username').get(checkUsername,getUser);
 
-

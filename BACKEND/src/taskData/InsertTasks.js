@@ -6,7 +6,7 @@ for (let i = 0; i < 100; i++) {
     const task = generateRandomTask();
     const result = await pool.query(`INSERT INTO Tasks(name, coins, workers,duration , type, resources) VALUES(?, ?,?,?,?,?)`,
         [task.name,task.coins,task.workers,task.duration,task.type,task.resources])
-        console.log(result);
+        console.log("Inserted tasks");
     }
     catch (err) {
         console.log(err);
