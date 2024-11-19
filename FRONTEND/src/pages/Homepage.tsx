@@ -2,10 +2,12 @@ import styled from "styled-components";
 import ButtonCta from "../ui/ButtonCta";
 
 const StyledHomepage = styled.div`
-  padding: 10rem;
+  *:first-child {
+    margin-bottom: 2rem;
+  }
 
   &:has(button:hover) button:not(:hover) {
-    transform: scale(0.8);
+    transform: scale(0.9);
   }
 `;
 
