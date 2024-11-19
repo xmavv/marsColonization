@@ -43,17 +43,27 @@ export const getUser = async function (req,res) {
     }
 }
 
-
 export const checkBody = async function(req, res, next){
-    console.log("checking body...")
+    
     if (!req.body.username || !req.body.password) {
         console.log("Empty name or password");
-      return res.status(400).json({
-        status: 'fail',
-        message: 'Empty username or password',
-      });
+        return res.status(400).json({
+            status: 'fail',
+            message: 'Empty username or password',
+        });
     }
     next();
+}
+
+export const checkUsernameIsTaken = async function (req,res, next) {
+    const usernames = await pool.query('SELECT username from Users')
+    if (usernames[0].some( ({username}) => username == req.body.username)) {
+        return res.status(400).json({
+            status: 'fail',
+            message: 'username taken',
+        })
+     }
+     next();
 }
 
 export const checkUsername = async function (req, res, next) {
@@ -67,12 +77,13 @@ export const checkUsername = async function (req, res, next) {
     next();
 }
 
-
 export const createUser = async function(req,res) {
     try {
         const result = await pool.query(`INSERT INTO Users(username, password) VALUES(?, ?)`,[req.body.username, req.body.password])
         const userID =  result[0].insertId * 1;
         createBuildings(userID);
+        createWorkers(userID);
+        createResources(userID);
         res.status(201).json({
             status: 'success',
             requestedAt: req.requestTime,
@@ -98,4 +109,12 @@ const createBuildings = async function(userID) {
     
     await Promise.all(types.map((type) => pool.query(`INSERT INTO Buildings(user_id, type) VALUES(?, ?)`,[userID, type]))
 );
+};
+
+const createWorkers = async function (userID) {
+    pool.query(`INSERT INTO Workers(user_id) VALUES(?)`,[userID])
+}
+
+const createResources = async function (userID) {
+    pool.query(`INSERT INTO Resources(user_id) VALUES(?)`,[userID])
 }

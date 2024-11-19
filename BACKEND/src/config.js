@@ -9,5 +9,4 @@ export const config = {
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
     },
-  };
-console.log(config);
+};

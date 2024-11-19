@@ -9,11 +9,6 @@ app.use(
       extended: true,
     }));
     
-app.use((req,res,next)=>{
-      console.log('Hello from the middleware!');
-      next();
-    });
-
     
 app.use('/api/v1/users',userRouter);
 app.use('/api/v1/buildings',buildingRouter);
