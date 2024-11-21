@@ -1,5 +1,7 @@
+import Authentication from "../features/user/Authentication";
+
 function Register() {
-  return <div>REGISTER</div>;
+  return <Authentication onClick={() => "register"}>REGISTER</Authentication>;
 }
 
 export default Register;

@@ -57,6 +57,11 @@ html,
   /* 6 */
   -webkit-tap-highlight-color: transparent;
   /* 7 */
+
+  --radius-small: 2rem;
+  --color-primary: #e03df6;
+  --color-primary-2: #9d42ff;
+  --color-complementary: #3177fd;
 }
 
 /*

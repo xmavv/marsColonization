@@ -3,16 +3,20 @@ import styled from "styled-components";
 import LogoType from "./LogoType";
 
 const StyledHomeLayout = styled.main`
-  background-image: url("backgrounds/bg-homepage.jpg");
+  /* https://www.newgrounds.com/art/view/will/space-pixel-studies */
+  background-image: url("backgrounds/bg-homepage.gif");
   background-size: cover;
   background-position: center;
 
+  position: relative;
+
   height: 100vh;
-  text-align: center;
 `;
 
 const Wrapper = styled.div`
-  padding: 5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Blur = styled.div`
@@ -24,6 +28,14 @@ const Blur = styled.div`
 
 const Authors = styled.p`
   font-size: 1.5rem;
+  font-weight: bold;
+  padding: 2rem;
+
+  color: var(--color-primary-2);
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
 `;
 
 function HomeLayout() {
@@ -33,7 +45,7 @@ function HomeLayout() {
         <Wrapper>
           <LogoType />
           <Outlet />
-          <Authors>authors: mateusz oleksy and mateusz tesarewicz</Authors>
+          <Authors>authors: xmavv, tesa44</Authors>
         </Wrapper>
       </Blur>
     </StyledHomeLayout>
