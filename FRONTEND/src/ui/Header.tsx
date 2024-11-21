@@ -1,12 +1,14 @@
 import styled from "styled-components";
 import Resource from "./Resource";
+import ButtonLogOut from "./ButtonLogOut";
 
 const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   font-size: 1rem;
-  padding: 1rem;
+  padding: 1.2rem;
 
   background-color: rgba(0, 0, 0, 0.85);
   border-bottom: 2px solid rgba(255, 255, 255, 0.5);
@@ -45,9 +47,7 @@ function Header() {
         <Resource type="temperature">TEMPERATURE</Resource>
       </Ul>
 
-      <div>
-        <button>log out</button>
-      </div>
+      <ButtonLogOut />
     </StyledHeader>
   );
 }
