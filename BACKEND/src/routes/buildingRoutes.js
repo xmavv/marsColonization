@@ -1,8 +1,8 @@
 import express from "express";
+import { checkUserID } from "../controllers/controller.js";
 import {
   checkBody,
   checkType,
-  checkUserID,
   getBuilding,
   getBuildings,
   updateBuildingLevel,
