@@ -11,12 +11,9 @@ const StyledHomeLayout = styled.main`
   position: relative;
 
   height: 100vh;
-  text-align: center;
 `;
 
 const Wrapper = styled.div`
-  padding: 5rem 0;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,10 +28,14 @@ const Blur = styled.div`
 
 const Authors = styled.p`
   font-size: 1.5rem;
+  font-weight: bold;
   padding: 2rem;
+
+  color: var(--color-primary-2);
 
   position: absolute;
   bottom: 0;
+  left: 0;
 `;
 
 function HomeLayout() {
@@ -44,7 +45,7 @@ function HomeLayout() {
         <Wrapper>
           <LogoType />
           <Outlet />
-          <Authors>authors: mateusz oleksy and mateusz tesarewicz</Authors>
+          <Authors>authors: xmavv, tesa44</Authors>
         </Wrapper>
       </Blur>
     </StyledHomeLayout>

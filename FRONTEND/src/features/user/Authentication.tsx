@@ -1,54 +1,84 @@
 import styled from "styled-components";
 import ButtonCta from "../../ui/ButtonCta";
 
-const StyledAuthentication = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-`;
-
 const UserData = styled.div`
-  font-size: 1.7rem;
+  font-size: 1.5rem;
+  width: 38rem;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 2rem;
 
-  padding: 2rem;
+  position: relative;
+  padding: 4rem 2rem;
+  margin-bottom: 2rem;
 
-  color: var(--color-primary);
-  border: 7px solid var(--color-primary);
-  border-radius: var(--radius-small);
-  background-color: var(--color-primary-bg);
+  color: black;
+  background-image: linear-gradient(
+    var(--color-primary),
+    var(--color-primary-2)
+  );
   box-shadow: 0 1rem 5rem var(--color-primary);
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    background-color: var(--color-complementary);
+  }
+
+  &::before {
+    bottom: -1rem;
+    left: 6px;
+
+    width: 100%;
+    height: 1rem;
+
+    transform: skewX(45deg);
+  }
+
+  &::after {
+    top: 7px;
+    right: -1rem;
+
+    width: 1rem;
+    height: 100%;
+
+    transform: skewY(45deg);
+  }
 `;
 
 const Input = styled.input`
   font-family: "Krona One", sans-serif;
+  display: block;
 
   padding: 1.5rem;
   margin: 2rem;
   width: 30rem;
 
-  border-radius: var(--radius-small);
+  color: var(--color-complementary);
+  background-color: rgba(0, 0, 0, 0.5);
   border: 7px solid transparent;
 
-  color: var(--color-complementary);
-  background-color: rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
 
   &::placeholder {
-    color: var(--color-complementary);
+    color: black;
   }
 
   &:focus {
     outline: none;
-    border: 7px solid var(--color-primary);
+    border: 7px solid var(--color-complementary);
   }
 `;
 
 const Label = styled.label`
+  margin-left: 2rem;
+  font-size: 1rem;
+  font-weight: bold;
   font-family: "Krona One", sans-serif;
+  text-transform: uppercase;
 `;
 
 interface AuthenticationProps {
@@ -58,17 +88,23 @@ interface AuthenticationProps {
 
 function Authentication({ children, onClick }: AuthenticationProps) {
   return (
-    <StyledAuthentication>
+    <form>
       <UserData>
-        <Label htmlFor="username">username</Label>
-        <Input placeholder="e.g. xmavv" id="username" type="text" />
+        <div>
+          <Label htmlFor="username">username</Label>
+          <Input placeholder="e.g. xmavv" id="username" type="text" />
+        </div>
 
-        <Label htmlFor="password">password</Label>
-        <Input placeholder="e.g. 12345" id="password" type="text" />
+        <div>
+          <Label htmlFor="password">password</Label>
+          <Input placeholder="e.g. 12345" id="password" type="password" />
+        </div>
       </UserData>
 
-      <ButtonCta onClick={onClick}>{children}</ButtonCta>
-    </StyledAuthentication>
+      <ButtonCta rotate="0deg" onClick={onClick}>
+        {children}
+      </ButtonCta>
+    </form>
   );
 }
 
