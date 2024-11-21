@@ -34,7 +34,7 @@ CREATE TABLE Resources (
     user_id integer,
     coins integer NOT NULL DEFAULT 0,
     energy integer NOT NULL DEFAULT 0,
-    wood integer NOT NULL DEFAULT 0,
+    food integer NOT NULL DEFAULT 0,
     water integer NOT NULL DEFAULT 0,
     oxygen integer NOT NULL DEFAULT 0,
     temperature integer NOT NULL DEFAULT -150,
