@@ -11,7 +11,6 @@ export const getAllUsers = async function(req,res) {
         data: {
             rows,
         },
-    
     });
     } catch (err) {
         res.status(404).json({
