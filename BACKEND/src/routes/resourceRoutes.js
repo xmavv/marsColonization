@@ -4,5 +4,6 @@ import { checkResources, getResources, updateResources } from '../controllers/re
 
 export const router = express.Router();
 
+router.param('userid',checkUserID);
 
-router.route('/:userid').get(checkUserID,getResources).patch(checkResources,updateResources);
+router.route('/:userid').get(getResources).patch(checkResources,updateResources);
