@@ -1,6 +1,15 @@
 import styled from "styled-components";
-import Resource from "./Resource";
+import Resource, { Type } from "./Resource";
 import ButtonLogOut from "./ButtonLogOut";
+
+const types = [
+  "coins",
+  "energy",
+  "food",
+  "water",
+  "oxygen",
+  "temperature",
+] as Type[];
 
 const StyledHeader = styled.header`
   display: flex;
@@ -39,12 +48,13 @@ function Header() {
       </div>
 
       <Ul>
-        <Resource type="coins">COINS</Resource>
-        <Resource type="energy">ENERGY</Resource>
-        <Resource type="food">FOOD</Resource>
-        <Resource type="water">WATER</Resource>
-        <Resource type="oxygen">OXYGEN</Resource>
-        <Resource type="temperature">TEMPERATURE</Resource>
+        {types.map((resourceType: Type) => (
+          <li>
+            <Resource type={resourceType}>
+              {resourceType.toUpperCase()}
+            </Resource>
+          </li>
+        ))}
       </Ul>
 
       <ButtonLogOut />

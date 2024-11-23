@@ -1,19 +1,18 @@
+import Icon from "../ui/Icon";
 import styled from "styled-components";
-
-const Img = styled.img`
-  display: inline-block;
-  width: 2.5rem;
-  aspect-ratio: 1/1;
-
-  margin: 0 0.5rem;
-`;
 
 const Quantity = styled.span<{ color: string }>`
   color: ${(props) => props.color};
 `;
-
+export type Type =
+  | "coins"
+  | "energy"
+  | "food"
+  | "water"
+  | "oxygen"
+  | "temperature";
 interface ResourceProps {
-  type: "coins" | "energy" | "food" | "water" | "oxygen" | "temperature";
+  type: Type;
   children: string;
 }
 
@@ -30,10 +29,10 @@ function Resource({ type, children }: ResourceProps) {
   const color = colors[type];
 
   return (
-    <li>
-      <Img src={`resources/${type}.png`} alt="" />
+    <div>
+      <Icon type={type} />
       <Quantity color={color}>{children}</Quantity>
-    </li>
+    </div>
   );
 }
 
