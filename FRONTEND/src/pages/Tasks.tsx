@@ -1,5 +1,11 @@
+import ButtonGoBack from "../ui/ButtonGoBack";
+
 function Tasks() {
-  return <div>TASKS</div>;
+  return (
+    <div>
+      <ButtonGoBack />
+    </div>
+  );
 }
 
 export default Tasks;

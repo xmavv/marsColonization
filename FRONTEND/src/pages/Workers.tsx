@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Worker from "../features/workers/Worker";
+import ButtonGoBack from "../ui/ButtonGoBack";
 
 const StyledWorkers = styled.div`
   background-image: linear-gradient(
@@ -14,13 +15,17 @@ const StyledWorkers = styled.div`
 
 function Workers() {
   return (
-    <StyledWorkers>
-      <Worker type="hydrologist" />
-      <Worker type="chemist" />
-      <Worker type="electrician" />
-      <Worker type="biologist" />
-      <Worker type="meteorologist" />
-    </StyledWorkers>
+    <>
+      <StyledWorkers>
+        <Worker type="hydrologist" />
+        <Worker type="chemist" />
+        <Worker type="electrician" />
+        <Worker type="biologist" />
+        <Worker type="meteorologist" />
+      </StyledWorkers>
+
+      <ButtonGoBack />
+    </>
   );
 }
 

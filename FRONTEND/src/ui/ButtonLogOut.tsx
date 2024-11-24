@@ -24,7 +24,7 @@ function ButtonLogOut() {
   return (
     <StyledButtonLogOut>
       <span>log out</span>
-      <Img src="/header/logout.png" alt="" />
+      <Img src="/utils/logout.png" alt="" />
     </StyledButtonLogOut>
   );
 }

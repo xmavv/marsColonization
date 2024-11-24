@@ -1,7 +1,9 @@
+import ButtonGoBack from "../ui/ButtonGoBack";
+
 function Building() {
   return (
     <div>
-      BUILDING
+      <ButtonGoBack />
     </div>
   );
 }
