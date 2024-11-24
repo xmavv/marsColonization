@@ -1,4 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 function Island() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("building/1");
+  };
+
   return (
     <svg
       width="100%"
@@ -18,6 +26,7 @@ function Island() {
           fill="url(#pattern1_58_9)"
           className="building"
           id="hydropolis"
+          onClick={handleClick}
         />
         <rect
           x="739"
@@ -27,6 +36,7 @@ function Island() {
           fill="url(#pattern2_58_9)"
           className="building"
           id="powerhouse"
+          onClick={handleClick}
         />
         <rect
           x="269"
@@ -36,6 +46,7 @@ function Island() {
           fill="url(#pattern3_58_9)"
           className="building"
           id="farm"
+          onClick={handleClick}
         />
         <rect
           x="568"
@@ -45,6 +56,7 @@ function Island() {
           fill="url(#pattern4_58_9)"
           className="building"
           id="laboratory"
+          onClick={handleClick}
         />
         <rect
           x="451"
@@ -54,6 +66,7 @@ function Island() {
           fill="url(#pattern5_58_9)"
           className="building"
           id="central"
+          onClick={handleClick}
         />
         <mask
           id="path-7-outside-1_58_9"
