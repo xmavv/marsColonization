@@ -1,9 +1,12 @@
-import Icon from "../ui/Icon";
 import styled from "styled-components";
+import Icon from "../ui/Icon";
+import { Quantity } from "./Quantity";
 
-const Quantity = styled.span<{ color: string }>`
-  color: ${(props) => props.color};
+const StyledResource = styled.div`
+  display: flex;
+  align-items: center;
 `;
+
 export type Type =
   | "coins"
   | "energy"
@@ -14,6 +17,7 @@ export type Type =
 interface ResourceProps {
   type: Type;
   children: string;
+  size?: string;
 }
 
 const colors = {
@@ -25,14 +29,16 @@ const colors = {
   temperature: "#FF405C",
 } as const;
 
-function Resource({ type, children }: ResourceProps) {
+function Resource({ type, children, size }: ResourceProps) {
   const color = colors[type];
 
   return (
-    <div>
+    <StyledResource>
       <Icon type={type} />
-      <Quantity color={color}>{children}</Quantity>
-    </div>
+      <Quantity color={color} size={size}>
+        {children}
+      </Quantity>
+    </StyledResource>
   );
 }
 

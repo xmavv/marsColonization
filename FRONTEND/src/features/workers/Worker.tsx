@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import IconPlus from "../../ui/IconPlus";
 import Resource from "../../ui/Resource";
+import { Quantity } from "../../ui/Quantity";
 
 const StyledWorker = styled.div`
-  background-image: linear-gradient(rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 1));
-
   display: grid;
   grid-template-rows: 1fr 1fr 10fr 1fr 1fr;
   align-items: center;
@@ -15,10 +14,10 @@ const StyledWorker = styled.div`
 
   &:hover {
     > img {
-      transform: translateY(-2rem);
+      transform: translateY(-1.5rem);
     }
 
-    span {
+    > span {
       color: white;
     }
 
@@ -53,11 +52,6 @@ const Name = styled.p`
   font-size: 2rem;
 `;
 
-const Quantity = styled.span`
-  color: var(--color-primary);
-  font-size: 2rem;
-`;
-
 interface WorkerProps {
   type:
     | "hydrologist"
@@ -70,13 +64,17 @@ interface WorkerProps {
 function Worker({ type }: WorkerProps) {
   return (
     <StyledWorker>
-      <Resource type="coins">$ 500</Resource>
+      <Resource type="coins" size="2rem">
+        $ 500
+      </Resource>
       <Button>
         <IconPlus /> add
       </Button>
       <Img src={`/workers/${type}.png`} alt="" />
       <Name>{type}</Name>
-      <Quantity>50</Quantity>
+      <Quantity color="var(--color-primary)" size="2rem">
+        50
+      </Quantity>
     </StyledWorker>
   );
 }

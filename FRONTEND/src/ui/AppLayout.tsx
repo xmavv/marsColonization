@@ -11,6 +11,7 @@ const StyledAppLayout = styled.main`
   overflow: hidden;
 
   background-image: url("/backgrounds/bg-app.png");
+
   background-size: cover;
 `;
 
