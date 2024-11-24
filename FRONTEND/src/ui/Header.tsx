@@ -49,7 +49,7 @@ function Header() {
 
       <Ul>
         {types.map((resourceType: Type) => (
-          <li>
+          <li key={resourceType}>
             <Resource type={resourceType}>
               {resourceType.toUpperCase()}
             </Resource>
