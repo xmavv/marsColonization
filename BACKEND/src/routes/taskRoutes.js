@@ -4,6 +4,6 @@ import { endTask, getTasks } from "../controllers/taskController.js";
 
 export const router = express.Router();
 
-//router.param("userid", checkUserID);
+router.param("userid", checkUserID);
 
 router.route("/:userid").get(getTasks).post(endTask);

@@ -17,5 +17,5 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/buildings", buildingRouter);
 app.use("/api/v1/resources", resourceRouter);
 app.use("/api/v1/workers", workerRouter);
-app.use("api/v1/tasks", taskRouter);
+app.use("/api/v1/tasks", taskRouter);
 export default app;
