@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Type } from "./Resource";
 
 const StyledIcon = styled.img`
   display: inline-block;
@@ -8,11 +9,7 @@ const StyledIcon = styled.img`
   margin: 0 0.5rem;
 `;
 
-interface IconProps {
-  type: "coins" | "energy" | "food" | "water" | "oxygen" | "temperature";
-}
-
-function Icon({ type }: IconProps) {
+function Icon({ type }: { type: Type }) {
   return <StyledIcon src={`/resources/${type}.png`} alt="" />;
 }
 

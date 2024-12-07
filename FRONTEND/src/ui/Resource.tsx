@@ -13,7 +13,9 @@ export type Type =
   | "food"
   | "water"
   | "oxygen"
-  | "temperature";
+  | "temperature"
+  | "workers"
+  | "duration";
 interface ResourceProps {
   type: Type;
   children: string;
@@ -27,6 +29,8 @@ const colors = {
   water: "#62DDFC",
   oxygen: "#F5F5F5",
   temperature: "#FF405C",
+  workers: "white",
+  duration: "xd",
 } as const;
 
 function Resource({ type, children, size }: ResourceProps) {

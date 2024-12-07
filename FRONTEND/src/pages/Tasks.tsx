@@ -1,10 +1,15 @@
+import TaskTable from "../features/tasks/TaskTable";
 import ButtonGoBack from "../ui/ButtonGoBack";
+import TableWrapper from "../ui/TableWrapper";
 
 function Tasks() {
   return (
-    <div>
+    <>
+      <TableWrapper>
+        <TaskTable />
+      </TableWrapper>
       <ButtonGoBack />
-    </div>
+    </>
   );
 }
 
