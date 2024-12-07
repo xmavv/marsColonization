@@ -74,6 +74,18 @@ uruchamiamy aplikacje `npm run dev`
 
 w przegladarce wchodzimy na adres `http://localhost:5173/`
 
+## backend
+
+### jak uruchomic back
+
+- node.js musi byc zainstalowany do pobrania paczek
+- wchodzimy bezpośrednio do folderu `./BACKEND`
+- instalujemy paczki `npm i`
+- tworzymy plik `config.env` w `./src` i ustawiamy `HOST=127.0.0.1`, `USER=root`, `PASSWORD=(twoje haslo do twojej lokalnej instancji mysql)`,  `PORT=8000`, `DATABASE=mars_colonization`.
+- Wymagane jest lokalne utworzenie bazy danych póki co, więc będąc w `./BACKEND` w terminalu wpisujemy `mysql -u root -p` i się logujemy do lokalnego mysql. Następnie tworzymy lokalną bazę `source schema.sql`.
+- Teraz można uruchomić aplikację `npm run start:dev`
+- Api można testować w przeglądarce, ale polecam aplikację `POSTMAN`.
+
 ### architektura 
 
 ![front architecture](./front-architecture.pdf)
