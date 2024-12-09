@@ -14,9 +14,20 @@ const StyledButtonGoBack = styled.button`
     var(--color-primary-2)
   );
   box-shadow: 0 0 1rem black;
+
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-0.5rem);
+  }
 `;
 
 const Img = styled.img`
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+
   width: 3rem;
   aspect-ratio: 1/1;
 `;
