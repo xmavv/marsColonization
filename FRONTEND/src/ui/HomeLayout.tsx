@@ -45,7 +45,7 @@ function HomeLayout() {
         <Wrapper>
           <LogoType />
           <Outlet />
-          <Authors>authors: xmavv, tesa44</Authors>
+          {/* <Authors>authors: xmavv, tesa44</Authors> */}
         </Wrapper>
       </Blur>
     </StyledHomeLayout>
