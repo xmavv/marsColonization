@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-export const Level = styled.span`
+export const Level = styled.span<{color?: string}>`
   margin: 0 0.5rem;
-  color: #21dc21;
+  color: ${props => props.color};
 `;
+
+Level.defaultProps= {color: '#21dc21'};

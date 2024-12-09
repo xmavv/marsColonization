@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Icon from "../ui/Icon";
 import { Quantity } from "./Quantity";
 
-const StyledResource = styled.div`
+const StyledResource = styled.span`
   display: flex;
   align-items: center;
 `;
@@ -29,8 +29,8 @@ const colors = {
   water: "#62DDFC",
   oxygen: "#F5F5F5",
   temperature: "#FF405C",
-  workers: "white",
-  duration: "xd",
+  workers: "#97D9F0",
+  duration: "white",
 } as const;
 
 function Resource({ type, children, size }: ResourceProps) {

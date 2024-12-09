@@ -24,7 +24,7 @@ function App() {
         </Route>
         <Route element={<AppLayout />}>
           <Route path="app" element={<Start />} />
-          <Route path="app/building/:buildingId" element={<Building />} />
+          <Route path="app/building/:buildingType" element={<Building />} />
           <Route path="app/tasks" element={<Tasks />} />
           <Route path="app/workers" element={<Workers />} />
         </Route>
