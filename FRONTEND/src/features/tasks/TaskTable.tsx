@@ -58,7 +58,33 @@ const task5: Task = {
   resources: 241,
 };
 
-const tasks = [task1, task2, task3, task4, task5];
+const tasks = [
+  task1,
+  task2,
+  task3,
+  task4,
+  task5,
+  task1,
+  task2,
+  task3,
+  task4,
+  task5,
+  task1,
+  task2,
+  task3,
+  task4,
+  task5,
+  task1,
+  task2,
+  task3,
+  task4,
+  task5,
+  task1,
+  task2,
+  task3,
+  task4,
+  task5,
+];
 
 function TaskTable() {
   return (
@@ -74,8 +100,9 @@ function TaskTable() {
       </Table.Header>
 
       <Table.Body
+        height="70vh"
         data={tasks}
-        render={(task) => <TaskRow key={task.id} task={task as Task}></TaskRow>}
+        render={(task) => <TaskRow key={task.id} task={task as Task} />}
       ></Table.Body>
     </Table>
   );

@@ -9,6 +9,7 @@ import Workers from "./pages/Workers";
 import Start from "./pages/Start";
 import PageNotFound from "./pages/PageNotFound";
 import HomeLayout from "./ui/HomeLayout";
+import Users from "./pages/Users";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="homepage" element={<Homepage />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
+          <Route path="users" element={<Users />} />
         </Route>
         <Route element={<AppLayout />}>
           <Route path="app" element={<Start />} />

@@ -40,7 +40,7 @@ function Resource({ type, children, size }: ResourceProps) {
     <StyledResource>
       <Icon type={type} />
       <Quantity color={color} size={size}>
-        {children}
+        {type === "coins" ? `${children} $` : children}
       </Quantity>
     </StyledResource>
   );

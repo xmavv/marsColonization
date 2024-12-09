@@ -13,6 +13,7 @@ interface TableProps {
 interface BodyProps {
   data: Task[] | User[];
   render: (element: Task | User) => React.ReactNode;
+  height: string;
 }
 
 interface Children {
@@ -21,6 +22,7 @@ interface Children {
 
 const StyledTable = styled.div`
   font-size: 1.2rem;
+  font-family: "Krona One", sans-serif;
   font-weight: 100;
 
   text-transform: uppercase;
@@ -31,10 +33,10 @@ const StyledTable = styled.div`
   padding: 3rem 4rem;
 `;
 
-const StyledBody = styled.div`
+const StyledBody = styled.div<{ height: string }>`
   overflow-x: hidden;
   overflow-y: auto;
-  height: 70vh;
+  height: ${(props) => props.height};
 `;
 
 const CommonRow = styled.div<{ columns: string }>`
@@ -80,8 +82,8 @@ function Header({ children }: Children) {
   );
 }
 
-function Body({ data, render }: BodyProps) {
-  return <StyledBody>{data.map(render)}</StyledBody>;
+function Body({ data, render, height }: BodyProps) {
+  return <StyledBody height={height}>{data.map(render)}</StyledBody>;
 }
 
 function Row({ children }: Children) {
