@@ -43,7 +43,7 @@ const Button = styled.button`
 `;
 
 const Img = styled.img`
-  width: 90%;
+  width: 80%;
   transition: transform 0.3s ease;
 `;
 
