@@ -2,7 +2,23 @@ import styled from "styled-components";
 import ButtonGoBack from "../ui/ButtonGoBack";
 import { useParams } from "react-router-dom";
 import { Level } from "../ui/Level";
-import Resource from "../ui/Resource";
+import Resource, { Type } from "../ui/Resource";
+
+const buildingsDescription = {
+  central: "The Central building serves as the heart of the Mars colony, providing advanced climate regulation systems to counteract the harsh Martian temperatures. Equipped with state-of-the-art cooling towers and thermal shields, it allows settlers to lower the ambient temperature to more habitable levels. As the Central building upgrades, its efficiency in reducing temperatures improves, enabling further expansion and survival in the hostile Martian environment.",
+  farm: "The Farm is the lifeline of the colony, responsible for producing vital food supplies. Using advanced hydroponics and Martian soil adaptations, it cultivates crops in a controlled environment. As the Farm levels up, it becomes more efficient, yielding larger quantities of fresh food to sustain the growing population. Its ability to maximize food production is crucial for maintaining colony morale and survival.",
+  laboratory: "The Laboratory is the colony’s oxygen production center, equipped with cutting-edge chemical reactors to split carbon dioxide into breathable oxygen. It also serves as a hub for scientific advancements. Upgrading the Laboratory enhances its oxygen production capacity, enabling settlers to expand their habitats and sustain life in larger numbers. Its role is vital for long-term survival on Mars.",
+  hydropolis: "Hydropolis is the colony's water processing hub, utilizing advanced filtration and condensation technology to extract water from Martian soil and atmosphere. This essential resource supports hydration, agriculture, and industrial processes. Higher levels of Hydropolis significantly increase water production, ensuring a steady supply for the expanding colony and safeguarding against resource shortages.",
+  powerhouse: "The Powerhouse generates and distributes energy to power the colony's systems and operations. Using solar panels and geothermal energy converters, it ensures sustainable energy production even in the harsh Martian environment. As the Powerhouse is upgraded, its energy output grows, supporting larger structures and more advanced technologies, enabling the colony's continued growth and resilience.",
+}
+
+const buildingsResource = {
+  central: "temperature",
+  farm: "food",
+  laboratory: "oxygen",
+  hydropolis: "water",
+  powerhouse: "energy",
+}
 
 const StyledBuilding = styled.div`
   font-size: 2.5rem;
@@ -70,8 +86,10 @@ const ResourcesContainer = styled.div`
 `
 
 function Building() {
-  // const buildingType = useParams();
-  const buildingType = 'central';
+  let {buildingType}= useParams() as {buildingType: "central" | "hydropolis" | "laboratory" | "farm" | "powerhouse"};
+  const capitalizedBuildingType = `${buildingType?.charAt(0).toUpperCase()}${buildingType?.slice(1)}`;
+  const buildingDescription = buildingsDescription[buildingType];
+  const buildingResrouce = buildingsResource[buildingType] as Type;
 
   return (
     <>
@@ -82,15 +100,15 @@ function Building() {
           <div>
             <Level color="var(--color-complementary)">level 1</Level>
           </div>
-          <Name>Central</Name>
-          <Description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim  veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea  commodo consequat. Duis aute irure dolor in reprehenderit in voluptate  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint  occaecat cupidatat non proident, sunt in culpa qui officia deserunt  mollit anim id est laborum</Description>
+          <Name>{capitalizedBuildingType}</Name>
+          <Description>{buildingDescription}</Description>
         </Info>
         <CtaSection>
           <div>
             <ResourcesContainer>
               <Resource type="duration">1min</Resource>
             </ResourcesContainer>
-            <ButtonClaim><Resource type="energy">300</Resource></ButtonClaim>
+            <ButtonClaim><Resource type={buildingResrouce}>300</Resource></ButtonClaim>
           </div>
 
           <div>

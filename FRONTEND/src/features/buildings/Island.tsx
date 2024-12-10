@@ -3,10 +3,6 @@ import { useNavigate } from "react-router-dom";
 function Island() {
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate("building/1");
-  };
-
   return (
     <svg
       width="100%"
@@ -18,6 +14,8 @@ function Island() {
     >
       <g clipPath="url(#clip0_58_9)">
         <rect width="1212" height="1024" fill="url(#pattern0_58_9)" />
+
+        {/* HYDROPOLIS */}
         <rect
           x="377"
           y="440"
@@ -26,8 +24,10 @@ function Island() {
           fill="url(#pattern1_58_9)"
           className="building"
           id="hydropolis"
-          onClick={handleClick}
+          onClick={() => navigate("building/hydropolis")}
         />
+
+        {/* POWERHOUSE */}
         <rect
           x="739"
           y="224"
@@ -36,8 +36,10 @@ function Island() {
           fill="url(#pattern2_58_9)"
           className="building"
           id="powerhouse"
-          onClick={handleClick}
+          onClick={() => navigate("building/powerhouse")}
         />
+
+        {/* FARM */}
         <rect
           x="269"
           y="255"
@@ -46,8 +48,10 @@ function Island() {
           fill="url(#pattern3_58_9)"
           className="building"
           id="farm"
-          onClick={handleClick}
+          onClick={() => navigate("building/farm")}
         />
+
+        {/* LABORATORY */}
         <rect
           x="568"
           y="522"
@@ -56,8 +60,10 @@ function Island() {
           fill="url(#pattern4_58_9)"
           className="building"
           id="laboratory"
-          onClick={handleClick}
+          onClick={() => navigate("building/laboratory")}
         />
+
+        {/* CENTRAL */}
         <rect
           x="451"
           y="13"
@@ -66,7 +72,7 @@ function Island() {
           fill="url(#pattern5_58_9)"
           className="building"
           id="central"
-          onClick={handleClick}
+          onClick={() => navigate("building/central")}
         />
         <mask
           id="path-7-outside-1_58_9"
