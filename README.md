@@ -67,14 +67,10 @@ Mechanika:
 ### jak uruchomic front
 
 - node.js musi byc zainstalowany
-
-wchodzimy bezposrednio do folderu `./FRONTEND`
-
-instalujemy paczki `npm i`
-
-uruchamiamy aplikacje `npm run dev`
-
-w przegladarce wchodzimy na adres `http://localhost:5173/`
+- wchodzimy bezposrednio do folderu `./FRONTEND`
+- instalujemy paczki `npm i`
+- uruchamiamy aplikacje `npm run dev`
+- w przegladarce wchodzimy na adres `http://localhost:5173/`
 
 ### architektura 
 
@@ -88,6 +84,6 @@ w przegladarce wchodzimy na adres `http://localhost:5173/`
 - wchodzimy bezpośrednio do folderu `./BACKEND`
 - instalujemy paczki `npm i`
 - tworzymy plik `config.env` w `./src` i ustawiamy `HOST=127.0.0.1`, `USER=root`, `PASSWORD=(twoje haslo do twojej lokalnej instancji mysql)`,  `PORT=8000`, `DATABASE=mars_colonization`.
-- Wymagane jest lokalne utworzenie bazy danych póki co, więc będąc w `./BACKEND` w terminalu wpisujemy `mysql -u root -p` i się logujemy do lokalnego mysql. Następnie tworzymy lokalną bazę `source schema.sql`.
-- Teraz można uruchomić aplikację `npm run start:dev`
-- Api można testować w przeglądarce, ale polecam aplikację `POSTMAN`.
+- wymagane jest lokalne utworzenie bazy danych póki co, więc będąc w `./BACKEND` w terminalu wpisujemy `mysql -u root -p` i się logujemy do lokalnego mysql. Następnie tworzymy lokalną bazę `source schema.sql`.
+- teraz można uruchomić aplikację `npm run start:dev`
+- api można testować w przeglądarce, ale polecam aplikację `POSTMAN`.
