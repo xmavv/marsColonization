@@ -1,14 +1,16 @@
 # [marsColonization](https://xmavv-marsColonization.netlify.app/)
 
 ![design preview](./preview.png)
+design by [xmavv](https://github.com/xmavv)
 
 - [plan](#plan)
 - [baza danych](#baza-danych)
 - [prces](#proces)
-    - [frontend](#front)
+    - [frontend](#frontend)
         - [jak uruchomic front](#jak-uruchomic-front)
         - [architektura](#architektura)
-    - [backend](#back)
+    - [backend](#backend)
+        - [jak uruchomic back](#jak-uruchomic-back)
 
 # plan
 
@@ -74,6 +76,10 @@ uruchamiamy aplikacje `npm run dev`
 
 w przegladarce wchodzimy na adres `http://localhost:5173/`
 
+### architektura 
+
+![front architecture](./front-architecture.pdf)
+
 ## backend
 
 ### jak uruchomic back
@@ -85,9 +91,3 @@ w przegladarce wchodzimy na adres `http://localhost:5173/`
 - Wymagane jest lokalne utworzenie bazy danych póki co, więc będąc w `./BACKEND` w terminalu wpisujemy `mysql -u root -p` i się logujemy do lokalnego mysql. Następnie tworzymy lokalną bazę `source schema.sql`.
 - Teraz można uruchomić aplikację `npm run start:dev`
 - Api można testować w przeglądarce, ale polecam aplikację `POSTMAN`.
-
-### architektura 
-
-![front architecture](./front-architecture.pdf)
-
-## backend
