@@ -3,7 +3,7 @@ import ButtonCta from "../../ui/ButtonCta";
 
 const UserData = styled.div`
   font-size: 1.5rem;
-  width: 38rem;
+  width: 35rem;
 
   display: flex;
   flex-direction: column;
@@ -97,7 +97,7 @@ function Authentication({ children, onClick }: AuthenticationProps) {
 
         <div>
           <Label htmlFor="password">password</Label>
-          <Input placeholder="e.g. 12345" id="password" type="password" />
+          <Input placeholder="e.g. admin' OR '1'='1 :)" id="password" type="password" />
         </div>
       </UserData>
 

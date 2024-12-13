@@ -8,8 +8,8 @@ const StyledButtonCta = styled.button<{ rotate: string }>`
   text-transform: uppercase;
 
   position: relative;
-  width: 38rem;
-  padding: 4rem 2rem;
+  width: 35rem;
+  padding: 3.5rem 2rem;
 
   color: black;
   background-image: linear-gradient(

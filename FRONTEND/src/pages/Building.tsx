@@ -69,6 +69,11 @@ const Button = styled.button`
   padding: 1rem 3rem;
   margin-top: 1.5rem;
   border-radius: 4rem;
+
+  transition: transform .3s ease;
+  &:hover {
+      transform: scale(1.07);
+  }
 `
 
 const ButtonClaim = styled(Button)`

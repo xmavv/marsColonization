@@ -3,44 +3,48 @@ import ButtonCta from "../ui/ButtonCta";
 import { Link } from "react-router-dom";
 
 const StyledHomepage = styled.div`
-  * {
-    margin: 10rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rem;
+
+  div >* {
+    margin: 5rem;
   }
 `;
 
-const Users = styled.div`
+const ButtonUsers = styled.button`
   font-size: 1.5rem;
-  text-align: center;
-`;
-
-const UsersLink = styled(Link)`
   font-family: "Krona one", sans-serif;
   padding: 2rem;
-  background-color: var(--color-complementary);
+  background-image: linear-gradient(var(--color-complementary), #00c3ff);
   border-radius: 2rem;
   text-transform: uppercase;
   font-weight: bold;
 
   box-shadow: 0 1rem 5rem var(--color-complementary);
 
-  transition: background-color 0.5s ease;
+  transition: transform 0.3s ease;
   &:hover {
+    transform: translateY(-1rem);
   }
 `;
 
 function Homepage() {
   return (
     <StyledHomepage>
+      <div>
       <ButtonCta rotate="5deg" to="/register">
         register
       </ButtonCta>
       <ButtonCta rotate="-12deg" to="/login">
         login
       </ButtonCta>
+      </div>
 
-      <Users>
-        <UsersLink to="/users">players table</UsersLink>
-      </Users>
+      <ButtonUsers>
+          <Link to="/users">players table</Link>
+      </ButtonUsers>
     </StyledHomepage>
   );
 }
