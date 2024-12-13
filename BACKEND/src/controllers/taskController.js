@@ -40,3 +40,23 @@ export const endTask = async function (req, res) {
     });
   }
 };
+
+export const checkBody = async function (req,res, next) {
+  try {
+      const taskID = req.body.task_id *1;
+      const [[maxID]] = await pool.query(`SELECT MAX(id) as max_id FROM Tasks`)
+      if (!(taskID >= 0 && taskID <= maxID.max_id)) {
+        return res.status(400).json({
+          status: 'fail',
+          message: "Invalid task ID",
+        })
+      }
+      next();
+  }
+  catch (err) {
+    return res.status(400).json({
+      status: 'fail',
+      message: err,
+    })
+  }
+}
