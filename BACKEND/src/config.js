@@ -4,9 +4,10 @@ dotenv.config({path: `${__dirname}/config.env`});
 
 export const config = {
     db: {
-      host: process.env.HOST,
+      host: process.env.DBHOST,
       user: process.env.USER,
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
+      port: process.env.DBPORT
     },
 };
