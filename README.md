@@ -69,7 +69,7 @@ Mechanika:
 - node.js musi byc zainstalowany
 - wchodzimy bezposrednio do folderu `./FRONTEND`
 - instalujemy paczki `npm i`
-- uruchamiamy aplikacje `npm run dev`
+- uruchamiamy aplikacje `npm run dev` (prosze zwrocic uwage na branche!)
 - w przegladarce wchodzimy na adres `http://localhost:5173/`
 
 ### architektura 
