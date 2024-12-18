@@ -3,12 +3,11 @@ import {pool} from '../db.js';
 export const getResources = async function (req, res) {
     try {
         const userID = req.params.userid *1;
-        console.log(userID);
-        const [[result]] = await pool.query(`SELECT * FROM Resources WHERE user_id = ?`,[userID])
+        const [[data]] = await pool.query(`SELECT * FROM Resources WHERE user_id = ?`,[userID])
         res.status(200).json({
             status: 'success',
             data: {
-                result,
+                data,
             },
         });
     }

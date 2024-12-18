@@ -3,11 +3,11 @@ import {pool} from '../db.js';
 export const getWorkers = async function (req, res) {
     try {
         const userID = req.params.userid *1;
-        const [[workers]] = await pool.query(`SELECT * FROM Workers WHERE user_id = ?`,[userID])
+        const [[data]] = await pool.query(`SELECT * FROM Workers WHERE user_id = ?`,[userID])
         res.status(200).json({
             status: 'success',
             data: {
-                workers,
+                data,
             }
         })
     }

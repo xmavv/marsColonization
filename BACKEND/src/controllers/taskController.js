@@ -3,14 +3,14 @@ import { pool } from "../db.js";
 export const getTasks = async function (req, res) {
   try {
     const userID = req.params.userid * 1;
-    const [result] = await pool.query(
+    const [data] = await pool.query(
       `SELECT * FROM tasks WHERE id NOT IN (SELECT task_id FROM users_tasks WHERE user_id = ?)`,
       [userID]
     );
     res.status(200).json({
       status: "success",
       data: {
-        result,
+        data,
       },
     });
   } catch (err) {
@@ -31,7 +31,7 @@ export const endTask = async function (req, res) {
     );
     res.status(201).json({
       status: "success",
-      message: `Inserted done task id:${taskID} to user id:${userID}`,
+      message: `Inserted Task`,
     });
   } catch (err) {
     res.status(400).json({

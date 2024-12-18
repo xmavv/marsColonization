@@ -3,14 +3,14 @@ import { pool } from "../db.js";
 export const getBuildings = async function (req, res) {
   try {
     const userID = req.params.userid * 1;
-    const [buildings] = await pool.query(
+    const [data] = await pool.query(
       `SELECT * FROM Buildings WHERE user_id = ?`,
       [userID]
     );
     res.status(200).json({
       status: "success",
       data: {
-        buildings,
+        data,
       },
     });
   } catch (err) {
@@ -44,11 +44,11 @@ export const getBuilding = async function (req, res) {
   try {
     const userID = req.params.userid *1;
     const type = req.params.type;
-    const [[building]] = await pool.query(`SELECT * FROM Buildings WHERE user_id = ? AND type = ?`,[userID,type]);
+    const [[data]] = await pool.query(`SELECT * FROM Buildings WHERE user_id = ? AND type = ?`,[userID,type]);
     res.status(200).json({
       status: 'success',
       data: {
-        building,
+        data,
       }
     })
   }
@@ -74,11 +74,10 @@ export const checkType = function(req,res, next) {
 export const updateBuildingLevel = async function(req, res) {
   console.log("Updating ...");
     try {
-      const [result] = await pool.query('UPDATE Buildings SET level = ? WHERE user_id = ? AND type = ?',[req.body.level, req.params.userid,req.params.type])
-      console.log(result);
+      const [data] = await pool.query('UPDATE Buildings SET level = ? WHERE user_id = ? AND type = ?',[req.body.level, req.params.userid,req.params.type])
       res.status(200).json({
         status: 'success',
-        message: result.info,
+        message: data.info,
       })
     }
     catch (err) {
