@@ -2,9 +2,12 @@ import { pool } from "../db.js";
 
 export const getAllUsers = async function(req,res) {
     try {
-    const [rows,] = await pool.query(`SELECT * FROM Users`)
-        //const [rows,] = await pool.query(`SELECT `)
-
+    const [rows] = await pool.query(`SELECT u.id, u.level, r.coins, r.oxygen, r.temperature, COUNT(t.task_id) AS done_tasks 
+                                    FROM Users u INNER JOIN Resources r ON u.id = r.user_id
+                                    INNER JOIN Users_Tasks t ON u.id = t.user_id
+                                    GROUP BY u.id, r.coins, r.oxygen, r.temperature
+                                    ORDER BY u.level DESC, r.temperature DESC, r.oxygen DESC, done_tasks DESC ,r.coins DESC;`
+                                )
     res.status(200).json({
         status: 'success',
         requestedAt: req.requestTime,

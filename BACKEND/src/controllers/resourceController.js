@@ -42,7 +42,7 @@ export const updateResources = async function (req, res) {
 export const checkResources = async function (req, res, next) {
     const resources  = ["coins", 'water', 'food','energy', 'oxygen','temperature']
     const entries = Object.entries(req.body);
-    if (!(entries.every(([resource, value]) => resources.includes(resource) && Number.isInteger(value * 1) && value*1 >= 0))) {
+    if (!(entries.every(([resource, value]) => resources.includes(resource) && Number.isInteger(value * 1) && (value*1 >= 0 || resource === 'temperature')))) {
         return res.status(400).json({
             status: 'fail',
             message: 'Invalid Resource or Value',
