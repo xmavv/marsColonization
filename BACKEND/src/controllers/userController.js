@@ -3,6 +3,7 @@ import { pool } from "../db.js";
 export const getAllUsers = async function(req,res) {
     try {
     const [rows,] = await pool.query(`SELECT * FROM Users`)
+        //const [rows,] = await pool.query(`SELECT `)
 
     res.status(200).json({
         status: 'success',
@@ -103,6 +104,31 @@ export const createUser = async function(req,res) {
         }
 }
 
+export const updateLevel = async function (req, res) {
+    try {
+        const level = req.body.level * 1;
+        const userID = req.params.username;
+        if (level > 0) { 
+            const result = await pool.query(`UPDATE Users SET level = ? WHERE username = ?`,[level,userID])
+            res.status(200).json({
+                status: 'success',
+                message: 'Updated level',
+            })
+        }
+        else {
+            res.status(400).json({
+                status: "fail",
+                 message: 'Invalid level'})
+        }
+    }
+    catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err,
+        })
+    }
+}
+
 const createBuildings = async function(userID) { 
     const types = ['laboratory', 'farm', 'powerhouse', 'central', 'hydropolis'];   
     
@@ -117,3 +143,4 @@ const createWorkers = async function (userID) {
 const createResources = async function (userID) {
     pool.query(`INSERT INTO Resources(user_id) VALUES(?)`,[userID])
 }
+
