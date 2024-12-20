@@ -45,7 +45,7 @@ const StyledBuilding = styled.div`
   grid-column-gap: 10rem;
   align-items: center;
 
-  padding: 5rem 20rem;
+  padding: 2rem 20rem;
 `;
 
 const ImgBuilding = styled.img``;
@@ -175,7 +175,7 @@ function Building() {
 
           <OtherBuildings>
             {otherBuildings.map((building) => (
-              <div>
+              <div key={building}>
                 <ImgBuilding
                   src={`/buildings/${building}.png`}
                   alt={`photo of ${building} building`}
