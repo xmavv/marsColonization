@@ -4,3 +4,6 @@ export function formatDuration(duration: number) {
 
   return mins === 0 ? `${secs}s` : `${mins}min ${secs}s`;
 }
+
+export const capitalizeName = (name: string) =>
+  `${name?.charAt(0).toUpperCase()}${name?.slice(1)}`;

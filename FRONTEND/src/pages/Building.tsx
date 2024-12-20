@@ -3,6 +3,16 @@ import ButtonGoBack from "../ui/ButtonGoBack";
 import { useParams } from "react-router-dom";
 import { Level } from "../ui/Level";
 import Resource, { Type } from "../ui/Resource";
+import { Card3D } from "../ui/3dCard";
+import { capitalizeName } from "../utils/helpers";
+
+const buildingTypes = [
+  "central",
+  "hydropolis",
+  "laboratory",
+  "farm",
+  "powerhouse",
+];
 
 const buildingsDescription = {
   central:
@@ -27,18 +37,28 @@ const buildingsResource = {
 const StyledBuilding = styled.div`
   font-size: 2.5rem;
   font-family: "Kumar one", sans-serif;
+  color: white;
 
   display: grid;
-  grid-template-columns: 2fr 3fr;
-  grid-template-rows: min-content auto;
-  grid-column-gap: 3rem;
+  grid-template-columns: 6fr 11fr;
+  grid-template-rows: min-content min-content;
+  grid-column-gap: 10rem;
   align-items: center;
 
-  padding: 5rem;
+  padding: 5rem 20rem;
 `;
 
-const ImgBuilding = styled.img`
-  grid-row: 1 / -1;
+const ImgBuilding = styled.img``;
+
+const P = styled.p`
+  font-size: 2rem;
+  padding: 1rem;
+`;
+
+const OtherBuildings = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
 `;
 
 const Info = styled.div``;
@@ -46,21 +66,18 @@ const Info = styled.div``;
 const CtaSection = styled.div`
   font-size: 1.7rem;
 
-  display: flex;
-  gap: 2rem;
-  justify-content: space-evenly;
-  grid-row: 3 / -1;
+  > * {
+    margin: 2rem;
+  }
 `;
 
 const Name = styled.h3`
   font-size: 4rem;
-  color: white;
 `;
 
 const Description = styled.div`
   font-size: 1.5rem;
   font-family: "Krona One", sans-serif;
-  color: white;
 `;
 
 const Button = styled.button`
@@ -85,9 +102,10 @@ const ButtonClaim = styled(Button)`
 
 const ButtonUpdate = styled(Button)`
   background-color: #21dc21;
+  color: black;
 `;
 
-const ResourcesContainer = styled.div`
+const CenterContainer = styled.div`
   display: flex;
   gap: 2rem;
   justify-content: center;
@@ -102,19 +120,24 @@ function Building() {
       | "farm"
       | "powerhouse";
   };
-  const capitalizedBuildingType = `${buildingType
-    ?.charAt(0)
-    .toUpperCase()}${buildingType?.slice(1)}`;
+
+  const capitalizedBuildingType = capitalizeName(buildingType);
   const buildingDescription = buildingsDescription[buildingType];
   const buildingResrouce = buildingsResource[buildingType] as Type;
+
+  const otherBuildings = buildingTypes.filter(
+    (building) => building !== buildingType
+  );
 
   return (
     <>
       <StyledBuilding>
-        <ImgBuilding
-          src={`/buildings/${buildingType}.png`}
-          alt={`photo of ${buildingType} building`}
-        />
+        <Card3D>
+          <ImgBuilding
+            src={`/buildings/${buildingType}.png`}
+            alt={`photo of ${buildingType} building`}
+          />
+        </Card3D>
 
         <Info>
           <div>
@@ -125,25 +148,45 @@ function Building() {
         </Info>
         <CtaSection>
           <div>
-            <ResourcesContainer>
+            <CenterContainer>
               <Resource type="duration">1min</Resource>
-            </ResourcesContainer>
+            </CenterContainer>
             <ButtonClaim>
-              <Resource type={buildingResrouce}>300</Resource>
+              <CenterContainer>
+                <Resource type={buildingResrouce}>300</Resource>
+              </CenterContainer>
             </ButtonClaim>
           </div>
 
           <div>
-            <ResourcesContainer>
+            <CenterContainer>
               <Resource type="energy">505</Resource>
               <Resource type="water">252</Resource>
               <Resource type="food">23</Resource>
               <Resource type="workers">5</Resource>
               <Resource type="coins">500</Resource>
-            </ResourcesContainer>
+            </CenterContainer>
             <ButtonUpdate>update</ButtonUpdate>
           </div>
         </CtaSection>
+
+        <div>
+          <P>check other buildings</P>
+
+          <OtherBuildings>
+            {otherBuildings.map((building) => (
+              <div>
+                <ImgBuilding
+                  src={`/buildings/${building}.png`}
+                  alt={`photo of ${building} building`}
+                />
+                <CenterContainer>
+                  <P>{capitalizeName(building)}</P>
+                </CenterContainer>
+              </div>
+            ))}
+          </OtherBuildings>
+        </div>
       </StyledBuilding>
 
       <ButtonGoBack />
