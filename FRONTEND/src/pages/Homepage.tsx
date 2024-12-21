@@ -2,13 +2,16 @@ import styled from "styled-components";
 import ButtonCta from "../ui/ButtonCta";
 import { Link } from "react-router-dom";
 
-const StyledHomepage = styled.div`
+import { motion } from "framer-motion";
+import { pageAnimation } from "../ui/pageAnimation";
+
+const StyledHomepage = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10rem;
 
-  div >* {
+  div > * {
     margin: 5rem;
   }
 `;
@@ -32,18 +35,18 @@ const ButtonUsers = styled.button`
 
 function Homepage() {
   return (
-    <StyledHomepage>
+    <StyledHomepage {...pageAnimation}>
       <div>
-      <ButtonCta rotate="5deg" to="/register">
-        register
-      </ButtonCta>
-      <ButtonCta rotate="-12deg" to="/login">
-        login
-      </ButtonCta>
+        <ButtonCta rotate="5deg" to="/register">
+          register
+        </ButtonCta>
+        <ButtonCta rotate="-12deg" to="/login">
+          login
+        </ButtonCta>
       </div>
 
       <ButtonUsers>
-          <Link to="/users">players table</Link>
+        <Link to="/users">players table</Link>
       </ButtonUsers>
     </StyledHomepage>
   );

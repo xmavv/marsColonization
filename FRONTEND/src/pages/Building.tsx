@@ -5,6 +5,9 @@ import { Level } from "../ui/Level";
 import Resource, { Type } from "../ui/Resource";
 import { Card3D } from "../ui/3dCard";
 import { capitalizeName } from "../utils/helpers";
+import { pageAnimation } from "../ui/pageAnimation";
+
+import { motion } from "framer-motion";
 
 const buildingTypes = [
   "central",
@@ -144,7 +147,7 @@ function Building() {
   );
 
   return (
-    <>
+    <motion.div {...pageAnimation}>
       <StyledBuilding>
         <Card3D>
           <ImgBuilding
@@ -206,7 +209,7 @@ function Building() {
       </StyledBuilding>
 
       <ButtonGoBack />
-    </>
+    </motion.div>
   );
 }
 

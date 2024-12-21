@@ -1,5 +1,9 @@
+import { pageAnimation } from "../ui/pageAnimation";
+
+import { motion } from "framer-motion";
+
 function PageNotFound() {
-  return <div>PAGE NOT FOUND</div>;
+  return <motion.div {...pageAnimation}>PAGE NOT FOUND</motion.div>;
 }
 
 export default PageNotFound;

@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import ButtonCta from "../../ui/ButtonCta";
 
+import { motion } from "framer-motion";
+import { pageAnimation } from "../../ui/pageAnimation";
+
 const UserData = styled.div`
   font-size: 1.5rem;
   width: 35rem;
@@ -88,7 +91,7 @@ interface AuthenticationProps {
 
 function Authentication({ children, onClick }: AuthenticationProps) {
   return (
-    <form>
+    <motion.form {...pageAnimation}>
       <UserData>
         <div>
           <Label htmlFor="username">username</Label>
@@ -97,14 +100,18 @@ function Authentication({ children, onClick }: AuthenticationProps) {
 
         <div>
           <Label htmlFor="password">password</Label>
-          <Input placeholder="e.g. admin' OR '1'='1 :)" id="password" type="password" />
+          <Input
+            placeholder="e.g. admin' OR '1'='1 :)"
+            id="password"
+            type="password"
+          />
         </div>
       </UserData>
 
       <ButtonCta rotate="0deg" onClick={onClick}>
         {children}
       </ButtonCta>
-    </form>
+    </motion.form>
   );
 }
 
