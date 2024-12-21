@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ButtonGoBack from "../ui/ButtonGoBack";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Level } from "../ui/Level";
 import Resource, { Type } from "../ui/Resource";
 import { Card3D } from "../ui/3dCard";
@@ -59,6 +59,18 @@ const OtherBuildings = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 3rem;
+
+  &:has(div:hover) > div:not(:hover) {
+    transform: scale(80%);
+  }
+
+  &:has(div:hover) div {
+    transform: scale(110%);
+  }
+`;
+
+const OtherBuilding = styled.div`
+  transition: transform 0.3s ease;
 `;
 
 const Info = styled.div``;
@@ -109,6 +121,8 @@ const CenterContainer = styled.div`
   display: flex;
   gap: 2rem;
   justify-content: center;
+
+  transition: transform 0.3s ease;
 `;
 
 function Building() {
@@ -175,15 +189,17 @@ function Building() {
 
           <OtherBuildings>
             {otherBuildings.map((building) => (
-              <div key={building}>
-                <ImgBuilding
-                  src={`/buildings/${building}.png`}
-                  alt={`photo of ${building} building`}
-                />
+              <OtherBuilding key={building}>
+                <Link to={`/app/building/${building}`}>
+                  <ImgBuilding
+                    src={`/buildings/${building}.png`}
+                    alt={`photo of ${building} building`}
+                  />
+                </Link>
                 <CenterContainer>
                   <P>{capitalizeName(building)}</P>
                 </CenterContainer>
-              </div>
+              </OtherBuilding>
             ))}
           </OtherBuildings>
         </div>
