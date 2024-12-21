@@ -1,4 +1,3 @@
-import { Level } from "../../ui/Level";
 import Table from "../../ui/Table";
 import { User } from "./User";
 import UserRow from "./UserRow";

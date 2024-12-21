@@ -23,7 +23,7 @@ const Blur = styled.div`
   width: 100%;
   height: 100%;
 
-  backdrop-filter: blur(1rem);
+  backdrop-filter: blur(0.3rem);
 `;
 
 const Authors = styled.p`
