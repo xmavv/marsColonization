@@ -36,7 +36,7 @@ function ButtonGoBack() {
   const navigate = useNavigate();
 
   return (
-    <StyledButtonGoBack title="go back" onClick={() => navigate(-1)}>
+    <StyledButtonGoBack title="go back" onClick={() => navigate("/app")}>
       <Img src="/utils/goback.png" alt="" />
     </StyledButtonGoBack>
   );
