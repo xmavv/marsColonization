@@ -10,7 +10,8 @@ const StyledAppLayout = styled.main`
   height: 100vh;
   overflow: hidden;
 
-  background-image: url("backgrounds/bg-app.png");
+  background-image: url("/backgrounds/bg-app.png");
+
   background-size: cover;
 `;
 

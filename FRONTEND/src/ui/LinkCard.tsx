@@ -6,8 +6,7 @@ const StyledLinkCard = styled.div<{ image: string }>`
   height: 25rem;
   border-radius: 2rem;
 
-  background-image: url(${(props) =>
-    `/cards/${props.image.split("/")[2]}.png`});
+  background-image: url(${(props) => `/cards/${props.image}.png`});
   background-size: cover;
   overflow: hidden;
 `;

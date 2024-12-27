@@ -1,20 +1,25 @@
 import styled from "styled-components";
+import Icon from "../ui/Icon";
+import { Quantity } from "./Quantity";
 
-const Img = styled.img`
-  display: inline-block;
-  width: 2.5rem;
-  aspect-ratio: 1/1;
-
-  margin: 0 0.5rem;
+const StyledResource = styled.span`
+  display: flex;
+  align-items: center;
 `;
 
-const Quantity = styled.span<{ color: string }>`
-  color: ${(props) => props.color};
-`;
-
+export type Type =
+  | "coins"
+  | "energy"
+  | "food"
+  | "water"
+  | "oxygen"
+  | "temperature"
+  | "workers"
+  | "duration";
 interface ResourceProps {
-  type: "coins" | "energy" | "food" | "water" | "oxygen" | "temperature";
+  type: Type;
   children: string;
+  size?: string;
 }
 
 const colors = {
@@ -24,16 +29,20 @@ const colors = {
   water: "#62DDFC",
   oxygen: "#F5F5F5",
   temperature: "#FF405C",
+  workers: "#97D9F0",
+  duration: "white",
 } as const;
 
-function Resource({ type, children }: ResourceProps) {
+function Resource({ type, children, size }: ResourceProps) {
   const color = colors[type];
 
   return (
-    <li>
-      <Img src={`resources/${type}.png`} alt="" />
-      <Quantity color={color}>{children}</Quantity>
-    </li>
+    <StyledResource>
+      <Icon type={type} />
+      <Quantity color={color} size={size}>
+        {type === "coins" ? `${children} $` : children}
+      </Quantity>
+    </StyledResource>
   );
 }
 

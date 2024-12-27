@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledLogoType = styled.div`
@@ -12,9 +13,9 @@ const Img = styled.img`
 function LogoType() {
   return (
     <StyledLogoType>
-      <a target="_blank" href="https://www.textstudio.com/">
+      <Link to="/homepage">
         <Img src="/logotype.png" alt="" />
-      </a>
+      </Link>
     </StyledLogoType>
   );
 }

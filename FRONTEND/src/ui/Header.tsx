@@ -1,6 +1,16 @@
 import styled from "styled-components";
-import Resource from "./Resource";
+import Resource, { Type } from "./Resource";
 import ButtonLogOut from "./ButtonLogOut";
+import { Level } from "./Level";
+
+const types = [
+  "coins",
+  "energy",
+  "food",
+  "water",
+  "oxygen",
+  "temperature",
+] as Type[];
 
 const StyledHeader = styled.header`
   display: flex;
@@ -8,6 +18,7 @@ const StyledHeader = styled.header`
   align-items: center;
 
   font-size: 1rem;
+  font-family: "Kumar One", sans-serif;
   padding: 1.2rem;
 
   background-color: rgba(0, 0, 0, 0.85);
@@ -20,11 +31,6 @@ const Nickname = styled.span`
   color: white;
 `;
 
-const Level = styled.span`
-  margin: 0 0.5rem;
-  color: green;
-`;
-
 const Ul = styled.ul`
   display: flex;
   gap: 1rem;
@@ -34,17 +40,18 @@ function Header() {
   return (
     <StyledHeader>
       <div>
-        <Nickname>NICKNAME</Nickname>
-        <Level>LEVEL 5</Level>
+        <Nickname>Tesa44</Nickname>
+        <Level>level 5</Level>
       </div>
 
       <Ul>
-        <Resource type="coins">COINS</Resource>
-        <Resource type="energy">ENERGY</Resource>
-        <Resource type="food">FOOD</Resource>
-        <Resource type="water">WATER</Resource>
-        <Resource type="oxygen">OXYGEN</Resource>
-        <Resource type="temperature">TEMPERATURE</Resource>
+        {types.map((resourceType: Type) => (
+          <li key={resourceType}>
+            <Resource type={resourceType}>
+              {resourceType.toUpperCase()}
+            </Resource>
+          </li>
+        ))}
       </Ul>
 
       <ButtonLogOut />

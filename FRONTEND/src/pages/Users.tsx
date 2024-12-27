@@ -1,19 +1,17 @@
-import TaskTable from "../features/tasks/TaskTable";
-import ButtonGoBack from "../ui/ButtonGoBack";
+import UserTable from "../features/users/UserTable";
 import { pageAnimation } from "../ui/pageAnimation";
 import TableWrapper from "../ui/TableWrapper";
 
 import { motion } from "framer-motion";
 
-function Tasks() {
+function Users() {
   return (
-    <motion.div {...pageAnimation}>
+    <motion.div style={{ width: "100%" }} {...pageAnimation}>
       <TableWrapper>
-        <TaskTable />
+        <UserTable />
       </TableWrapper>
-      <ButtonGoBack />
     </motion.div>
   );
 }
 
-export default Tasks;
+export default Users;

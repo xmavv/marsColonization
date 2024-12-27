@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 function Island() {
+  const navigate = useNavigate();
+
   return (
     <svg
       width="100%"
@@ -10,6 +14,8 @@ function Island() {
     >
       <g clipPath="url(#clip0_58_9)">
         <rect width="1212" height="1024" fill="url(#pattern0_58_9)" />
+
+        {/* HYDROPOLIS */}
         <rect
           x="377"
           y="440"
@@ -18,7 +24,10 @@ function Island() {
           fill="url(#pattern1_58_9)"
           className="building"
           id="hydropolis"
+          onClick={() => navigate("building/hydropolis")}
         />
+
+        {/* POWERHOUSE */}
         <rect
           x="739"
           y="224"
@@ -27,7 +36,10 @@ function Island() {
           fill="url(#pattern2_58_9)"
           className="building"
           id="powerhouse"
+          onClick={() => navigate("building/powerhouse")}
         />
+
+        {/* FARM */}
         <rect
           x="269"
           y="255"
@@ -36,7 +48,10 @@ function Island() {
           fill="url(#pattern3_58_9)"
           className="building"
           id="farm"
+          onClick={() => navigate("building/farm")}
         />
+
+        {/* LABORATORY */}
         <rect
           x="568"
           y="522"
@@ -45,7 +60,10 @@ function Island() {
           fill="url(#pattern4_58_9)"
           className="building"
           id="laboratory"
+          onClick={() => navigate("building/laboratory")}
         />
+
+        {/* CENTRAL */}
         <rect
           x="451"
           y="13"
@@ -54,6 +72,7 @@ function Island() {
           fill="url(#pattern5_58_9)"
           className="building"
           id="central"
+          onClick={() => navigate("building/central")}
         />
         <mask
           id="path-7-outside-1_58_9"

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const StyledButtonLogOut = styled.button`
+  font-family: "Krona One", sans-serif;
   padding: 1rem 2rem;
 
   background-color: rgba(255, 0, 0, 0.5);
@@ -24,7 +25,7 @@ function ButtonLogOut() {
   return (
     <StyledButtonLogOut>
       <span>log out</span>
-      <Img src="/header/logout.png" alt="" />
+      <Img src="/utils/logout.png" alt="" />
     </StyledButtonLogOut>
   );
 }

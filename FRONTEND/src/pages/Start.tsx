@@ -2,8 +2,11 @@ import styled from "styled-components";
 import Island from "../features/buildings/Island";
 import LinkCard from "../ui/LinkCard";
 import { Card3D } from "../ui/3dCard";
+import { pageAnimation } from "../ui/pageAnimation";
 
-const StyledStart = styled.div`
+import { motion } from "framer-motion";
+
+const StyledStart = styled(motion.div)`
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr 1fr;
@@ -18,7 +21,7 @@ const IslandWrapper = styled.div`
 
 function Start() {
   return (
-    <StyledStart>
+    <StyledStart {...pageAnimation}>
       <IslandWrapper>
         <Card3D width="full">
           <Island />
@@ -26,11 +29,11 @@ function Start() {
       </IslandWrapper>
 
       <Card3D>
-        <LinkCard to="/app/workers">WORKERS</LinkCard>
+        <LinkCard to="workers">WORKERS</LinkCard>
       </Card3D>
 
       <Card3D>
-        <LinkCard to="/app/tasks">TASKS</LinkCard>
+        <LinkCard to="tasks">TASKS</LinkCard>
       </Card3D>
     </StyledStart>
   );
