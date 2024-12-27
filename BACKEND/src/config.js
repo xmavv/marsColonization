@@ -1,12 +1,13 @@
-//zmienić później na dotenv
-const config = {
+import * as dotenv from 'dotenv';
+const __dirname = import.meta.dirname;
+dotenv.config({path: `${__dirname}/config.env`});
+
+export const config = {
     db: {
-      host: "127.0.0.1",
-      user: "root",
-      password: "QweAsdZxc2203#",
-      database: "mars_colonization",
-      connectTimeout: 60000
+      host: "mars-colonization-mars-colonization.l.aivencloud.com",
+      user: process.env.USER,
+      password: process.env.PASSWORD,
+      database: process.env.DATABASE,
+      port: process.env.DBPORT
     },
-    listPerPage: 10,
-  };
-  module.exports = config;
+};
