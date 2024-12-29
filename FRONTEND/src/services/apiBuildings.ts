@@ -13,3 +13,19 @@ export async function getBuilding(userId: number, buildingType: string) {
 
   return data;
 }
+
+export async function updateBuilding(
+  userId: number,
+  buildingType: string,
+  buildingLevel: number
+) {
+  const res = await fetch(`${apiLink}/buildings/${userId}/${buildingType}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ level: buildingLevel }),
+  });
+
+  const data = await res.json();
+
+  return data;
+}
