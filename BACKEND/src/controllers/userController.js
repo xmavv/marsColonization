@@ -84,6 +84,11 @@ export const createUser = async function(req,res) {
         res.status(201).json({
             status: 'success',
             message: 'Created new user',
+            data: {
+                id: userID,
+                username: req.body.username,
+                level: 0,
+            },
         });
         } catch (err) {
             res.status(400).json({

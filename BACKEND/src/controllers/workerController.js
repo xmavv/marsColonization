@@ -24,9 +24,13 @@ export const updateWorkers = async function(req, res) {
         const userID = req.params.userid * 1;
         const entries = Object.entries(req.body)
         entries.forEach(([worker, value]) => pool.query(`UPDATE Workers SET ?? = ? WHERE user_id = ?`,[worker,value,userID]))
+        const data = Object.fromEntries(entries)
         res.status(200).json({
             status: 'success',
             message: 'Updated Workers',
+            data: {
+                data,
+            }
         })
     }
     catch (err) {

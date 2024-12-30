@@ -36,5 +36,3 @@ app.use(cors({
   credentials: true,                  // Include cookies if needed
   allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
 }));
-
-
