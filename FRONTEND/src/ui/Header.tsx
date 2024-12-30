@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Resource, { Type } from "./Resource";
+import Resource, { Type } from "../features/resources/Resource";
 import ButtonLogOut from "./ButtonLogOut";
 import { Level } from "./Level";
 
