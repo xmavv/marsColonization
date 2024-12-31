@@ -1,6 +1,6 @@
 import { pool } from "../db.js";
 
-export const getAllUsers = async function(req,res) {
+export const getRanking = async function(req,res) {
     try {
     const [data] = await pool.query(`SELECT u.username, u.level, r.coins, r.oxygen, r.temperature, COUNT(t.task_id) AS done_tasks 
                                     FROM Users u INNER JOIN Resources r ON u.id = r.user_id
@@ -36,6 +36,36 @@ export const getUser = async function (req,res) {
     catch (err) {
         res.status(404).json({
             message: 'fail',
+            message: err,
+        })
+    }
+}
+
+export const checkLogin = async function(req, res) {
+    try {
+        const username = req.body.username;
+        const password = req.body.password;
+        const [[data]] = await pool.query(`SELECT * from Users WHERE username = ? AND password = ?`, [username,password])
+        if (data){
+            res.status(200).json({
+                status: 'success',
+                data: {
+                    id: data.id,
+                    username: data.username,
+                    level: data.level,
+                }
+            })
+        }
+        else {
+            res.status(404).json({
+                status: 'fail',
+                message: 'Invalid username or password',
+            })
+        }
+    }
+    catch (err) {
+        res.status(400).json({
+            status: 'fail',
             message: err,
         })
     }

@@ -75,7 +75,6 @@ export const checkType = function(req,res, next) {
 export const updateBuildingLevel = async function(req, res) {
     try {
       const [data] = await pool.query('UPDATE Buildings SET level = ? WHERE user_id = ? AND type = ?',[req.body.level, req.params.userid,req.params.type])
-      console.log(data)
       res.status(200).json({
         status: 'success',
         message: 'Updated Building Level',

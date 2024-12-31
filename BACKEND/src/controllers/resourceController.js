@@ -23,7 +23,6 @@ export const updateResources = async function (req, res) {
     try {
         const userID = req.params.userid *1;
         const entries = Object.entries(req.body);
-        console.log(entries);
         entries.forEach(([resource,value]) => pool.query(`UPDATE Resources SET ?? = ? WHERE user_id = ?`,[resource,value,userID]));
         const data = Object.fromEntries(entries)
         res.status(200).json({
