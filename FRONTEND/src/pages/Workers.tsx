@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Worker from "../features/workers/Worker";
+import WorkersList from "../features/workers/WorkersList";
 import ButtonGoBack from "../ui/ButtonGoBack";
 import { pageAnimation } from "../ui/pageAnimation";
 
@@ -21,11 +21,7 @@ function Workers() {
   return (
     <motion.div {...pageAnimation}>
       <StyledWorkers>
-        <Worker type="hydrologist" />
-        <Worker type="chemist" />
-        <Worker type="electrician" />
-        <Worker type="biologist" />
-        <Worker type="meteorologist" />
+        <WorkersList />
       </StyledWorkers>
 
       <ButtonGoBack />

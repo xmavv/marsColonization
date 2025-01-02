@@ -4,7 +4,7 @@ export async function getTasks(userId: number) {
   const res = await fetch(`${apiLink}/tasks/${userId}`);
   const data = await res.json();
 
-  return data;
+  return data.data.data;
 }
 
 export async function addTask(userId: number, taskId: number) {

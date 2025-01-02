@@ -4,22 +4,31 @@ import Table from "../../ui/Table";
 import { User } from "./User";
 
 function UserRow({ user }: { user: User }) {
+  const {
+    username,
+    level,
+    coins,
+    oxygen,
+    temperature,
+    done_tasks: tasks,
+  } = user;
+
   return (
     <Table.Row>
-      <div>{user.username}</div>
+      <div>{username}</div>
       <div>
-        <Level>{user.level}</Level>
+        <Level>{level}</Level>
       </div>
       <div>
-        <Resource type="coins">42</Resource>
+        <Resource type="coins">{coins}</Resource>
       </div>
       <div>
-        <Resource type="oxygen">10</Resource>
+        <Resource type="oxygen">{oxygen}</Resource>
       </div>
       <div>
-        <Resource type="temperature">-50</Resource>
+        <Resource type="temperature">{temperature}</Resource>
       </div>
-      <div>12/1000</div>
+      <div>{tasks}/1000</div>
     </Table.Row>
   );
 }

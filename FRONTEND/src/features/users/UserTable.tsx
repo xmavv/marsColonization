@@ -1,53 +1,14 @@
+import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
 import { User } from "./User";
 import UserRow from "./UserRow";
-
-const user1: User = {
-  id: 2,
-  username: "xmavv",
-  password: "xd",
-  level: 2,
-};
-
-const user2: User = {
-  id: 1,
-  username: "tesa44",
-  password: "xd",
-  level: 5,
-};
-
-const users = [
-  user1,
-  user2,
-  user1,
-  user2,
-  user1,
-  user2,
-  user1,
-  user2,
-  user1,
-  user2,
-  user1,
-  user2,
-  user1,
-  user2,
-  user1,
-  user2,
-  user1,
-  user2,
-  user1,
-  user2,
-  user1,
-  user2,
-  user1,
-  user2,
-  user1,
-  user2,
-  user1,
-  user2,
-];
+import { useUsers } from "./useUsers";
 
 function UserTable() {
+  const { data: users, isLoading } = useUsers();
+
+  if (isLoading) return <Spinner />;
+
   return (
     <Table columns="2fr 1fr 2fr 2fr 2fr 2fr">
       <Table.Header>

@@ -4,7 +4,7 @@ export async function getUsers() {
   const res = await fetch(`${apiLink}/users`);
   const data = await res.json();
 
-  return data;
+  return data.data.data;
 }
 
 export async function createUser(username: string, password: string) {

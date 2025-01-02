@@ -21,21 +21,23 @@ const Description = styled.div`
 `;
 
 function TaskRow({ task }: { task: Task }) {
+  const { name, description, type, resources, coins, workers, duration } = task;
+
   return (
     <Table.Row>
-      <div>{task.name}</div>
-      <Description>{task.description}</Description>
+      <div>{name}</div>
+      <Description>{description}</Description>
       <div>
-        <Resource type={task.type}>{`${task.resources}`}</Resource>
+        <Resource type={type}>{`${resources}`}</Resource>
       </div>
       <div>
-        <Resource type="coins">{`${task.coins}`}</Resource>
+        <Resource type="coins">{`${coins}`}</Resource>
       </div>
       <div>
-        <Resource type="workers">{`${task.workers}`}</Resource>
+        <Resource type="workers">{`${workers}`}</Resource>
       </div>
       <div>
-        <Resource type="duration">{formatDuration(task.durtation)}</Resource>
+        <Resource type="duration">{formatDuration(duration)}</Resource>
       </div>
       <Button>
         <IconPlus />

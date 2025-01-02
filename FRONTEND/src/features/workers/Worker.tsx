@@ -52,20 +52,23 @@ const Name = styled.p`
   font-size: 2rem;
 `;
 
+export type WorkerType =
+  | "hydrologist"
+  | "chemist"
+  | "electrician"
+  | "biologist"
+  | "meteorologist";
+
 interface WorkerProps {
-  type:
-    | "hydrologist"
-    | "chemist"
-    | "electrician"
-    | "biologist"
-    | "meteorologist";
+  type: WorkerType;
+  quantity: number;
 }
 
-function Worker({ type }: WorkerProps) {
+function Worker({ type, quantity }: WorkerProps) {
   return (
     <StyledWorker>
       <Resource type="coins" size="2rem">
-        $ 500
+        500
       </Resource>
       <Button>
         <IconPlus /> add
@@ -73,7 +76,7 @@ function Worker({ type }: WorkerProps) {
       <Img src={`/workers/${type}.png`} alt="" />
       <Name>{type}</Name>
       <Quantity color="var(--color-primary)" size="2rem">
-        50
+        {quantity}
       </Quantity>
     </StyledWorker>
   );

@@ -36,15 +36,10 @@ const ButtonUsers = styled.button`
 `;
 
 function Homepage() {
-  const handleClick = async () => {
-    const data = await getUsers();
-    console.log(data);
-  };
-
   return (
     <StyledHomepage {...pageAnimation}>
       <div>
-        <ButtonCta rotate="5deg" onClick={handleClick}>
+        <ButtonCta rotate="5deg" to="/register">
           register
         </ButtonCta>
         <ButtonCta rotate="-12deg" to="/login">
