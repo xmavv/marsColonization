@@ -11,3 +11,5 @@ export const config = {
       port: process.env.DBPORT
     },
 };
+
+export const MAX_BUILDING_LEVEL = 10;

@@ -4,8 +4,12 @@ import { router as buildingRouter } from "./routes/buildingRoutes.js";
 import { router as resourceRouter } from "./routes/resourceRoutes.js";
 import { router as workerRouter } from "./routes/workerRoutes.js";
 import { router as taskRouter } from "./routes/taskRoutes.js";
+import cors from "cors";
+
 const app = express();
 
+app.use(cors())
+// const cors = require('cors');
 app.use(json());
 app.use(
   urlencoded({
@@ -19,3 +23,19 @@ app.use("/api/v1/resources", resourceRouter);
 app.use("/api/v1/workers", workerRouter);
 app.use("/api/v1/tasks", taskRouter);
 export default app;
+
+// Configure CORS middleware
+
+// const allowedOrigins = ['http://localhost:5137',  '127.0.0.1:5137']
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   methods: ['GET', 'POST', 'PATCH','OPTIONS'], // Allowed methods
+//   credentials: true,                  // Include cookies if needed
+//   allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+// }));

@@ -1,10 +1,10 @@
 import { pool } from "../db.js";
 
-export const getAllUsers = async function(req,res) {
+export const getRanking = async function(req,res) {
     try {
-    const [data] = await pool.query(`SELECT u.id, u.level, r.coins, r.oxygen, r.temperature, COUNT(t.task_id) AS done_tasks 
+    const [data] = await pool.query(`SELECT u.username, u.level, r.coins, r.oxygen, r.temperature, COUNT(t.task_id) AS done_tasks 
                                     FROM Users u INNER JOIN Resources r ON u.id = r.user_id
-                                    INNER JOIN Users_Tasks t ON u.id = t.user_id
+                                    LEFT JOIN Users_Tasks t ON u.id = t.user_id
                                     GROUP BY u.id, r.coins, r.oxygen, r.temperature
                                     ORDER BY u.level DESC, r.temperature DESC, r.oxygen DESC, done_tasks DESC ,r.coins DESC;`
                                 )
@@ -36,6 +36,36 @@ export const getUser = async function (req,res) {
     catch (err) {
         res.status(404).json({
             message: 'fail',
+            message: err,
+        })
+    }
+}
+
+export const checkLogin = async function(req, res) {
+    try {
+        const username = req.body.username;
+        const password = req.body.password;
+        const [[data]] = await pool.query(`SELECT * from Users WHERE username = ? AND password = ?`, [username,password])
+        if (data){
+            res.status(200).json({
+                status: 'success',
+                data: {
+                    id: data.id,
+                    username: data.username,
+                    level: data.level,
+                }
+            })
+        }
+        else {
+            res.status(404).json({
+                status: 'fail',
+                message: 'Invalid username or password',
+            })
+        }
+    }
+    catch (err) {
+        res.status(400).json({
+            status: 'fail',
             message: err,
         })
     }
@@ -76,14 +106,18 @@ export const checkUsername = async function (req, res, next) {
 
 export const createUser = async function(req,res) {
     try {
-        const [data] = await pool.query(`INSERT INTO Users(username, password) VALUES(?, ?)`,[req.body.username, req.body.password])
-        const userID = data.insertId * 1;
+        const [result] = await pool.query(`INSERT INTO Users(username, password) VALUES(?, ?)`,[req.body.username, req.body.password])
+        const userID = result.insertId * 1;
         createBuildings(userID);
         createWorkers(userID);
         createResources(userID);
+        const [data] = await pool.query("SELECT id, username, level FROM Users")
         res.status(201).json({
             status: 'success',
             message: 'Created new user',
+            data: {
+                data,
+            },
         });
         } catch (err) {
             res.status(400).json({
@@ -121,7 +155,7 @@ export const updateLevel = async function (req, res) {
 const createBuildings = async function(userID) { 
     const types = ['laboratory', 'farm', 'powerhouse', 'central', 'hydropolis'];   
     
-    await Promise.all(types.map((type) => pool.query(`INSERT INTO Buildings(user_id, type) VALUES(?, ?)`,[userID, type]))
+    types.map(async (type) => await pool.query(`INSERT INTO Buildings(user_id, type) VALUES(?, ?)`,[userID, type])
 );
 };
 

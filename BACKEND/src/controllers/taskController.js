@@ -4,7 +4,7 @@ export const getTasks = async function (req, res) {
   try {
     const userID = req.params.userid * 1;
     const [data] = await pool.query(
-      `SELECT * FROM tasks WHERE id NOT IN (SELECT task_id FROM users_tasks WHERE user_id = ?)`,
+      `SELECT * FROM Tasks WHERE id NOT IN (SELECT task_id FROM Users_Tasks WHERE user_id = ?)`,
       [userID]
     );
     res.status(200).json({
@@ -29,9 +29,16 @@ export const endTask = async function (req, res) {
       "INSERT INTO Users_Tasks(user_id, task_id) VALUES(?, ?)",
       [userID, taskID]
     );
+    const [data] = await pool.query(
+      `SELECT * FROM Tasks WHERE id NOT IN (SELECT task_id FROM Users_Tasks WHERE user_id = ?)`,
+      [userID]
+    );
     res.status(201).json({
       status: "success",
       message: `Inserted Task`,
+      data: {
+        data,
+      }
     });
   } catch (err) {
     res.status(400).json({

@@ -23,11 +23,18 @@ export const updateResources = async function (req, res) {
     try {
         const userID = req.params.userid *1;
         const entries = Object.entries(req.body);
-        entries.forEach(([resource,value]) => pool.query(`UPDATE Resources SET ?? = ? WHERE user_id = ?`,[resource,value,userID]));
+        entries.forEach(async ([resource,value]) => await pool.query(`UPDATE Resources SET ?? = ? WHERE user_id = ?`,[resource,value,userID]));
+        let [[data]] = await pool.query("SELECT * FROM Resources WHERE user_id = ?",[userID])
+        // entries.forEach(([resource, value]) => data[resource] = value);
 
+        data = {...data,...req.body}
+        console.log(data)
         res.status(200).json({
             status: 'success',
             message: 'Updated resources',
+            data: {
+                data,
+            },
         })
     }
     catch (err) {
