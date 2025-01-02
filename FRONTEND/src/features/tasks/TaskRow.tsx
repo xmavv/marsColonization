@@ -2,7 +2,7 @@ import styled from "styled-components";
 import IconPlus from "../../ui/IconPlus";
 import Table from "../../ui/Table";
 import { Task } from "./Task";
-import Resource from "../../ui/Resource";
+import Resource from "../resources/Resource";
 import { formatDuration } from "../../utils/helpers";
 
 const Button = styled.button`

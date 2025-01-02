@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { pageAnimation } from "../ui/pageAnimation";
 
+import { getUsers } from "../services/apiUsers";
+
 const StyledHomepage = styled(motion.div)`
   display: flex;
   flex-direction: column;
@@ -34,10 +36,15 @@ const ButtonUsers = styled.button`
 `;
 
 function Homepage() {
+  const handleClick = async () => {
+    const data = await getUsers();
+    console.log(data);
+  };
+
   return (
     <StyledHomepage {...pageAnimation}>
       <div>
-        <ButtonCta rotate="5deg" to="/register">
+        <ButtonCta rotate="5deg" onClick={handleClick}>
           register
         </ButtonCta>
         <ButtonCta rotate="-12deg" to="/login">

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Icon from "../ui/Icon";
-import { Quantity } from "./Quantity";
+import Icon from "../../ui/Icon";
+import { Quantity } from "../../ui/Quantity";
 
 const StyledResource = styled.span`
   display: flex;

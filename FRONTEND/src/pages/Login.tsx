@@ -1,4 +1,4 @@
-import Authentication from "../features/user/Authentication";
+import Authentication from "../features/users/Authentication";
 
 function Login() {
   return <Authentication onClick={() => "login"}>LOGIN</Authentication>;

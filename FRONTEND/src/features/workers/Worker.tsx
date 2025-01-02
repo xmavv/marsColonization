@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import IconPlus from "../../ui/IconPlus";
-import Resource from "../../ui/Resource";
+import Resource from "../resources/Resource";
 import { Quantity } from "../../ui/Quantity";
 
 const StyledWorker = styled.div`

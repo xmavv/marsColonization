@@ -1,5 +1,5 @@
 import { Level } from "../../ui/Level";
-import Resource from "../../ui/Resource";
+import Resource from "../resources/Resource";
 import Table from "../../ui/Table";
 import { User } from "./User";
 

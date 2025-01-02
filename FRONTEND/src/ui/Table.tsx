@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 import { Task } from "../features/tasks/Task";
-import { User } from "../features/user/User";
+import { User } from "../features/users/User";
 import styled from "styled-components";
 
 const TableContex = createContext({ columns: "" });

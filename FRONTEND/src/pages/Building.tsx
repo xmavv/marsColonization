@@ -2,7 +2,7 @@ import styled from "styled-components";
 import ButtonGoBack from "../ui/ButtonGoBack";
 import { Link, useParams } from "react-router-dom";
 import { Level } from "../ui/Level";
-import Resource, { Type } from "../ui/Resource";
+import Resource, { Type } from "../features/resources/Resource";
 import { Card3D } from "../ui/3dCard";
 import { capitalizeName } from "../utils/helpers";
 import { pageAnimation } from "../ui/pageAnimation";
