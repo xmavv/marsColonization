@@ -22,25 +22,6 @@ export const getBuildings = async function (req, res) {
   }
 };
 
-export const checkUserID = async function (req, res, next) {
-  try {
-    const userID = req.params.userid * 1;
-    const [userIDs] = await pool.query("SELECT id FROM Users");
-    if (!userIDs.some((id) => id.id === userID)) {
-      return res.status(404).json({
-        status: "fail",
-        message: "Invalid User ID",
-      });
-    }
-  } catch (err) {
-    return res.status(404).json({
-      status: "fail",
-      message: err,
-    });
-  }
-  next();
-};
-
 export const getBuilding = async function (req, res) {
   try {
     const userID = req.params.userid *1;
@@ -74,7 +55,7 @@ export const checkType = function(req,res, next) {
 
 export const updateBuildingLevel = async function(req, res) {
     try {
-      const [data] = await pool.query('UPDATE Buildings SET level = ? WHERE user_id = ? AND type = ?',[req.body.level, req.params.userid,req.params.type])
+      const result = await pool.query('UPDATE Buildings SET level = ? WHERE user_id = ? AND type = ?',[req.body.level, req.params.userid,req.params.type])
       res.status(200).json({
         status: 'success',
         message: 'Updated Building Level',

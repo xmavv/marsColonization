@@ -106,18 +106,17 @@ export const checkUsername = async function (req, res, next) {
 
 export const createUser = async function(req,res) {
     try {
-        const [data] = await pool.query(`INSERT INTO Users(username, password) VALUES(?, ?)`,[req.body.username, req.body.password])
-        const userID = data.insertId * 1;
+        const [result] = await pool.query(`INSERT INTO Users(username, password) VALUES(?, ?)`,[req.body.username, req.body.password])
+        const userID = result.insertId * 1;
         createBuildings(userID);
         createWorkers(userID);
         createResources(userID);
+        const [data] = await pool.query("SELECT id, username, level FROM Users")
         res.status(201).json({
             status: 'success',
             message: 'Created new user',
             data: {
-                id: userID,
-                username: req.body.username,
-                level: 0,
+                data,
             },
         });
         } catch (err) {
@@ -156,7 +155,7 @@ export const updateLevel = async function (req, res) {
 const createBuildings = async function(userID) { 
     const types = ['laboratory', 'farm', 'powerhouse', 'central', 'hydropolis'];   
     
-    await Promise.all(types.map((type) => pool.query(`INSERT INTO Buildings(user_id, type) VALUES(?, ?)`,[userID, type]))
+    types.map(async (type) => await pool.query(`INSERT INTO Buildings(user_id, type) VALUES(?, ?)`,[userID, type])
 );
 };
 
