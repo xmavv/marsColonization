@@ -1,3 +1,4 @@
+import { buyCosts, WORKERS } from '../config.js';
 import {pool} from '../db.js';
 
 export const getWorkers = async function (req, res) {
@@ -43,10 +44,9 @@ export const updateWorkers = async function(req, res) {
 };
 
 export const checkBody = function(req, res, next) {
-    const workers = ['electricians','biologists','hydrologists','chemists','meteorologists']
     try {
         const entries = Object.entries(req.body);
-        if (!(entries.every(([worker,value]) => workers.includes(worker) && Number.isInteger(value*1) && value*1 >= 0))) {
+        if (!(entries.every(([worker,value]) => WORKERS.includes(worker) && Number.isInteger(value*1) && value*1 >= 0))) {
             return res.status(400).json({
                 status: 'fail',
                 message: 'Invalid Worker or Value'
@@ -62,4 +62,15 @@ export const checkBody = function(req, res, next) {
     finally {
         next();
     }
+}
+
+export const buyCost = function(req,res) {
+    const data = buyCosts.workers
+    res.status(200).json({
+        status: 'success',
+        message: "Needed costs to buy workers",
+        data: {
+            data,
+        }
+    })   
 }

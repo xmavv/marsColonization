@@ -1,5 +1,5 @@
 import { pool } from "../db.js";
-import {MAX_BUILDING_LEVEL} from "../config.js";
+import {MAX_BUILDING_LEVEL, TYPES,production, updateCosts} from "../config.js";
 
 export const getBuildings = async function (req, res) {
   try {
@@ -27,10 +27,16 @@ export const getBuilding = async function (req, res) {
     const userID = req.params.userid *1;
     const type = req.params.type;
     const [[data]] = await pool.query(`SELECT * FROM Buildings WHERE user_id = ? AND type = ?`,[userID,type]);
+    const level = data.level + 1;
+    const updateCost = getUpdateCost(type, level)
+    const product = getProduct(type, level)
+ 
     res.status(200).json({
       status: 'success',
       data: {
         data,
+        updateCost,
+        product,
       }
     })
   }
@@ -42,9 +48,26 @@ export const getBuilding = async function (req, res) {
   }
 }
 
-export const checkType = function(req,res, next) {
-  const types = ['laboratory', 'farm', 'powerhouse', 'central', 'hydropolis'];   
-  if (!types.some((type) => type === req.params.type)) {
+const getUpdateCost = function(type, level) {
+  const cost = Object.entries(updateCosts.buildings[type])
+  const [,factor] = cost.pop()
+  const updateCost = {}
+  cost.forEach(([resource, value]) => updateCost[resource] = Math.ceil(factor**level*value));
+  return updateCost
+}
+
+const getProduct = function(type, level) {
+  const productEntries = Object.entries(production.buildings[type])
+  const [,productFactor] = productEntries.pop()
+  const [,time] = productEntries.pop()
+  const product = {} 
+  productEntries.forEach(([resource, value]) => product[resource] = Math.ceil(productFactor**level*value));
+  product["TIME"] = time
+  return product
+}
+
+export const checkType = function(req,res, next) {   
+  if (!TYPES.some((type) => type === req.params.type)) {
     return res.status(400).json({
       status: 'fail',
       message: 'Invalid Building Type',
@@ -83,4 +106,6 @@ export const checkBody = function(req,res,next) {
   }
   next()
 }
+
+
 
