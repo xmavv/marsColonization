@@ -5,10 +5,12 @@ export const getWorkers = async function (req, res) {
     try {
         const userID = req.params.userid *1;
         const [[data]] = await pool.query(`SELECT * FROM Workers WHERE user_id = ?`,[userID])
+        const buyCosts = getBuyCosts()
         res.status(200).json({
             status: 'success',
             data: {
                 data,
+                buyCosts,
             }
         })
     }
@@ -19,6 +21,10 @@ export const getWorkers = async function (req, res) {
         })
     }
 };
+
+const getBuyCosts = function() {
+    return buyCosts.workers
+}
 
 export const updateWorkers = async function(req, res) {
     try {
@@ -64,13 +70,3 @@ export const checkBody = function(req, res, next) {
     }
 }
 
-export const buyCost = function(req,res) {
-    const data = buyCosts.workers
-    res.status(200).json({
-        status: 'success',
-        message: "Needed costs to buy workers",
-        data: {
-            data,
-        }
-    })   
-}
