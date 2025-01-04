@@ -7,12 +7,12 @@ export async function getWorkers(userId: number) {
   return data.data;
 }
 
-interface workersToUpdate {
-  hydrologist: string;
-  chemist: string;
-  electrician: string;
-  biologist: string;
-  meteorologist: string;
+export interface workersToUpdate {
+  biologists?: number;
+  hydrologists?: number;
+  chemists?: number;
+  electricians?: number;
+  meteorologist?: number;
 }
 
 export async function updateWorkers(

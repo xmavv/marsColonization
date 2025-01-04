@@ -2,6 +2,7 @@ import styled from "styled-components";
 import IconPlus from "../../ui/IconPlus";
 import Resource from "../resources/Resource";
 import { Quantity } from "../../ui/Quantity";
+import { useUpdateWorkers } from "./useUpdateWorkers";
 
 const StyledWorker = styled.div`
   display: grid;
@@ -66,12 +67,22 @@ interface WorkerProps {
 }
 
 function Worker({ type, quantity, cost }: WorkerProps) {
+  const { updateWorkers, isPending } = useUpdateWorkers();
+
+  function handleAdd() {
+    //WALIDACJA CZY MA WYSTARCZAJACO COINSOW
+
+    const workersToUpdate = { [`${type}s`]: quantity + 1 };
+
+    updateWorkers(workersToUpdate);
+  }
+
   return (
     <StyledWorker>
       <Resource type="coins" size="2rem">
         {`${cost}`}
       </Resource>
-      <Button>
+      <Button onClick={handleAdd} disabled={isPending}>
         <IconPlus /> add
       </Button>
       <Img src={`/workers/${type}.png`} alt="" />
