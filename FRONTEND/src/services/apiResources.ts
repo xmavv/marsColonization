@@ -4,7 +4,7 @@ export async function getResources(userId: number) {
   const res = await fetch(`${apiLink}/resources/${userId}`);
   const data = await res.json();
 
-  return data;
+  return data.data.data;
 }
 
 interface resourcesToUpdate {

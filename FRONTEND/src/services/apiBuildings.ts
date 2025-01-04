@@ -4,8 +4,6 @@ export async function getBuildings(userId: number) {
   const res = await fetch(`${apiLink}/buildings/${userId}`);
   const data = await res.json();
 
-  console.log(data);
-
   return data.data.data;
 }
 
@@ -13,9 +11,7 @@ export async function getBuilding(userId: number, buildingType: string) {
   const res = await fetch(`${apiLink}/buildings/${userId}/${buildingType}`);
   const data = await res.json();
 
-  console.log(data);
-
-  return data.data.data;
+  return data.data;
 }
 
 export async function updateBuilding(

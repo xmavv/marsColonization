@@ -11,14 +11,20 @@ const workerTypes: WorkerType[] = [
 ];
 
 function WorkersList() {
-  const { data: workers, isLoading } = useWorkers();
+  const { data: { data: workers, buyCosts } = {}, isLoading } = useWorkers();
 
   if (isLoading) return <Spinner />;
+
+  console.log(buyCosts);
 
   return (
     <>
       {workerTypes.map((worker) => (
-        <Worker type={worker} quantity={workers[`${worker}s`]} />
+        <Worker
+          type={worker}
+          quantity={workers[`${worker}s`]}
+          cost={buyCosts[`${worker}s`].COINS}
+        />
       ))}
     </>
   );

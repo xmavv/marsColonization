@@ -4,10 +4,7 @@ export async function getWorkers(userId: number) {
   const res = await fetch(`${apiLink}/workers/${userId}`);
   const data = await res.json();
 
-  console.log(data);
-  console.log();
-
-  return data.data.data;
+  return data.data;
 }
 
 interface workersToUpdate {

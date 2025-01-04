@@ -62,13 +62,14 @@ export type WorkerType =
 interface WorkerProps {
   type: WorkerType;
   quantity: number;
+  cost?: number;
 }
 
-function Worker({ type, quantity }: WorkerProps) {
+function Worker({ type, quantity, cost }: WorkerProps) {
   return (
     <StyledWorker>
       <Resource type="coins" size="2rem">
-        500
+        {`${cost}`}
       </Resource>
       <Button>
         <IconPlus /> add

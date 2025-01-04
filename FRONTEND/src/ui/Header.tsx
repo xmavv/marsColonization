@@ -2,15 +2,8 @@ import styled from "styled-components";
 import Resource, { Type } from "../features/resources/Resource";
 import ButtonLogOut from "./ButtonLogOut";
 import { Level } from "./Level";
-
-const types = [
-  "coins",
-  "energy",
-  "food",
-  "water",
-  "oxygen",
-  "temperature",
-] as Type[];
+import { useResources } from "../features/resources/useResources";
+import Spinner from "./Spinner";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -33,10 +26,15 @@ const Nickname = styled.span`
 
 const Ul = styled.ul`
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
 `;
 
 function Header() {
+  const { data: resources, isLoading } = useResources();
+
+  if (isLoading) return <Spinner />;
+  const { coins, energy, food, oxygen, temperature, water } = resources;
+
   return (
     <StyledHeader>
       <div>
@@ -45,13 +43,25 @@ function Header() {
       </div>
 
       <Ul>
-        {types.map((resourceType: Type) => (
-          <li key={resourceType}>
-            <Resource type={resourceType}>
-              {resourceType.toUpperCase()}
-            </Resource>
-          </li>
-        ))}
+        <li>
+          <Resource type={"coins"}>{coins}</Resource>
+        </li>
+        <li>
+          <Resource type={"energy"}>{energy}</Resource>
+        </li>
+        <li>
+          <Resource type={"food"}>{food}</Resource>
+        </li>
+
+        <li>
+          <Resource type={"water"}>{water}</Resource>
+        </li>
+        <li>
+          <Resource type={"oxygen"}>{oxygen}</Resource>
+        </li>
+        <li>
+          <Resource type={"temperature"}>{temperature}</Resource>
+        </li>
       </Ul>
 
       <ButtonLogOut />

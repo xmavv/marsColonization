@@ -2,7 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { Level } from "../../ui/Level";
 import Resource, { Type } from "../resources/Resource";
 import { Card3D } from "../../ui/3dCard";
-import { capitalizeName } from "../../utils/helpers";
+import { capitalizeName, formatDuration } from "../../utils/helpers";
 import styled from "styled-components";
 import { useBuilding } from "./useBuilding";
 import Spinner from "../../ui/Spinner";
@@ -124,16 +124,15 @@ function BuildingInfo() {
 
   const capitalizedBuildingType = capitalizeName(buildingType);
   const buildingDescription = buildingsDescription[buildingType];
-  const buildingResrouce = buildingsResource[buildingType] as Type;
+  const buildingResource = buildingsResource[buildingType] as Type;
 
   const otherBuildings = buildingTypes.filter(
     (building) => building !== buildingType
   );
 
   //database info
-  console.log("xd");
-
-  const { data: building, isLoading } = useBuilding(buildingType);
+  const { data: { data: building, updateCost, product } = {}, isLoading } =
+    useBuilding(buildingType);
 
   if (isLoading) return <Spinner />;
 
@@ -158,24 +157,26 @@ function BuildingInfo() {
       <CtaSection>
         <div>
           <CenterContainer>
-            <Resource type="duration">1min</Resource>
+            <Resource type="duration">
+              {formatDuration(product.TIME / 1000)}
+            </Resource>
           </CenterContainer>
           <ButtonClaim>
             <CenterContainer>
-              <Resource type={buildingResrouce}>300</Resource>
+              {/* <Resource type={buildingResource}>300</Resource> */}
             </CenterContainer>
           </ButtonClaim>
         </div>
 
         <div>
           <CenterContainer>
-            <Resource type="energy">505</Resource>
-            <Resource type="water">252</Resource>
-            <Resource type="food">23</Resource>
-            <Resource type="workers">5</Resource>
-            <Resource type="coins">500</Resource>
+            <Resource type="energy">{updateCost.ENERGY}</Resource>
+            <Resource type="water">{updateCost.WATER}</Resource>
+            <Resource type="food">{updateCost.FOOD}</Resource>
+            {/* <Resource type="workers">{updateCost.ENERGY}</Resource> */}
+            <Resource type="coins">{updateCost.COINS}</Resource>
           </CenterContainer>
-          <ButtonUpdate>update</ButtonUpdate>
+          <ButtonUpdate>upgrade</ButtonUpdate>
         </div>
       </CtaSection>
 
