@@ -116,3 +116,48 @@ export const production = {
     }
   }
 }
+
+export const experience = {
+  buildings: {
+    powerhouse: {
+      EXP: 500,
+      INCREASE_FACTOR: 1.2
+    },
+    laboratory: {
+      EXP: 500,
+      INCREASE_FACTOR: 1.2
+    },
+    farm: {
+      EXP: 400,
+      INCREASE_FACTOR: 1.2
+    },
+    central: {
+      EXP: 1000,
+      INCREASE_FACTOR: 1.5
+    },
+    hydropolis: {
+      EXP: 400,
+      INCREASE_FACTOR: 1.2
+    }   
+  },
+  workers: {
+    electricians: {
+      EXP: 300,
+    },
+    biologists: {
+      EXP: 200,
+    },
+    hydrologists: {
+      EXP: 200,
+    },
+    chemists: {
+      EXP: 300,
+    },
+    meteorologists: {
+      EXP: 400,
+    }   
+  },
+  tasks: {
+    EXP: 700,
+  }
+}
