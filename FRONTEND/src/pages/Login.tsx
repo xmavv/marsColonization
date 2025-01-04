@@ -1,7 +1,7 @@
-import Authentication from "../features/users/Authentication";
+import LoginForm from "../features/authentication/LoginForm";
 
 function Login() {
-  return <Authentication onClick={() => "login"}>LOGIN</Authentication>;
+  return <LoginForm />;
 }
 
 export default Login;

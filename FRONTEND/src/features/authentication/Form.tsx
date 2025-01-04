@@ -1,10 +1,6 @@
 import styled from "styled-components";
-import ButtonCta from "../../ui/ButtonCta";
 
-import { motion } from "framer-motion";
-import { pageAnimation } from "../../ui/pageAnimation";
-
-const UserData = styled.div`
+export const UserData = styled.div`
   font-size: 1.5rem;
   width: 35rem;
 
@@ -52,7 +48,7 @@ const UserData = styled.div`
   }
 `;
 
-const Input = styled.input`
+export const Input = styled.input`
   font-family: "Krona One", sans-serif;
   display: block;
 
@@ -76,43 +72,10 @@ const Input = styled.input`
   }
 `;
 
-const Label = styled.label`
+export const Label = styled.label`
   margin-left: 2rem;
   font-size: 1rem;
   font-weight: bold;
   font-family: "Krona One", sans-serif;
   text-transform: uppercase;
 `;
-
-interface AuthenticationProps {
-  children: string;
-  onClick: () => void;
-}
-
-function Authentication({ children, onClick }: AuthenticationProps) {
-  return (
-    <motion.form {...pageAnimation}>
-      <UserData>
-        <div>
-          <Label htmlFor="username">username</Label>
-          <Input placeholder="e.g. xmavv" id="username" type="text" />
-        </div>
-
-        <div>
-          <Label htmlFor="password">password</Label>
-          <Input
-            placeholder="e.g. admin' OR '1'='1 :)"
-            id="password"
-            type="password"
-          />
-        </div>
-      </UserData>
-
-      <ButtonCta rotate="0deg" onClick={onClick}>
-        {children}
-      </ButtonCta>
-    </motion.form>
-  );
-}
-
-export default Authentication;

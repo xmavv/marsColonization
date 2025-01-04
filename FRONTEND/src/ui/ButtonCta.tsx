@@ -72,19 +72,26 @@ interface ButtonCtaProps {
   children: string;
   to?: string;
   rotate: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+  disabled: boolean;
 }
 
-function ButtonCta({ children, to, rotate, onClick }: ButtonCtaProps) {
+function ButtonCta({
+  children,
+  to,
+  rotate,
+  onClick,
+  disabled,
+}: ButtonCtaProps) {
   if (to === undefined)
     return (
-      <StyledButtonCta rotate={rotate} onClick={onClick}>
+      <StyledButtonCta rotate={rotate} onClick={onClick} disabled={disabled}>
         {children}
       </StyledButtonCta>
     );
 
   return (
-    <StyledButtonCta rotate={rotate}>
+    <StyledButtonCta rotate={rotate} disabled={disabled}>
       <Link to={to}>{children}</Link>
     </StyledButtonCta>
   );
