@@ -30,7 +30,7 @@ const Ul = styled.ul`
 `;
 
 function Header() {
-  const { data: resources, isLoading } = useResources();
+  const { data: resources, isLoading } = {} = useResources();
 
   if (isLoading) return <Spinner />;
   const { coins, energy, food, oxygen, temperature, water } = resources;

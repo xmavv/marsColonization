@@ -7,7 +7,7 @@ export async function getResources(userId: number) {
   return data.data.data;
 }
 
-interface resourcesToUpdate {
+export interface ResourcesToUpdate {
   coins?: number;
   energy?: number;
   food?: number;
@@ -18,7 +18,7 @@ interface resourcesToUpdate {
 
 export async function updateResources(
   userId: number,
-  resourcesToUpdate: resourcesToUpdate
+  resourcesToUpdate: ResourcesToUpdate
 ) {
   const res = await fetch(`${apiLink}/resources/${userId}`, {
     method: "PATCH",

@@ -6,6 +6,10 @@ import { capitalizeName, formatDuration } from "../../utils/helpers";
 import styled from "styled-components";
 import { useBuilding } from "./useBuilding";
 import Spinner from "../../ui/Spinner";
+import { useUpdateResources } from "../resources/useUpdateResources";
+import { useUpdateBuilding } from "./useUpdateBuilding";
+import { useResources } from "../resources/useResources";
+import { useWorkers } from "../workers/useWorkers";
 
 const buildingTypes = [
   "central",
@@ -15,7 +19,7 @@ const buildingTypes = [
   "powerhouse",
 ];
 
-const buildingsDescription = {
+const buildingsDescriptions = {
   central:
     "The Central building serves as the heart of the Mars colony, providing advanced climate regulation systems to counteract the harsh Martian temperatures. Equipped with state-of-the-art cooling towers and thermal shields, it allows settlers to lower the ambient temperature to more habitable levels. As the Central building upgrades, its efficiency in reducing temperatures improves, enabling further expansion and survival in the hostile Martian environment.",
   farm: "The Farm is the lifeline of the colony, responsible for producing vital food supplies. Using advanced hydroponics and Martian soil adaptations, it cultivates crops in a controlled environment. As the Farm levels up, it becomes more efficient, yielding larger quantities of fresh food to sustain the growing population. Its ability to maximize food production is crucial for maintaining colony morale and survival.",
@@ -27,13 +31,22 @@ const buildingsDescription = {
     "The Powerhouse generates and distributes energy to power the colony's systems and operations. Using solar panels and geothermal energy converters, it ensures sustainable energy production even in the harsh Martian environment. As the Powerhouse is upgraded, its energy output grows, supporting larger structures and more advanced technologies, enabling the colony's continued growth and resilience.",
 };
 
-const buildingsResource = {
+const buildingsResources = {
   central: "temperature",
   farm: "food",
   laboratory: "oxygen",
   hydropolis: "water",
   powerhouse: "energy",
 };
+
+const workersTypes = {
+  central: "meteorologists",
+  farm: "biologists",
+  laboratory: "chemists",
+  hydropolis: "hydrologists",
+  powerhouse: "electricians",
+}
+
 
 const ImgBuilding = styled.img``;
 
@@ -123,16 +136,41 @@ function BuildingInfo() {
   };
 
   const capitalizedBuildingType = capitalizeName(buildingType);
-  const buildingDescription = buildingsDescription[buildingType];
-  const buildingResource = buildingsResource[buildingType] as Type;
+  const buildingDescription = buildingsDescriptions[buildingType];
+  const buildingResource = buildingsResources[buildingType] as Type;
+  const workerType = workersTypes[buildingType];
 
   const otherBuildings = buildingTypes.filter(
     (building) => building !== buildingType
   );
 
   //database info
+  const {data: resources, isLoading: isLoadingResources} = useResources();
+  const {data: workers, isLoading: isLoadingWorkers} = useWorkers();
+
   const { data: { data: building, updateCost, product } = {}, isLoading } =
     useBuilding(buildingType);
+  const {updateResources, isPending: isUpdatingResources} = useUpdateResources();
+  const {updateBuilding, isPending: isUpdatingBuilding} = useUpdateBuilding(buildingType);
+
+  function handleClaimResource() {
+    const resourcesToUpdate = {[buildingResource]: resources[buildingResource] + product.RESOURCE};
+
+    updateResources(resourcesToUpdate);
+  }
+
+  function handleUpdateBuilding() {
+    if(resources.energy > updateCost.ENERGY &&
+       resources.water > updateCost.WATER &&
+       resources.food > updateCost.FOOD &&
+       resources.coins > updateCost.COINS && 
+       workers[workerType] > updateCost.WORKERS) {
+        updateBuilding(building.level + 1);
+       } else {
+        console.log('nie masz wystarczajaco resourcow!')
+       }
+
+  }
 
   if (isLoading) return <Spinner />;
 
@@ -158,12 +196,12 @@ function BuildingInfo() {
         <div>
           <CenterContainer>
             <Resource type="duration">
-              {formatDuration(product.TIME / 1000)}
+              {formatDuration(product.TIME)}
             </Resource>
           </CenterContainer>
-          <ButtonClaim>
+          <ButtonClaim onClick={handleClaimResource} disabled={isUpdatingResources}>
             <CenterContainer>
-              {/* <Resource type={buildingResource}>300</Resource> */}
+              <Resource type={buildingResource}>{product.RESOURCE}</Resource>
             </CenterContainer>
           </ButtonClaim>
         </div>
@@ -173,10 +211,10 @@ function BuildingInfo() {
             <Resource type="energy">{updateCost.ENERGY}</Resource>
             <Resource type="water">{updateCost.WATER}</Resource>
             <Resource type="food">{updateCost.FOOD}</Resource>
-            {/* <Resource type="workers">{updateCost.ENERGY}</Resource> */}
+            <Resource type="workers">{updateCost.WORKERS}</Resource>
             <Resource type="coins">{updateCost.COINS}</Resource>
           </CenterContainer>
-          <ButtonUpdate>upgrade</ButtonUpdate>
+          <ButtonUpdate onClick={handleUpdateBuilding} disabled={isUpdatingBuilding}>upgrade</ButtonUpdate>
         </div>
       </CtaSection>
 
