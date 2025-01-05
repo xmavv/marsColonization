@@ -25,7 +25,7 @@ export const updateCosts = {
       FOOD: 30,
       WATER: 25,
       OXYGEN: 10,
-      ELECTRICIANS: 3,
+      WORKERS: 3,
       INCREASE_FACTOR: 1.2
     },
     laboratory: {
@@ -34,7 +34,7 @@ export const updateCosts = {
       FOOD: 35,
       WATER: 20,
       OXYGEN: 15,
-      CHEMISTS: 3,
+      WORKERS: 3,
       INCREASE_FACTOR: 1.2
     },
     farm: {
@@ -43,7 +43,7 @@ export const updateCosts = {
       FOOD: 10,
       WATER: 30,
       OXYGEN: 25,
-      BIOLOGISTS: 3,
+      WORKERS: 3,
       INCREASE_FACTOR: 1.1
     },
     central: {
@@ -52,7 +52,7 @@ export const updateCosts = {
       FOOD: 30,
       WATER: 30,
       OXYGEN: 30,
-      METEOROLOGISTS: 5,
+      WORKERS: 5,
       INCREASE_FACTOR: 1.5
     },
     hydropolis: {
@@ -61,7 +61,7 @@ export const updateCosts = {
       FOOD: 35,
       WATER: 15,
       OXYGEN: 25,
-      HYDROLOGISTS: 3,
+      WORKERS: 3,
       INCREASE_FACTOR: 1.2
     }
   }
@@ -90,28 +90,28 @@ export const buyCosts = {
 export const production = {
   buildings: {
     powerhouse: {
-      ENERGY: 2,
-      TIME: 60000,
+      RESOURCE: 2,
+      TIME: 10,
       INCREASE_FACTOR: 1.5
     },
     laboratory: {
-      OXYGEN: 2,
-      TIME: 60000,
+      RESOURCE: 2,
+      TIME: 10,
       INCREASE_FACTOR: 1.5
     },
     farm: {
-      FOOD: 2,
-      TIME: 60000,
+      RESOURCE: 2,
+      TIME: 10,
       INCREASE_FACTOR: 1.5
     },
     hydropolis: {
-      WATER: 2,
-      TIME: 60000,
+      RESOURCE: 2,
+      TIME: 10,
       INCREASE_FACTOR: 1.5
     },
     central: {
-      TEMPERATURE: 1,
-      TIME: 300000,
+      RESOURCE: 1,
+      TIME: 30,
       INCREASE_FACTOR: 1.1
     }
   }
