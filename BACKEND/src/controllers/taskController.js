@@ -1,3 +1,4 @@
+import { experience } from "../config.js";
 import { pool } from "../db.js";
 
 export const getTasks = async function (req, res) {
@@ -25,6 +26,7 @@ export const endTask = async function (req, res) {
   try {
     const userID = req.params.userid * 1;
     const taskID = req.body.task_id * 1;
+    const userLevel = await updateUserLevel(userID)
     const result = await pool.query(
       "INSERT INTO Users_Tasks(user_id, task_id) VALUES(?, ?)",
       [userID, taskID]
@@ -37,6 +39,7 @@ export const endTask = async function (req, res) {
       status: "success",
       message: `Inserted Task`,
       data: {
+        userlevel: userLevel,
         data,
       }
     });
@@ -65,5 +68,17 @@ export const checkBody = async function (req,res, next) {
       status: 'fail',
       message: err,
     })
+  }
+}
+
+const updateUserLevel = async function(userID) {
+  try {
+    let [[{level}]] = await pool.query("SELECT level FROM Users WHERE id = ?",[userID])
+    level += experience.tasks.EXP
+    await pool.query("UPDATE Users SET level = ? WHERE id = ?",[level,userID])
+    return level
+  }
+  catch (err) {
+    throw "Failed updating user level"
   }
 }

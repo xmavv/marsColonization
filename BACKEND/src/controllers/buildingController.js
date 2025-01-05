@@ -1,5 +1,5 @@
 import { pool } from "../db.js";
-import {MAX_BUILDING_LEVEL, TYPES,production, updateCosts} from "../config.js";
+import {MAX_BUILDING_LEVEL, TYPES,experience,production, updateCosts} from "../config.js";
 
 export const getBuildings = async function (req, res) {
   try {
@@ -78,6 +78,7 @@ export const checkType = function(req,res, next) {
 
 export const updateBuildingLevel = async function(req, res) {
     try {
+      const userLevel = await updateUserLevel(req.params.userid, {...req.params,...req.body})
       const result = await pool.query('UPDATE Buildings SET level = ? WHERE user_id = ? AND type = ?',[req.body.level, req.params.userid,req.params.type])
       res.status(200).json({
         status: 'success',
@@ -85,6 +86,7 @@ export const updateBuildingLevel = async function(req, res) {
         data: {
             type: req.params.type,
             level: req.body.level,
+            userlevel: userLevel,
         },
       })
     }
@@ -106,6 +108,38 @@ export const checkBody = function(req,res,next) {
   }
   next()
 }
+
+const updateUserLevel = async function(userID, body) {
+  try{
+    const buildingLevel = body.level
+    const type = body.type
+    let [[{level}]] = await pool.query("SELECT level FROM Users WHERE id = ?",[userID])
+    level += experience.buildings[type].INCREASE_FACTOR**buildingLevel*experience.buildings[type].EXP
+    level = Math.round(level / 100) * 100 //Round to hundreds
+    await pool.query("UPDATE Users SET level = ? WHERE id = ?",[level,userID])
+    return level 
+  }
+  catch (err) {
+      throw "Failed updating user level"
+  }
+
+
+}
+
+// const updateLevel = async function(userID, body) {
+//     const [[curWorkers]] = await pool.query("SELECT * FROM Workers WHERE user_id = ?",[userID])
+//     let [[{level}]] = await pool.query("SELECT level FROM Users WHERE id = ?",[userID])
+//     // console.log("Current level: ", level)
+//     for (const [worker, value] of Object.entries(body)) {
+//         const diff = value - curWorkers[worker];
+//         if (diff > 0) {
+//             level += diff*experience.workers[worker].EXP;
+//         }
+//     }
+//     // console.log('New level: ', level);
+//     await pool.query("UPDATE Users SET level = ? WHERE id = ?",[level,userID])
+//     return level
+// }
 
 
 
