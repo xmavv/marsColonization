@@ -45,8 +45,7 @@ const workersTypes = {
   laboratory: "chemists",
   hydropolis: "hydrologists",
   powerhouse: "electricians",
-}
-
+};
 
 const ImgBuilding = styled.img``;
 
@@ -145,31 +144,36 @@ function BuildingInfo() {
   );
 
   //database info
-  const {data: resources, isLoading: isLoadingResources} = useResources();
-  const {data: workers, isLoading: isLoadingWorkers} = useWorkers();
+  const { data: resources, isLoading: isLoadingResources } = useResources();
+  const { data: workers, isLoading: isLoadingWorkers } = useWorkers();
 
   const { data: { data: building, updateCost, product } = {}, isLoading } =
     useBuilding(buildingType);
-  const {updateResources, isPending: isUpdatingResources} = useUpdateResources();
-  const {updateBuilding, isPending: isUpdatingBuilding} = useUpdateBuilding(buildingType);
+  const { updateResources, isPending: isUpdatingResources } =
+    useUpdateResources();
+  const { updateBuilding, isPending: isUpdatingBuilding } =
+    useUpdateBuilding(buildingType);
 
   function handleClaimResource() {
-    const resourcesToUpdate = {[buildingResource]: resources[buildingResource] + product.RESOURCE};
+    const resourcesToUpdate = {
+      [buildingResource]: resources[buildingResource] + product.RESOURCE,
+    };
 
     updateResources(resourcesToUpdate);
   }
 
   function handleUpdateBuilding() {
-    if(resources.energy > updateCost.ENERGY &&
-       resources.water > updateCost.WATER &&
-       resources.food > updateCost.FOOD &&
-       resources.coins > updateCost.COINS && 
-       workers[workerType] > updateCost.WORKERS) {
-        updateBuilding(building.level + 1);
-       } else {
-        console.log('nie masz wystarczajaco resourcow!')
-       }
-
+    if (
+      resources.energy >= updateCost.ENERGY &&
+      resources.water >= updateCost.WATER &&
+      resources.food >= updateCost.FOOD &&
+      resources.coins >= updateCost.COINS &&
+      workers[workerType] >= updateCost.WORKERS
+    ) {
+      updateBuilding(building.level + 1);
+    } else {
+      console.log("nie masz wystarczajaco resourcow!");
+    }
   }
 
   if (isLoading) return <Spinner />;
@@ -195,11 +199,12 @@ function BuildingInfo() {
       <CtaSection>
         <div>
           <CenterContainer>
-            <Resource type="duration">
-              {formatDuration(product.TIME)}
-            </Resource>
+            <Resource type="duration">{formatDuration(product.TIME)}</Resource>
           </CenterContainer>
-          <ButtonClaim onClick={handleClaimResource} disabled={isUpdatingResources}>
+          <ButtonClaim
+            onClick={handleClaimResource}
+            disabled={isUpdatingResources}
+          >
             <CenterContainer>
               <Resource type={buildingResource}>{product.RESOURCE}</Resource>
             </CenterContainer>
@@ -214,7 +219,12 @@ function BuildingInfo() {
             <Resource type="workers">{updateCost.WORKERS}</Resource>
             <Resource type="coins">{updateCost.COINS}</Resource>
           </CenterContainer>
-          <ButtonUpdate onClick={handleUpdateBuilding} disabled={isUpdatingBuilding}>upgrade</ButtonUpdate>
+          <ButtonUpdate
+            onClick={handleUpdateBuilding}
+            disabled={isUpdatingBuilding}
+          >
+            upgrade
+          </ButtonUpdate>
         </div>
       </CtaSection>
 

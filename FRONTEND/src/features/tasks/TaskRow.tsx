@@ -4,6 +4,7 @@ import Table from "../../ui/Table";
 import { Task } from "./Task";
 import Resource from "../resources/Resource";
 import { formatDuration } from "../../utils/helpers";
+import { SpinnerMini } from "../../ui/Spinner";
 
 const Button = styled.button`
   transition: transform 0.3s ease;
@@ -20,7 +21,15 @@ const Description = styled.div`
   text-overflow: ellipsis;
 `;
 
-function TaskRow({ task }: { task: Task }) {
+function TaskRow({
+  task,
+  onClick,
+  isExecuting,
+}: {
+  task: Task;
+  onClick: () => void;
+  isExecuting: boolean;
+}) {
   const { name, description, type, resources, coins, workers, duration } = task;
 
   return (
@@ -39,9 +48,15 @@ function TaskRow({ task }: { task: Task }) {
       <div>
         <Resource type="duration">{formatDuration(duration)}</Resource>
       </div>
-      <Button>
-        <IconPlus />
-      </Button>
+      {isExecuting ? (
+        <div>
+          <SpinnerMini />
+        </div>
+      ) : (
+        <Button onClick={onClick}>
+          <IconPlus />
+        </Button>
+      )}
     </Table.Row>
   );
 }
