@@ -16,7 +16,7 @@ export const MAX_BUILDING_LEVEL = 10;
 export const TYPES = ['laboratory', 'farm', 'powerhouse', 'central', 'hydropolis'];
 export const RESOURCES  = ["coins", 'water', 'food','energy', 'oxygen','temperature'];
 export const WORKERS = ['electricians','biologists','hydrologists','chemists','meteorologists'];
-
+export const JOBS = {'laboratory': 'chemists', 'farm': 'biologists', 'powerhouse': 'electricians', 'central': 'meteorologists', 'hydropolis': 'hydrologists'}
 export const updateCosts = {
   buildings: {
     powerhouse: {

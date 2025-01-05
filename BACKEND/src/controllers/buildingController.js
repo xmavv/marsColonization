@@ -1,5 +1,5 @@
 import { pool } from "../db.js";
-import {MAX_BUILDING_LEVEL, TYPES,experience,production, updateCosts} from "../config.js";
+import {MAX_BUILDING_LEVEL, RESOURCES,WORKERS, TYPES, JOBS, experience,production, updateCosts} from "../config.js";
 
 export const getBuildings = async function (req, res) {
   try {
@@ -78,6 +78,7 @@ export const checkType = function(req,res, next) {
 
 export const updateBuildingLevel = async function(req, res) {
     try {
+      await takeResources(req.params.userid, req.params.type, req.body.level)
       const userLevel = await updateUserLevel(req.params.userid, {...req.params,...req.body})
       const result = await pool.query('UPDATE Buildings SET level = ? WHERE user_id = ? AND type = ?',[req.body.level, req.params.userid,req.params.type])
       res.status(200).json({
@@ -122,24 +123,33 @@ const updateUserLevel = async function(userID, body) {
   catch (err) {
       throw "Failed updating user level"
   }
-
-
 }
 
-// const updateLevel = async function(userID, body) {
-//     const [[curWorkers]] = await pool.query("SELECT * FROM Workers WHERE user_id = ?",[userID])
-//     let [[{level}]] = await pool.query("SELECT level FROM Users WHERE id = ?",[userID])
-//     // console.log("Current level: ", level)
-//     for (const [worker, value] of Object.entries(body)) {
-//         const diff = value - curWorkers[worker];
-//         if (diff > 0) {
-//             level += diff*experience.workers[worker].EXP;
-//         }
-//     }
-//     // console.log('New level: ', level);
-//     await pool.query("UPDATE Users SET level = ? WHERE id = ?",[level,userID])
-//     return level
-// }
-
+const takeResources = async function(userID,type, level) {
+  try{
+    const updateCost = getUpdateCost(type, level)
+    const [[curValues]] = await pool.query("SELECT * FROM Resources r INNER JOIN Workers w ON r.user_id = w.user_id WHERE w.user_id = ?",[userID])
+    const newValues = {}
+    // Object.entries(updateCost).forEach(([resource, value]) => newResources[resource.toLowerCase()] = curResources[resource.toLowerCase()] - value)
+    for (let [key, value] of Object.entries(updateCost)) {
+        key = key.toLowerCase()
+        if (RESOURCES.includes(key)) {
+            const newValue = curValues[key] - value;
+            newValues[key] = newValue
+            await pool.query(`UPDATE Resources SET ?? = ? WHERE user_id = ?`,[key,newValue,userID])
+        }
+        else if (key === 'workers') {
+          key = JOBS[type]
+          const newValue = curValues[key] - value;
+          newValues[key] = newValue
+          await pool.query(`UPDATE Workers SET ?? = ? WHERE user_id = ?`,[key,value,userID]);
+        }
+    }
+    console.log(newValues)
+  }
+  catch (err) {
+    throw "Failed updating resources"
+  }
+}
 
 
