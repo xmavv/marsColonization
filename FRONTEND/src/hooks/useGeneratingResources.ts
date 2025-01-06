@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { CLAIM_RESOURCES_COUNTER } from "../utils/constans";
 
 export function useGeneratingResources(
   duration: number,
@@ -6,7 +7,7 @@ export function useGeneratingResources(
   setState: React.Dispatch<React.SetStateAction<number>>
 ) {
   useEffect(() => {
-    if (!duration || state >= duration * 5) return;
+    if (!duration || state >= duration * CLAIM_RESOURCES_COUNTER) return;
 
     const id = setTimeout(() => {
       setState((i) => i + duration);

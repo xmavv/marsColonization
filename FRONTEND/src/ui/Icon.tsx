@@ -6,6 +6,7 @@ const StyledIcon = styled.img`
   width: 2.5rem;
   aspect-ratio: 1/1;
 
+  z-index: inherit;
   margin: 0 0.5rem;
 `;
 

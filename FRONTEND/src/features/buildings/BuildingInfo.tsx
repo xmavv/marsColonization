@@ -3,16 +3,17 @@ import { Level } from "../../ui/Level";
 import Resource, { Type } from "../resources/Resource";
 import { Card3D } from "../../ui/3dCard";
 import { capitalizeName, formatDuration } from "../../utils/helpers";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useBuilding } from "./useBuilding";
 import Spinner from "../../ui/Spinner";
 import { useUpdateResources } from "../resources/useUpdateResources";
 import { useUpdateBuilding } from "./useUpdateBuilding";
 import { useResources } from "../resources/useResources";
 import { useWorkers } from "../workers/useWorkers";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useGeneratingResources } from "../../hooks/useGeneratingResources";
 import { useChangeTitle } from "../../hooks/useChangeTitle";
+import { CLAIM_RESOURCES_COUNTER } from "../../utils/constans";
 
 const buildingTypes = [
   "central",
@@ -21,6 +22,14 @@ const buildingTypes = [
   "farm",
   "powerhouse",
 ];
+
+const buildingColors = {
+  central: "#820000",
+  hydropolis: "#346dff",
+  laboratory: "#0099a4",
+  farm: "#007a1d",
+  powerhouse: "#983800",
+};
 
 const buildingsDescriptions = {
   central:
@@ -110,8 +119,31 @@ const Button = styled.button`
   }
 `;
 
+const resourcesCountdown = keyframes`
+      from {
+        width: 0%;
+      } to {
+        width: 100%;
+      }
+  `;
+
+const Countdown = styled.div<{ duration: number }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: ${(props) => props.color};
+
+  animation: ${resourcesCountdown} ${(props) => `${props.duration}s`}
+    ${CLAIM_RESOURCES_COUNTER} linear;
+`;
+
 const ButtonClaim = styled(Button)`
+  position: relative;
   background-color: black;
+  overflow: hidden;
 `;
 
 const ButtonUpdate = styled(Button)`
@@ -120,10 +152,12 @@ const ButtonUpdate = styled(Button)`
 `;
 
 const CenterContainer = styled.div`
+  position: relative;
   display: flex;
   gap: 2rem;
   justify-content: center;
 
+  z-index: 10;
   transition: transform 0.3s ease;
 `;
 function BuildingInfo() {
@@ -217,6 +251,10 @@ function BuildingInfo() {
             onClick={handleClaimResource}
             disabled={isUpdatingResources || interval < product.TIME}
           >
+            <Countdown
+              duration={product.TIME}
+              color={buildingColors[buildingType]}
+            />
             <CenterContainer>
               <Resource type={buildingResource}>
                 {`${resourcesToClaim}`}
