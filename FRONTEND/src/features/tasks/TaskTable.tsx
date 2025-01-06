@@ -40,10 +40,12 @@ function TaskTable() {
 
     updateWorkers(workersToUpdate);
     setExecutinTask(task.id);
+    document.title = `marsColonization - ⭐ executing task ${task.id} `;
 
     setTimeout(() => {
       addTask(task.id);
       setExecutinTask(-1);
+      document.title = `marsColonization`;
     }, task.duration * 1000);
   }
 
