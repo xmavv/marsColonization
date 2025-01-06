@@ -7,6 +7,7 @@ import { Task } from "./Task";
 import TaskRow from "./TaskRow";
 import { useAddTask } from "./useAddTask";
 import { useTasks } from "./useTasks";
+import { useChangeTitle } from "../../hooks/useChangeTitle";
 
 const workersTypes = {
   temperature: "meteorologists",
@@ -19,6 +20,7 @@ const workersTypes = {
 function TaskTable() {
   const [executingTask, setExecutinTask] = useState(-1);
 
+  //database info
   const { data: tasks, isLoading } = useTasks();
   const { addTask, isPending: isPendingTask } = useAddTask();
 
@@ -26,6 +28,7 @@ function TaskTable() {
     useWorkers();
   const { updateWorkers, isPending } = useUpdateWorkers();
 
+  //handler functions
   function handleExecuteTask(task: Task) {
     const workerType = workersTypes[task.type];
     const taskWorkers = task.workers;
@@ -48,6 +51,9 @@ function TaskTable() {
       document.title = `marsColonization`;
     }, task.duration * 1000);
   }
+
+  //hooks
+  useChangeTitle("tasks");
 
   if (isLoading || isLoadingWorkers) return <Spinner />;
 

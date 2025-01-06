@@ -10,6 +10,9 @@ import { useUpdateResources } from "../resources/useUpdateResources";
 import { useUpdateBuilding } from "./useUpdateBuilding";
 import { useResources } from "../resources/useResources";
 import { useWorkers } from "../workers/useWorkers";
+import { useEffect, useRef, useState } from "react";
+import { useGeneratingResources } from "../../hooks/useGeneratingResources";
+import { useChangeTitle } from "../../hooks/useChangeTitle";
 
 const buildingTypes = [
   "central",
@@ -124,6 +127,8 @@ const CenterContainer = styled.div`
   transition: transform 0.3s ease;
 `;
 function BuildingInfo() {
+  const [interval, setInterval] = useState(0);
+
   //static info
   const { buildingType } = useParams() as {
     buildingType:
@@ -154,9 +159,12 @@ function BuildingInfo() {
   const { updateBuilding, isPending: isUpdatingBuilding } =
     useUpdateBuilding(buildingType);
 
+  const resourcesToClaim = (product?.RESOURCE * interval) / product?.TIME || 0;
+
+  //handler functions
   function handleClaimResource() {
     const resourcesToUpdate = {
-      [buildingResource]: resources[buildingResource] + product.RESOURCE,
+      [buildingResource]: resources[buildingResource] + resourcesToClaim,
     };
 
     updateResources(resourcesToUpdate);
@@ -175,6 +183,10 @@ function BuildingInfo() {
       console.log("nie masz wystarczajaco resourcow!");
     }
   }
+
+  //hooks
+  useChangeTitle(buildingType);
+  useGeneratingResources(product?.TIME, interval, setInterval);
 
   if (isLoading) return <Spinner />;
 
@@ -203,10 +215,12 @@ function BuildingInfo() {
           </CenterContainer>
           <ButtonClaim
             onClick={handleClaimResource}
-            disabled={isUpdatingResources}
+            disabled={isUpdatingResources || interval < product.TIME}
           >
             <CenterContainer>
-              <Resource type={buildingResource}>{product.RESOURCE}</Resource>
+              <Resource type={buildingResource}>
+                {`${resourcesToClaim}`}
+              </Resource>
             </CenterContainer>
           </ButtonClaim>
         </div>
