@@ -7,6 +7,17 @@ export async function getResources(userId: number) {
   return data.data.data;
 }
 
+export interface Resources {
+  coins: number;
+  energy: number;
+  food: number;
+  water: number;
+  oxygen: number;
+  temperature: number;
+  duration: number;
+  workers: number;
+}
+
 export interface ResourcesToUpdate {
   coins?: number;
   energy?: number;

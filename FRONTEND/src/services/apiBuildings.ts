@@ -7,7 +7,10 @@ export async function getBuildings(userId: number) {
   return data.data.data;
 }
 
-export async function getBuilding(userId: number, buildingType: string) {
+export async function getBuilding(
+  userId: number,
+  buildingType: "central" | "hydropolis" | "laboratory" | "farm" | "powerhouse"
+) {
   const res = await fetch(`${apiLink}/buildings/${userId}/${buildingType}`);
   const data = await res.json();
 
