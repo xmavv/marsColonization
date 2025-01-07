@@ -1,20 +1,43 @@
-import { useEffect } from "react";
-import { CLAIM_RESOURCES_COUNTER } from "../utils/constans";
+import { useEffect, useRef, useState } from "react";
 
 export function useGeneratingResources(
-  duration: number,
-  state: number,
-  setState: React.Dispatch<React.SetStateAction<number>>
+  initialDuration: number,
+  resources: number
 ) {
-  useEffect(() => {
-    if (!duration || state >= duration * CLAIM_RESOURCES_COUNTER) return;
+  const [countdown, setCountdown] = useState(1);
+  const [resourcesToClaim, setResourcesToClaim] = useState(0);
+  const [duration, setDuration] = useState(initialDuration);
+  const interval = useRef(0);
 
-    const id = setTimeout(() => {
-      setState((i) => i + duration);
-    }, duration * 1000);
+  function resetGeneratingResources() {
+    setCountdown(1);
+    setResourcesToClaim(0);
+    setDuration(initialDuration);
+  }
+
+  useEffect(() => {
+    if (countdown % 100 === 0) {
+      setResourcesToClaim((r) => r + resources + countdown / 10);
+      setDuration((d) => d + countdown / 10);
+    }
+    if (countdown === 500) clearInterval(interval.current);
+  }, [countdown, resources]);
+  //not really good to use hook like that but...
+
+  useEffect(() => {
+    interval.current = setInterval(() => {
+      setCountdown((c) => c + 1);
+    }, duration * 10);
 
     return () => {
-      clearTimeout(id);
+      clearInterval(interval.current);
     };
-  }, [duration, state, setState]);
+  }, [duration, resources]);
+
+  return {
+    resourcesToClaim,
+    resetGeneratingResources,
+    countdown,
+    duration,
+  };
 }

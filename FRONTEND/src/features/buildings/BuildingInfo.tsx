@@ -9,11 +9,7 @@ import BuildingDescription from "./BuildingDescription";
 import ButtonUpgrade from "./ButtonUpgrade";
 import ButtonClaim from "./ButtonClaim";
 import OtherBuildings from "./OtherBuildings";
-
-export const P = styled.p`
-  font-size: 2rem;
-  padding: 1rem;
-`;
+import { P } from "./BuildingUtils";
 
 const CtaSection = styled.div`
   font-size: 1.7rem;
@@ -21,32 +17,6 @@ const CtaSection = styled.div`
   > * {
     margin: 2rem;
   }
-`;
-
-export const Button = styled.button`
-  font-family: "Krona One", sans-serif;
-  font-size: 2rem;
-  text-transform: uppercase;
-
-  width: 100%;
-  padding: 1rem 3rem;
-  margin-top: 1.5rem;
-  border-radius: 4rem;
-
-  transition: transform 0.3s ease;
-  &:hover {
-    transform: scale(1.07);
-  }
-`;
-
-export const CenterContainer = styled.div`
-  position: relative;
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-
-  z-index: 10;
-  transition: transform 0.3s ease;
 `;
 
 function BuildingInfo() {

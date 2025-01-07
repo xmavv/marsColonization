@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { capitalizeName } from "../../utils/helpers";
-import { CenterContainer, P } from "./BuildingInfo";
 import { Link } from "react-router-dom";
+import { CenterContainer, P } from "./BuildingUtils";
 
 const StyledOtherBuildings = styled.div`
   display: grid;

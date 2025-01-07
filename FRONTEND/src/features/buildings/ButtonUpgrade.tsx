@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Resource from "../resources/Resource";
-import { Button, CenterContainer } from "./BuildingInfo";
 import { useWorkers } from "../workers/useWorkers";
 import { useUpdateBuilding } from "./useUpdateBuilding";
 import { Resources } from "../../services/apiResources";
+import { Button, CenterContainer } from "./BuildingUtils";
 
 const workersTypes = {
   central: "meteorologists",

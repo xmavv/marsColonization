@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { formatDuration } from "../../utils/helpers";
 import Resource, { Type } from "../resources/Resource";
-import { Button, CenterContainer } from "./BuildingInfo";
 import { useUpdateResources } from "../resources/useUpdateResources";
 import { useGeneratingResources } from "../../hooks/useGeneratingResources";
 import { Resources } from "../../services/apiResources";
+import { Button, CenterContainer } from "./BuildingUtils";
 
 const buildingsResources = {
   central: "temperature",
@@ -22,18 +22,19 @@ const buildingColors = {
   powerhouse: "#983800",
 };
 
-const Countdown = styled.div<{ duration: number }>`
+const Countdown = styled.div<{ countdown: number }>`
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: ${(props) => props.countdown}%;
   height: 100%;
 
+  transition: width 0.5s linear;
   background-color: ${(props) => props.color};
-
-  /* animation: ${resourcesCountdown} ${(props) => `${props.duration}s`} */
-  /* ${CLAIM_RESOURCES_COUNTER} linear; */
 `;
+
+/* animation: ${resourcesCountdown} ${(props) => `${props.duration}s`} */
+/* ${CLAIM_RESOURCES_COUNTER} linear; */
 
 const StyledButtonClaim = styled(Button)`
   position: relative;
@@ -57,34 +58,35 @@ function ButtonClaim({
 }) {
   const { updateResources, isPending: isUpdatingResources } =
     useUpdateResources();
+  const { resourcesToClaim, resetGeneratingResources, countdown, duration } =
+    useGeneratingResources(product.TIME, product.RESOURCE);
 
   const buildingResource = buildingsResources[buildingType] as Type;
 
   function handleClaimResource() {
     const resourcesToUpdate = {
-      [buildingResource]: resources[buildingResource],
+      [buildingResource]: resources[buildingResource] + resourcesToClaim,
     };
 
     updateResources(resourcesToUpdate);
+    resetGeneratingResources();
   }
-
-  //   useGeneratingResources(product?.TIME, interval, setInterval);
 
   return (
     <div>
       <CenterContainer>
-        <Resource type="duration">{formatDuration(product.TIME)}</Resource>
+        <Resource type="duration">{formatDuration(duration)}</Resource>
       </CenterContainer>
       <StyledButtonClaim
         onClick={handleClaimResource}
-        // disabled={isUpdatingResources ||  < product.TIME}
+        disabled={isUpdatingResources || resourcesToClaim < duration}
       >
         <Countdown
-          duration={product.TIME}
+          countdown={countdown % 100}
           color={buildingColors[buildingType]}
         />
         <CenterContainer>
-          <Resource type={buildingResource}>{`${2}`}</Resource>
+          <Resource type={buildingResource}>{`${resourcesToClaim}`}</Resource>
         </CenterContainer>
       </StyledButtonClaim>
     </div>
