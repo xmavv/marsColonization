@@ -79,7 +79,7 @@ function ButtonClaim({
       </CenterContainer>
       <StyledButtonClaim
         onClick={handleClaimResource}
-        disabled={isUpdatingResources || resourcesToClaim < duration}
+        disabled={isUpdatingResources || resourcesToClaim === 0}
       >
         <Countdown
           countdown={countdown % 100}

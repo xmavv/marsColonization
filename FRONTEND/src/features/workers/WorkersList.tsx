@@ -18,8 +18,6 @@ function WorkersList() {
 
   if (isLoading) return <Spinner />;
 
-  console.log(buyCosts);
-
   return (
     <>
       {workerTypes.map((worker) => (

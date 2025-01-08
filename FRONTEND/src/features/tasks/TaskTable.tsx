@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
 import { useUpdateWorkers } from "../workers/useUpdateWorkers";
@@ -54,6 +54,14 @@ function TaskTable() {
 
   //hooks
   useChangeTitle("tasks");
+
+  useEffect(() => {
+    window.onclose = function () {
+      if (executingTask !== -1) {
+        alert("jezeli teraz wyjdziesz to sie zjebie wszystko xd");
+      }
+    };
+  }, [executingTask]);
 
   if (isLoading || isLoadingWorkers) return <Spinner />;
 

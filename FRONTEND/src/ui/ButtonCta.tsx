@@ -66,6 +66,10 @@ const StyledButtonCta = styled.button<{ rotate: string }>`
       left: 3px;
     }
   }
+
+  &:disabled {
+    filter: grayscale(1);
+  }
 `;
 
 interface ButtonCtaProps {

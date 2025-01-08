@@ -41,6 +41,10 @@ const Button = styled.button`
   &:focus {
     transform: scale(1.2);
   }
+
+  &:disabled {
+    filter: grayscale(1);
+  }
 `;
 
 const Img = styled.img`
