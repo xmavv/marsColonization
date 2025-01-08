@@ -3,6 +3,8 @@ import IconPlus from "../../ui/IconPlus";
 import Resource from "../resources/Resource";
 import { Quantity } from "../../ui/Quantity";
 import { useUpdateWorkers } from "./useUpdateWorkers";
+import { useResources } from "../resources/useResources";
+import { toast } from "react-toastify";
 
 const StyledWorker = styled.div`
   display: grid;
@@ -67,18 +69,18 @@ export type WorkerType =
 interface WorkerProps {
   type: WorkerType;
   quantity: number;
-  cost?: number;
+  cost: number;
 }
 
 function Worker({ type, quantity, cost }: WorkerProps) {
   const { updateWorkers, isPending } = useUpdateWorkers();
+  const { data: resources, isLoading } = useResources();
 
   function handleAdd() {
-    //WALIDACJA CZY MA WYSTARCZAJACO COINSOW
-
-    const workersToUpdate = { [`${type}s`]: quantity + 1 };
-
-    updateWorkers(workersToUpdate);
+    if (resources.coins >= cost) {
+      const workersToUpdate = { [`${type}s`]: quantity + 1 };
+      updateWorkers(workersToUpdate);
+    } else toast.error("nie masz wystarczajaco coinsow!", { theme: "colored" });
   }
 
   return (
@@ -86,7 +88,7 @@ function Worker({ type, quantity, cost }: WorkerProps) {
       <Resource type="coins" size="2rem">
         {`${cost}`}
       </Resource>
-      <Button onClick={handleAdd} disabled={isPending}>
+      <Button onClick={handleAdd} disabled={isPending || isLoading}>
         <IconPlus /> add
       </Button>
       <Img src={`/workers/${type}.png`} alt="" />

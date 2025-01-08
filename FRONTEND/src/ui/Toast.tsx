@@ -12,20 +12,22 @@ const StyledContainer = styled(ToastContainer)`
 `;
 
 function Toast() {
-return <StyledContainer
-    position="top-left"
-    autoClose={5000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick={true}
-    rtl={false}
-    pauseOnFocusLoss
-    draggable
-    pauseOnHover
-    theme="colored"
-    transition={Slide}
-    style={{fontSize: "1.5rem"}}
-/>
+  return (
+    <StyledContainer
+      position="top-left"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick={true}
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="colored"
+      transition={Slide}
+      style={{ fontSize: "1.5rem" }}
+    />
+  );
 }
 
 export default Toast;

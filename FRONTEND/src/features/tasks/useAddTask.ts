@@ -9,6 +9,7 @@ export function useAddTask() {
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      queryClient.invalidateQueries({ queryKey: ["resources"] });
     },
   });
 

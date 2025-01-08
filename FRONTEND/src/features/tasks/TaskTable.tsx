@@ -8,6 +8,7 @@ import TaskRow from "./TaskRow";
 import { useAddTask } from "./useAddTask";
 import { useTasks } from "./useTasks";
 import { useChangeTitle } from "../../hooks/useChangeTitle";
+import { toast } from "react-toastify";
 
 const workersTypes = {
   temperature: "meteorologists",
@@ -43,12 +44,18 @@ function TaskTable() {
 
     updateWorkers(workersToUpdate);
     setExecutinTask(task.id);
+    toast.success("task is being executed! dont leave this page!", {
+      theme: "colored",
+    });
+
     document.title = `marsColonization - ⭐ executing task ${task.id} `;
 
     setTimeout(() => {
       addTask(task.id);
       setExecutinTask(-1);
-      document.title = `marsColonization`;
+      toast.success("you have successfully done task!", { theme: "colored" });
+
+      document.title = `marsColonization - ⭐ tasks`;
     }, task.duration * 1000);
   }
 
@@ -58,7 +65,9 @@ function TaskTable() {
   useEffect(() => {
     window.onclose = function () {
       if (executingTask !== -1) {
-        alert("jezeli teraz wyjdziesz to stracisz workersow i nie uzyskasz zasobow!");
+        alert(
+          "jezeli teraz wyjdziesz to stracisz workersow i nie uzyskasz zasobow!"
+        );
       }
     };
   }, [executingTask]);

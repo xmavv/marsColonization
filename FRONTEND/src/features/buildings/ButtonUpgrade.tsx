@@ -38,7 +38,8 @@ function ButtonUpgrade({
   updateCost: UpdateCost;
   level: number;
 }) {
-  const { data: workers, isLoading: isLoadingWorkers } = useWorkers();
+  const { data: { data: workers } = {}, isLoading: isLoadingWorkers } =
+    useWorkers();
   const { updateBuilding, isPending: isUpdatingBuilding } =
     useUpdateBuilding(buildingType);
 
@@ -52,12 +53,14 @@ function ButtonUpgrade({
       resources.coins >= updateCost.COINS &&
       workers[workerType] >= updateCost.WORKERS
     ) {
-      updateBuilding(level + 1);
-      toast.success('you successfully upgraded the building!', {theme: "colored",});
-    } else {
-      toast.error('nie masz wystarczajaco resourcow!', {theme: "colored",});
+      //tez moze musi byc ze jak upgrade budynku to od nowa sie laduja resourcy w buttonClaim
 
-    }
+      updateBuilding(level + 1);
+      toast.success("you successfully upgraded the building!", {
+        theme: "colored",
+      });
+    } else
+      toast.error("nie masz wystarczajaco resourcow!", { theme: "colored" });
   }
 
   return (

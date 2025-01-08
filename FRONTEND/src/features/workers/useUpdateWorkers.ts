@@ -13,6 +13,7 @@ export function useUpdateWorkers() {
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["workers"] });
+      queryClient.invalidateQueries({ queryKey: ["resources"] });
     },
   });
 
