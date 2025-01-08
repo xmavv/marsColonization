@@ -58,7 +58,7 @@ function TaskTable() {
   useEffect(() => {
     window.onclose = function () {
       if (executingTask !== -1) {
-        alert("jezeli teraz wyjdziesz to sie zjebie wszystko xd");
+        alert("jezeli teraz wyjdziesz to stracisz workersow i nie uzyskasz zasobow!");
       }
     };
   }, [executingTask]);

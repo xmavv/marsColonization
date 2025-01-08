@@ -15,6 +15,8 @@ export async function createUser(username: string, password: string) {
   });
   const data = await res.json();
 
+  if(data.status === "fail") throw new Error(data.message);
+
   return data.data;
 }
 
@@ -26,6 +28,8 @@ export async function login(username: string, password: string) {
   });
 
   const data = await res.json();
+
+  if(data.status === "fail") throw new Error(data.message);
 
   return data.data;
 }

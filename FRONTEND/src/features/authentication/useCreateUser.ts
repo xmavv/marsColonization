@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createUser as createUserApi } from "../../services/apiUsers";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export function useCreateUser() {
   const queryClient = useQueryClient();
@@ -18,7 +19,12 @@ export function useCreateUser() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
       navigate("/login");
+      toast.success('sign up successfully! now please login', {theme: "colored"});
     },
+
+    onError: (err) => {
+      toast.success(err.message, {theme: "colored"});
+    }
   });
 
   return { createUser, isPending };

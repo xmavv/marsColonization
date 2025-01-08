@@ -4,6 +4,7 @@ import { useWorkers } from "../workers/useWorkers";
 import { useUpdateBuilding } from "./useUpdateBuilding";
 import { Resources } from "../../services/apiResources";
 import { Button, CenterContainer } from "./BuildingUtils";
+import { toast } from "react-toastify";
 
 const workersTypes = {
   central: "meteorologists",
@@ -52,8 +53,10 @@ function ButtonUpgrade({
       workers[workerType] >= updateCost.WORKERS
     ) {
       updateBuilding(level + 1);
+      toast.success('you successfully upgraded the building!', {theme: "colored",});
     } else {
-      console.log("nie masz wystarczajaco resourcow!");
+      toast.error('nie masz wystarczajaco resourcow!', {theme: "colored",});
+
     }
   }
 
