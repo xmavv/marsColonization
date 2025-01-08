@@ -96,16 +96,17 @@ const addResources = async function (userID, taskID) {
     ]);
     const resourceType = taskData.type;
     const value = taskData.resources;
+    const coins = taskData.coins;
     const [[resources]] = await pool.query(
       "SELECT * FROM Resources WHERE user_id = ?",
       [userID]
     );
     resources[resourceType] += value;
-    await pool.query("UPDATE Resources SET ?? = ? WHERE user_id = ?", [
-      resourceType,
-      resources[resourceType],
-      userID,
-    ]);
+    resources["coins"] += coins;
+    await pool.query(
+      "UPDATE Resources SET ?? = ?, coins = ? WHERE user_id = ?",
+      [resourceType, resources[resourceType], resources["coins"], userID]
+    );
     return resources;
   } catch (err) {
     throw err;
