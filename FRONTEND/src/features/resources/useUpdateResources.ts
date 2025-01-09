@@ -1,15 +1,22 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { ResourcesToUpdate, updateResources as updateResourcesApi} from "../../services/apiResources";
+import {
+  ResourcesToUpdate,
+  updateResources as updateResourcesApi,
+} from "../../services/apiResources";
+import { useAuth } from "../../contexts/AuthContext";
 
 export function useUpdateResources() {
-    const queryClient = useQueryClient();
+  const { user } = useAuth();
+  const queryClient = useQueryClient();
 
-    const {mutate: updateResources, isPending} = useMutation({
-        mutationFn: (resourcesToUpdate: ResourcesToUpdate) => updateResourcesApi(19, resourcesToUpdate), 
+  const { mutate: updateResources, isPending } = useMutation({
+    mutationFn: (resourcesToUpdate: ResourcesToUpdate) =>
+      updateResourcesApi(user?.id as number, resourcesToUpdate),
 
-        onSuccess: () => {
-        queryClient.invalidateQueries({queryKey: ['resources']});
-    }});
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["resources"] });
+    },
+  });
 
-    return {updateResources, isPending};
+  return { updateResources, isPending };
 }

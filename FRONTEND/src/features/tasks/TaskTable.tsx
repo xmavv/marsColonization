@@ -65,17 +65,17 @@ function TaskTable() {
   //hooks
   useChangeTitle("tasks");
 
-  useEffect(() => {
-    window.onclose = function () {
-      if (executingTask !== -1) {
-        alert(
-          "jezeli teraz wyjdziesz to stracisz workersow i nie uzyskasz zasobow!"
-        );
-      }
-    };
+  // useEffect(() => {
+  //   window.onclose = function () {
+  //     if (executingTask !== -1) {
+  //       alert(
+  //         "jezeli teraz wyjdziesz to stracisz workersow i nie uzyskasz zasobow!"
+  //       );
+  //     }
+  //   };
 
-    // return () => clearTimeout(timeoutRef.current);
-  }, [executingTask]);
+  //   // return () => clearTimeout(timeoutRef.current);
+  // }, [executingTask]);
 
   if (isLoading || isLoadingWorkers) return <Spinner />;
 
