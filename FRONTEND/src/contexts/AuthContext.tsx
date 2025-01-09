@@ -12,7 +12,7 @@ const AuthContext = createContext<AuthProps | null>(null);
 export interface User {
   username: string;
   level: number;
-  userId: number;
+  id: number;
 }
 
 function AuthProvider({ children }: { children: React.ReactNode }) {

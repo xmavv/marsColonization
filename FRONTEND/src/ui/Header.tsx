@@ -4,6 +4,7 @@ import ButtonLogOut from "./ButtonLogOut";
 import { Level } from "./Level";
 import { useResources } from "../features/resources/useResources";
 import Spinner from "./Spinner";
+import { useAuth } from "../contexts/AuthContext";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -30,7 +31,8 @@ const Ul = styled.ul`
 `;
 
 function Header() {
-  const { data: resources, isLoading } = {} = useResources();
+  const { data: resources, isLoading } = useResources();
+  const { user } = useAuth();
 
   if (isLoading) return <Spinner />;
   const { coins, energy, food, oxygen, temperature, water } = resources;
@@ -38,8 +40,8 @@ function Header() {
   return (
     <StyledHeader>
       <div>
-        <Nickname>Tesa44</Nickname>
-        <Level>level 5</Level>
+        <Nickname>{user?.username}</Nickname>
+        <Level>{user?.level}</Level>
       </div>
 
       <Ul>

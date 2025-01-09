@@ -38,7 +38,9 @@ function TaskTable() {
     const workersToUpdate = { [workerType]: workers[workerType] - taskWorkers };
 
     if (workers[workerType] < taskWorkers) {
-      console.log("nie mozesz tego zrobic ");
+      toast.error("nie mozesz tego zrobic! masz za malo zasobow!", {
+        theme: "colored",
+      });
 
       return;
     }
