@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
 import { useUpdateWorkers } from "../workers/useUpdateWorkers";
@@ -20,6 +20,7 @@ const workersTypes = {
 
 function TaskTable() {
   const [executingTask, setExecutinTask] = useState(-1);
+  const timeoutRef = useRef(0);
 
   //database info
   const { data: tasks, isLoading } = useTasks();
@@ -50,7 +51,7 @@ function TaskTable() {
 
     document.title = `marsColonization - ⭐ executing task ${task.id} `;
 
-    setTimeout(() => {
+    timeoutRef.current = setTimeout(() => {
       addTask(task.id);
       setExecutinTask(-1);
       toast.success("you have successfully done task!", { theme: "colored" });
@@ -70,6 +71,8 @@ function TaskTable() {
         );
       }
     };
+
+    // return () => clearTimeout(timeoutRef.current);
   }, [executingTask]);
 
   if (isLoading || isLoadingWorkers) return <Spinner />;
