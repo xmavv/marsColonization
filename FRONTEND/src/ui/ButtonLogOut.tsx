@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useAuth } from "../contexts/AuthContext";
 
 const StyledButtonLogOut = styled.button`
   font-family: "Krona One", sans-serif;
@@ -22,8 +23,14 @@ const Img = styled.img`
 `;
 
 function ButtonLogOut() {
+  const { logout } = useAuth();
+
+  function handleLogout() {
+    logout();
+  }
+
   return (
-    <StyledButtonLogOut>
+    <StyledButtonLogOut onClick={handleLogout}>
       <span>log out</span>
       <Img src="/utils/logout.png" alt="" />
     </StyledButtonLogOut>
