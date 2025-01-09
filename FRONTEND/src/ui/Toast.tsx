@@ -14,15 +14,12 @@ const StyledContainer = styled(ToastContainer)`
 function Toast() {
   return (
     <StyledContainer
-      position="top-left"
+      position="bottom-left"
       autoClose={5000}
       hideProgressBar={false}
-      newestOnTop={false}
+      newestOnTop={true}
+      limit={1}
       closeOnClick={true}
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
       theme="colored"
       transition={Slide}
       style={{ fontSize: "1.5rem" }}

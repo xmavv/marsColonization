@@ -15,6 +15,7 @@ export function useUpdateResources() {
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["resources"] });
+      queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });
 

@@ -9,9 +9,10 @@ export function useAddTask() {
   const { mutate: addTask, isPending } = useMutation({
     mutationFn: (taskId: number) => addTaskApi(user?.id as number, taskId),
 
-    onSettled: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
       queryClient.invalidateQueries({ queryKey: ["resources"] });
+      queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });
 

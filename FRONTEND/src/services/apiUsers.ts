@@ -7,6 +7,13 @@ export async function getUsers() {
   return data.data.data;
 }
 
+export async function getUser(username: string) {
+  const res = await fetch(`${apiLink}/users/${username}`);
+  const data = await res.json();
+
+  return data.data.data;
+}
+
 export async function createUser(username: string, password: string) {
   const res = await fetch(`${apiLink}/users`, {
     method: "POST",
@@ -15,7 +22,7 @@ export async function createUser(username: string, password: string) {
   });
   const data = await res.json();
 
-  if(data.status === "fail") throw new Error(data.message);
+  if (data.status === "fail") throw new Error(data.message);
 
   return data.data;
 }
@@ -29,7 +36,7 @@ export async function login(username: string, password: string) {
 
   const data = await res.json();
 
-  if(data.status === "fail") throw new Error(data.message);
+  if (data.status === "fail") throw new Error(data.message);
 
   return data.data;
 }

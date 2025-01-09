@@ -10,9 +10,10 @@ export function useUpdateBuilding(buildingType: string) {
     mutationFn: (level: number) =>
       updateBuildingApi(user?.id as number, buildingType, level),
 
-    onSettled: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["resources"] });
       queryClient.invalidateQueries({ queryKey: ["building", buildingType] });
+      queryClient.invalidateQueries({ queryKey: ["user", buildingType] });
     },
     onError: () => {
       console.log("nie masz wystarczajaco resourcow!");
