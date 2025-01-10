@@ -45,7 +45,7 @@ export const checkLogin = async function(req, res) {
     try {
         const username = req.body.username;
         const password = req.body.password;
-        const [[data]] = await pool.query(`SELECT * from Users WHERE username = ? AND password = ?`, [username,password])
+        const [[data]] = await pool.query('SELECT * FROM Users WHERE username = ? AND password = SHA(?)',[username,password])
         if (data){
             res.status(200).json({
                 status: 'success',
@@ -107,6 +107,7 @@ export const checkUsername = async function (req, res, next) {
 export const createUser = async function(req,res) {
     try {
         const [result] = await pool.query(`INSERT INTO Users(username, password) VALUES(?, ?)`,[req.body.username, req.body.password])
+        await pool.query('UPDATE Users SET password = SHA(?) WHERE username = ?',[req.body.password, req.body.username])
         const userID = result.insertId * 1;
         createBuildings(userID);
         createWorkers(userID);
