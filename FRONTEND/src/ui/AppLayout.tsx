@@ -4,22 +4,28 @@ import styled from "styled-components";
 
 const StyledAppLayout = styled.main`
   font-family: "Krona One", sans-serif;
+  position: relative;
 
-  display: grid;
-  grid-template-rows: auto 1fr;
-  height: 100vh;
-  overflow: hidden;
-
-  background-image: url("/backgrounds/bg-app.png");
-
+  background-image: url("/backgrounds/bg-app.gif");
   background-size: cover;
+
+  > div {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+    overflow: hidden;
+
+    backdrop-filter: blur(1rem);
+  }
 `;
 
 function AppLayout() {
   return (
     <StyledAppLayout>
-      <Header />
-      <Outlet />
+      <div>
+        <Header />
+        <Outlet />
+      </div>
     </StyledAppLayout>
   );
 }
