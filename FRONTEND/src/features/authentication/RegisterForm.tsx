@@ -5,6 +5,8 @@ import { pageAnimation } from "../../ui/pageAnimation";
 import { Input, Label, UserData } from "./Form";
 import { useCreateUser } from "./useCreateUser";
 import { useState } from "react";
+import { isCorrectInput } from "../../utils/helpers";
+import { toast } from "react-toastify";
 
 function RegisterForm() {
   const { createUser, isPending } = useCreateUser();
@@ -14,6 +16,13 @@ function RegisterForm() {
 
   function handleSubmit(e: React.MouseEvent<HTMLElement>) {
     e.preventDefault();
+
+    if (!isCorrectInput(username) || !isCorrectInput(password)) {
+      toast.error("please, use only letters and numbers!", {
+        theme: "colored",
+      });
+      return;
+    }
 
     createUser({ username, password });
   }

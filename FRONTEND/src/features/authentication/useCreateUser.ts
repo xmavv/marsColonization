@@ -19,12 +19,14 @@ export function useCreateUser() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
       navigate("/login");
-      toast.success('sign up successfully! now please login', {theme: "colored"});
+      toast.success("sign up successfully! now please login", {
+        theme: "colored",
+      });
     },
 
     onError: (err) => {
-      toast.success(err.message, {theme: "colored"});
-    }
+      toast.error(err.message, { theme: "colored" });
+    },
   });
 
   return { createUser, isPending };

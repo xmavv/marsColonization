@@ -19,7 +19,7 @@ export function useLogin() {
 
     onSuccess: (user: User) => {
       loginAuth(user);
-      navigate("/app");
+      navigate("/app", { replace: true });
     },
 
     onError: (err) => {

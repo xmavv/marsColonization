@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledLogoType = styled.div`
-  display: inline-block;
-  width: 80%;
+  margin-bottom: 10rem;
 `;
 
 const Img = styled.img`

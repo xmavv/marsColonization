@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const StyledButtonLogOut = styled.button`
   font-family: "Krona One", sans-serif;
@@ -24,9 +25,11 @@ const Img = styled.img`
 
 function ButtonLogOut() {
   const { logout } = useAuth();
+  const navigate = useNavigate();
 
   function handleLogout() {
     logout();
+    navigate("/homepage", { replace: true });
   }
 
   return (

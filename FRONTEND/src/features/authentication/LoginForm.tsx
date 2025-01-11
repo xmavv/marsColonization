@@ -5,6 +5,8 @@ import { pageAnimation } from "../../ui/pageAnimation";
 import { Input, Label, UserData } from "./Form";
 import { useLogin } from "./useLogin";
 import React, { useState } from "react";
+import { isCorrectInput } from "../../utils/helpers";
+import { toast } from "react-toastify";
 
 function LoginForm() {
   const [username, setUsername] = useState("");
@@ -14,6 +16,13 @@ function LoginForm() {
 
   function handleLogin(e: React.MouseEvent<HTMLElement>) {
     e.preventDefault();
+
+    if (!isCorrectInput(username) || !isCorrectInput(password)) {
+      toast.error("please, use only letters and numbers!", {
+        theme: "colored",
+      });
+      return;
+    }
 
     login({ username, password });
   }
