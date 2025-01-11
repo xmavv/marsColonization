@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon src/server.js",
-    "init:Tasks": "nodemon src/taskData/InsertTasks.js"
+    "init:tasks": "node src/taskData/InsertTasks.js"
   },
   "author": "Tesa44",
   "license": "ISC",
