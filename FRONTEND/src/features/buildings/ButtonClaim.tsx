@@ -5,6 +5,7 @@ import { useUpdateResources } from "../resources/useUpdateResources";
 import { useGeneratingResources } from "../../hooks/useGeneratingResources";
 import { Resources } from "../../services/apiResources";
 import { Button, CenterContainer } from "./BuildingUtils";
+import { Countdown } from "../../ui/Countdown";
 
 const buildingsResources = {
   central: "temperature",
@@ -22,24 +23,20 @@ const buildingColors = {
   powerhouse: "#983800",
 };
 
-const Countdown = styled.div<{ countdown: number }>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: ${(props) => props.countdown}%;
-  height: 100%;
-
-  transition: width 0.5s linear;
-  background-color: ${(props) => props.color};
-`;
-
-/* animation: ${resourcesCountdown} ${(props) => `${props.duration}s`} */
-/* ${CLAIM_RESOURCES_COUNTER} linear; */
-
 const StyledButtonClaim = styled(Button)`
   position: relative;
   background-color: black;
   overflow: hidden;
+
+  background-color: #4a4a4a;
+  opacity: 0.8;
+  background: repeating-linear-gradient(
+    -45deg,
+    #4a4a4a 1px,
+    #4a4a4a 5px,
+    #6c6c6c 6px,
+    #6c6c6c 10px
+  );
 `;
 
 interface Product {

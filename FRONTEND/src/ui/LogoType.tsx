@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledLogoType = styled.div`
-  margin-bottom: 10rem;
+  margin-bottom: 7vh;
 `;
 
 const Img = styled.img`

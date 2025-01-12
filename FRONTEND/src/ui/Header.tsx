@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import Resource, { Type } from "../features/resources/Resource";
+import Resource from "../features/resources/Resource";
 import ButtonLogOut from "./ButtonLogOut";
-import { Level } from "./Level";
 import { useResources } from "../features/resources/useResources";
 import Spinner from "./Spinner";
-import { useAuth } from "../contexts/AuthContext";
-import { useUser } from "../features/users/useUser";
+import UserData from "./UserData";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -20,12 +18,6 @@ const StyledHeader = styled.header`
   border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 `;
 
-const Nickname = styled.span`
-  font-size: 1.5rem;
-  margin: 0 0.5rem;
-  color: white;
-`;
-
 const Ul = styled.ul`
   display: flex;
   gap: 2rem;
@@ -33,17 +25,13 @@ const Ul = styled.ul`
 
 function Header() {
   const { data: resources, isLoading } = useResources();
-  const { data: user, isLoading: isLoading2 } = useUser();
 
-  if (isLoading || isLoading2) return <Spinner />;
+  if (isLoading) return <Spinner />;
   const { coins, energy, food, oxygen, temperature, water } = resources;
 
   return (
     <StyledHeader>
-      <div>
-        <Nickname>{user.username}</Nickname>
-        <Level>{user.level}</Level>
-      </div>
+      <UserData />
 
       <Ul>
         <li>
@@ -55,7 +43,6 @@ function Header() {
         <li>
           <Resource type={"food"}>{food}</Resource>
         </li>
-
         <li>
           <Resource type={"water"}>{water}</Resource>
         </li>
