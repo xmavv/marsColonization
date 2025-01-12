@@ -1,9 +1,7 @@
 import styled from "styled-components";
-import Resource from "../features/resources/Resource";
-import ButtonLogOut from "./ButtonLogOut";
-import { useResources } from "../features/resources/useResources";
-import Spinner from "./Spinner";
-import UserData from "./UserData";
+import UserData from "../features/users/UserData";
+import ResourcesList from "../features/resources/ResourcesList";
+import UserActions from "../features/users/UserActions";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -18,43 +16,14 @@ const StyledHeader = styled.header`
   border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 `;
 
-const Ul = styled.ul`
-  display: flex;
-  gap: 2rem;
-`;
-
 function Header() {
-  const { data: resources, isLoading } = useResources();
-
-  if (isLoading) return <Spinner />;
-  const { coins, energy, food, oxygen, temperature, water } = resources;
-
   return (
     <StyledHeader>
       <UserData />
 
-      <Ul>
-        <li>
-          <Resource type={"coins"}>{coins}</Resource>
-        </li>
-        <li>
-          <Resource type={"energy"}>{energy}</Resource>
-        </li>
-        <li>
-          <Resource type={"food"}>{food}</Resource>
-        </li>
-        <li>
-          <Resource type={"water"}>{water}</Resource>
-        </li>
-        <li>
-          <Resource type={"oxygen"}>{oxygen}</Resource>
-        </li>
-        <li>
-          <Resource type={"temperature"}>{temperature}</Resource>
-        </li>
-      </Ul>
+      <ResourcesList />
 
-      <ButtonLogOut />
+      <UserActions />
     </StyledHeader>
   );
 }

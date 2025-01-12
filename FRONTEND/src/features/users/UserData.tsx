@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { useUser } from "../features/users/useUser";
-import { Level } from "./Level";
-import Spinner from "./Spinner";
-import { Countdown } from "./Countdown";
+import { useUser } from "./useUser";
+import { Level } from "../../ui/Level";
+import Spinner from "../../ui/Spinner";
+import { Countdown } from "../../ui/Countdown";
 
 const StyledUserData = styled.div`
   display: flex;
