@@ -91,22 +91,22 @@ export const production = {
   buildings: {
     powerhouse: {
       RESOURCE: 2,
-      TIME: 30,
+      TIME: 10,
       INCREASE_FACTOR: 1.5
     },
     laboratory: {
       RESOURCE: 2,
-      TIME: 30,
+      TIME: 10,
       INCREASE_FACTOR: 1.5
     },
     farm: {
       RESOURCE: 2,
-      TIME: 30,
+      TIME: 10,
       INCREASE_FACTOR: 1.5
     },
     hydropolis: {
       RESOURCE: 2,
-      TIME: 30,
+      TIME: 10,
       INCREASE_FACTOR: 1.5
     },
     central: {
