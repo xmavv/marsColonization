@@ -41,6 +41,31 @@ export const getUser = async function (req,res) {
     }
 }
 
+export const deleteUser = async function(req, res) {
+    try {
+    const username = req.params.username;
+    const [[{id}]] = await pool.query(`SELECT id FROM Users WHERE username = ?`,[username])
+    await pool.query(`DELETE FROM Buildings WHERE user_id = ?`,[id])
+    await pool.query(`DELETE FROM Resources WHERE user_id = ?`,[id])
+    await pool.query(`DELETE FROM Workers WHERE user_id = ?`,[id])
+    await pool.query(`DELETE FROM Users_tasks WHERE user_id = ?`,[id])
+    await pool.query(`DELETE FROM Users WHERE id = ?`,[id])
+    res.status(200).json({
+        status: "success",
+        message: "Deleted user",
+        data: {
+            id,
+        }
+    })
+    }
+    catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err,
+        })
+    }
+}
+
 export const checkLogin = async function(req, res) {
     try {
         const username = req.body.username;
@@ -61,7 +86,7 @@ export const checkLogin = async function(req, res) {
                 status: 'fail',
                 message: 'Invalid username or password',
             })
-        }
+        }   
     }
     catch (err) {
         res.status(400).json({
