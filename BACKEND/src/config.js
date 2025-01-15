@@ -26,7 +26,7 @@ export const updateCosts = {
       WATER: 25,
       OXYGEN: 10,
       WORKERS: 3,
-      INCREASE_FACTOR: 1.2
+      INCREASE_FACTOR: 1.5
     },
     laboratory: {
       COINS: 100,
@@ -35,7 +35,7 @@ export const updateCosts = {
       WATER: 20,
       OXYGEN: 15,
       WORKERS: 3,
-      INCREASE_FACTOR: 1.2
+      INCREASE_FACTOR: 1.5
     },
     farm: {
       COINS: 70,
@@ -44,7 +44,7 @@ export const updateCosts = {
       WATER: 30,
       OXYGEN: 25,
       WORKERS: 3,
-      INCREASE_FACTOR: 1.1
+      INCREASE_FACTOR: 1.5
     },
     central: {
       COINS: 200,
@@ -53,7 +53,7 @@ export const updateCosts = {
       WATER: 30,
       OXYGEN: 30,
       WORKERS: 5,
-      INCREASE_FACTOR: 1.5
+      INCREASE_FACTOR: 2.0
     },
     hydropolis: {
       COINS: 80,
@@ -62,7 +62,7 @@ export const updateCosts = {
       WATER: 15,
       OXYGEN: 25,
       WORKERS: 3,
-      INCREASE_FACTOR: 1.2
+      INCREASE_FACTOR: 1.5
     }
   }
 }
@@ -91,28 +91,28 @@ export const production = {
   buildings: {
     powerhouse: {
       RESOURCE: 2,
-      TIME: 10,
+      TIME: 30,
       INCREASE_FACTOR: 1.5
     },
     laboratory: {
       RESOURCE: 2,
-      TIME: 10,
+      TIME: 30,
       INCREASE_FACTOR: 1.5
     },
     farm: {
       RESOURCE: 2,
-      TIME: 10,
+      TIME: 30,
       INCREASE_FACTOR: 1.5
     },
     hydropolis: {
       RESOURCE: 2,
-      TIME: 10,
+      TIME: 30,
       INCREASE_FACTOR: 1.5
     },
     central: {
       RESOURCE: 1,
-      TIME: 30,
-      INCREASE_FACTOR: 1.1
+      TIME: 600,
+      INCREASE_FACTOR: 1.5
     }
   }
 }
