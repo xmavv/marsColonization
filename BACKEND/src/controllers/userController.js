@@ -48,8 +48,8 @@ export const deleteUser = async function(req, res) {
     await pool.query(`DELETE FROM Buildings WHERE user_id = ?`,[id])
     await pool.query(`DELETE FROM Resources WHERE user_id = ?`,[id])
     await pool.query(`DELETE FROM Workers WHERE user_id = ?`,[id])
-    await pool.query(`DELETE FROM Users_tasks WHERE user_id = ?`,[id])
-    await pool.query(`DELETE FROM Users WHERE id = ?`,[id])
+    await pool.query(`DELETE FROM Users_Tasks WHERE user_id = ?`,[id])
+    await pool.query(`DELETE FROM Users WHERE username = ?`,[username])
     res.status(200).json({
         status: "success",
         message: "Deleted user",
