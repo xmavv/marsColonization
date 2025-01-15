@@ -59,8 +59,7 @@ function ButtonUpgrade({
       toast.success("you successfully upgraded the building!", {
         theme: "colored",
       });
-    } else
-      toast.error("nie masz wystarczajaco resourcow!", { theme: "colored" });
+    } else toast.error("not enought resources!", { theme: "colored" });
   }
 
   return (

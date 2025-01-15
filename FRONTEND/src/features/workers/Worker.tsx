@@ -80,7 +80,7 @@ function Worker({ type, quantity, cost }: WorkerProps) {
     if (resources.coins >= cost) {
       const workersToUpdate = { [`${type}s`]: quantity + 1 };
       updateWorkers(workersToUpdate);
-    } else toast.error("nie masz wystarczajaco coinsow!", { theme: "colored" });
+    } else toast.error("not enought coins!", { theme: "colored" });
   }
 
   return (

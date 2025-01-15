@@ -38,10 +38,11 @@ const LevelProgress = styled.div`
 
 function UserData() {
   const { data: user, isLoading: isLoading2 } = useUser();
-  const level = Math.floor(user.level / 1000);
-  const progress = Math.floor((user.level % 1000) / 10);
 
   if (isLoading2) return <Spinner />;
+
+  const level = Math.floor(user.level / 1000);
+  const progress = Math.floor((user.level % 1000) / 10);
 
   return (
     <StyledUserData>
