@@ -4,7 +4,7 @@ export interface Task {
   description: string;
   coins: number;
   workers: number;
-  durtation: number;
+  duration: number;
   type: "energy" | "food" | "water" | "oxygen";
   resources: number;
 }

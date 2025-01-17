@@ -7,14 +7,13 @@ const rotate = keyframes`
 `;
 
 const Spinner = styled.div`
-  margin: 4.8rem auto;
+  margin: 4.5rem auto;
 
   width: 50px;
   padding: 8px;
   aspect-ratio: 1;
   border-radius: 50%;
-  /* background: #25b09b; */
-  background-color: var(--color-primary);
+  background: var(--color-primary);
   --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
   -webkit-mask: var(--_m);
   mask: var(--_m);
@@ -22,6 +21,12 @@ const Spinner = styled.div`
   mask-composite: subtract;
 
   animation: ${rotate} 1s infinite linear;
+`;
+
+export const SpinnerMini = styled(Spinner)`
+  margin: 0.9rem auto;
+  width: 25px;
+  background: #3ada3f;
 `;
 
 export default Spinner;

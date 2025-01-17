@@ -1,7 +1,7 @@
-import Authentication from "../features/users/Authentication";
+import RegisterForm from "../features/authentication/RegisterForm";
 
 function Register() {
-  return <Authentication onClick={() => "register"}>REGISTER</Authentication>;
+  return <RegisterForm />;
 }
 
 export default Register;

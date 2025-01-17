@@ -1,11 +1,9 @@
 import styled from "styled-components";
 import ButtonCta from "../ui/ButtonCta";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { motion } from "framer-motion";
 import { pageAnimation } from "../ui/pageAnimation";
-
-import { getUsers } from "../services/apiUsers";
 
 const StyledHomepage = styled(motion.div)`
   display: flex;
@@ -18,7 +16,7 @@ const StyledHomepage = styled(motion.div)`
   }
 `;
 
-const ButtonUsers = styled.button`
+const ButtonUsers = styled(Link)`
   font-size: 1.5rem;
   font-family: "Krona one", sans-serif;
   padding: 2rem;
@@ -36,25 +34,28 @@ const ButtonUsers = styled.button`
 `;
 
 function Homepage() {
-  const handleClick = async () => {
-    const data = await getUsers();
-    console.log(data);
-  };
+  const navigate = useNavigate();
 
   return (
     <StyledHomepage {...pageAnimation}>
       <div>
-        <ButtonCta rotate="5deg" onClick={handleClick}>
+        <ButtonCta
+          rotate="5deg"
+          to="/register"
+          onClick={() => navigate("/register")}
+        >
           register
         </ButtonCta>
-        <ButtonCta rotate="-12deg" to="/login">
+        <ButtonCta
+          rotate="-12deg"
+          to="/login"
+          onClick={() => navigate("/login")}
+        >
           login
         </ButtonCta>
       </div>
 
-      <ButtonUsers>
-        <Link to="/users">players table</Link>
-      </ButtonUsers>
+      <ButtonUsers to="/users">players table</ButtonUsers>
     </StyledHomepage>
   );
 }

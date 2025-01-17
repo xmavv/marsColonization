@@ -26,17 +26,17 @@ const Blur = styled.div`
   backdrop-filter: blur(0.3rem);
 `;
 
-const Authors = styled.p`
-  font-size: 1.5rem;
-  font-weight: bold;
-  padding: 2rem;
+// const Authors = styled.p`
+//   font-size: 1.5rem;
+//   font-weight: bold;
+//   padding: 2rem;
 
-  color: var(--color-primary-2);
+//   color: var(--color-primary-2);
 
-  position: absolute;
-  bottom: 0;
-  left: 0;
-`;
+//   position: absolute;
+//   bottom: 0;
+//   left: 0;
+// `;
 
 function HomeLayout() {
   return (

@@ -12,6 +12,7 @@ import HomeLayout from "../ui/HomeLayout";
 import Users from "../pages/Users";
 
 import { AnimatePresence } from "framer-motion";
+import ProtectedRoute from "../features/authentication/ProtectedRoute";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -26,7 +27,13 @@ function AnimatedRoutes() {
           <Route path="login" element={<Login />} />
           <Route path="users" element={<Users />} />
         </Route>
-        <Route element={<AppLayout />}>
+        <Route
+          element={
+            <ProtectedRoute>
+              <AppLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route path="app" element={<Start />} />
           <Route path="app/building/:buildingType" element={<Building />} />
           <Route path="app/tasks" element={<Tasks />} />

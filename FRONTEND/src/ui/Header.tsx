@@ -1,16 +1,7 @@
 import styled from "styled-components";
-import Resource, { Type } from "../features/resources/Resource";
-import ButtonLogOut from "./ButtonLogOut";
-import { Level } from "./Level";
-
-const types = [
-  "coins",
-  "energy",
-  "food",
-  "water",
-  "oxygen",
-  "temperature",
-] as Type[];
+import UserData from "../features/users/UserData";
+import ResourcesList from "../features/resources/ResourcesList";
+import UserActions from "../features/users/UserActions";
 
 const StyledHeader = styled.header`
   display: flex;
@@ -25,36 +16,14 @@ const StyledHeader = styled.header`
   border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 `;
 
-const Nickname = styled.span`
-  font-size: 1.5rem;
-  margin: 0 0.5rem;
-  color: white;
-`;
-
-const Ul = styled.ul`
-  display: flex;
-  gap: 1rem;
-`;
-
 function Header() {
   return (
     <StyledHeader>
-      <div>
-        <Nickname>Tesa44</Nickname>
-        <Level>level 5</Level>
-      </div>
+      <UserData />
 
-      <Ul>
-        {types.map((resourceType: Type) => (
-          <li key={resourceType}>
-            <Resource type={resourceType}>
-              {resourceType.toUpperCase()}
-            </Resource>
-          </li>
-        ))}
-      </Ul>
+      <ResourcesList />
 
-      <ButtonLogOut />
+      <UserActions />
     </StyledHeader>
   );
 }

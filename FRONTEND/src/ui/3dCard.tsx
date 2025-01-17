@@ -1,8 +1,4 @@
-import {
-  CardBody,
-  CardContainer,
-  CardItem,
-} from "./../../@/components/ui/3d-card";
+import { CardBody, CardContainer } from "./../../@/components/ui/3d-card";
 
 interface Card3DProps {
   children: React.ReactNode;

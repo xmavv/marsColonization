@@ -4,6 +4,7 @@ import Table from "../../ui/Table";
 import { Task } from "./Task";
 import Resource from "../resources/Resource";
 import { formatDuration } from "../../utils/helpers";
+import { SpinnerMini } from "../../ui/Spinner";
 
 const Button = styled.button`
   transition: transform 0.3s ease;
@@ -20,26 +21,42 @@ const Description = styled.div`
   text-overflow: ellipsis;
 `;
 
-function TaskRow({ task }: { task: Task }) {
+function TaskRow({
+  task,
+  onClick,
+  isExecuting,
+}: {
+  task: Task;
+  onClick: () => void;
+  isExecuting: boolean;
+}) {
+  const { name, description, type, resources, coins, workers, duration } = task;
+
   return (
     <Table.Row>
-      <div>{task.name}</div>
-      <Description>{task.description}</Description>
+      <div>{name}</div>
+      <Description>{description}</Description>
       <div>
-        <Resource type={task.type}>{`${task.resources}`}</Resource>
+        <Resource type={type}>{`${resources}`}</Resource>
       </div>
       <div>
-        <Resource type="coins">{`${task.coins}`}</Resource>
+        <Resource type="coins">{`${coins}`}</Resource>
       </div>
       <div>
-        <Resource type="workers">{`${task.workers}`}</Resource>
+        <Resource type="workers">{`${workers}`}</Resource>
       </div>
       <div>
-        <Resource type="duration">{formatDuration(task.durtation)}</Resource>
+        <Resource type="duration">{formatDuration(duration)}</Resource>
       </div>
-      <Button>
-        <IconPlus />
-      </Button>
+      {isExecuting ? (
+        <div>
+          <SpinnerMini />
+        </div>
+      ) : (
+        <Button onClick={onClick}>
+          <IconPlus />
+        </Button>
+      )}
     </Table.Row>
   );
 }

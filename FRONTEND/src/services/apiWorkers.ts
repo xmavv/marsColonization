@@ -4,15 +4,15 @@ export async function getWorkers(userId: number) {
   const res = await fetch(`${apiLink}/workers/${userId}`);
   const data = await res.json();
 
-  return data;
+  return data.data;
 }
 
-interface workersToUpdate {
-  hydrologist: string;
-  chemist: string;
-  electrician: string;
-  biologist: string;
-  meteorologist: string;
+export interface workersToUpdate {
+  biologists?: number;
+  hydrologists?: number;
+  chemists?: number;
+  electricians?: number;
+  meteorologist?: number;
 }
 
 export async function updateWorkers(

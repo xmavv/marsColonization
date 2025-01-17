@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledButtonCta = styled.button<{ rotate: string }>`
@@ -66,28 +65,39 @@ const StyledButtonCta = styled.button<{ rotate: string }>`
       left: 3px;
     }
   }
+
+  &:disabled {
+    filter: grayscale(1);
+  }
 `;
 
 interface ButtonCtaProps {
   children: string;
   to?: string;
   rotate: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+  disabled?: boolean;
 }
 
-function ButtonCta({ children, to, rotate, onClick }: ButtonCtaProps) {
-  if (to === undefined)
-    return (
-      <StyledButtonCta rotate={rotate} onClick={onClick}>
-        {children}
-      </StyledButtonCta>
-    );
-
+function ButtonCta({
+  children,
+  // to,
+  rotate,
+  onClick,
+  disabled,
+}: ButtonCtaProps) {
+  // if (to === undefined)
   return (
-    <StyledButtonCta rotate={rotate}>
-      <Link to={to}>{children}</Link>
+    <StyledButtonCta rotate={rotate} onClick={onClick} disabled={disabled}>
+      {children}
     </StyledButtonCta>
   );
+
+  // return (
+  //   <StyledButtonCta as={Link} to={to} rotate={rotate} disabled={disabled}>
+  //     {children}
+  //   </StyledButtonCta>
+  // );
 }
 
 export default ButtonCta;

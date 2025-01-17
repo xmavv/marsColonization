@@ -1,108 +1,107 @@
+import { useRef, useState } from "react";
+import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
+import { useUpdateWorkers } from "../workers/useUpdateWorkers";
+import { useWorkers } from "../workers/useWorkers";
 import { Task } from "./Task";
 import TaskRow from "./TaskRow";
+import { useAddTask } from "./useAddTask";
+import { useTasks } from "./useTasks";
+import { useChangeTitle } from "../../hooks/useChangeTitle";
+import { toast } from "react-toastify";
 
-const task1: Task = {
-  id: 1,
-  name: "space adventure",
-  description: "space adventure at the end ",
-  coins: 1234,
-  workers: 123,
-  durtation: 2000,
-  type: "food",
-  resources: 123,
+const workersTypes = {
+  temperature: "meteorologists",
+  food: "biologists",
+  oxygen: "chemists",
+  water: "hydrologists",
+  energy: "electricians",
 };
-
-const task2: Task = {
-  id: 1,
-  name: "space adventure",
-  description: "space  at the end ",
-  coins: 521,
-  workers: 532,
-  durtation: 53,
-  type: "oxygen",
-  resources: 53,
-};
-
-const task3: Task = {
-  id: 1,
-  name: "space adventure",
-  description:
-    "space adventure at thdwwwwwwwwwwwwwwwwwwe dsdsdsdsdssssssssssssssssssssssend ",
-  coins: 21,
-  workers: 5312,
-  durtation: 531,
-  type: "oxygen",
-  resources: 632,
-};
-
-const task4: Task = {
-  id: 1,
-  name: "space adventure",
-  description: "space adventdwadsure at the end ",
-  coins: 2121,
-  workers: 52,
-  durtation: 42,
-  type: "water",
-  resources: 12,
-};
-
-const task5: Task = {
-  id: 1,
-  name: "xdd ahah",
-  description: "space dwadwawdwadwa at the end ",
-  coins: 6732,
-  workers: 632,
-  durtation: 63,
-  type: "energy",
-  resources: 241,
-};
-
-const tasks = [
-  task1,
-  task2,
-  task3,
-  task4,
-  task5,
-  task1,
-  task2,
-  task3,
-  task4,
-  task5,
-  task1,
-  task2,
-  task3,
-  task4,
-  task5,
-  task1,
-  task2,
-  task3,
-  task4,
-  task5,
-  task1,
-  task2,
-  task3,
-  task4,
-  task5,
-];
 
 function TaskTable() {
+  const [executingTask, setExecutinTask] = useState(-1);
+  const timeoutRef = useRef(0);
+
+  //database info
+  const { data: tasks, isLoading } = useTasks();
+  const { addTask } = useAddTask();
+
+  const { data: { data: workers } = {}, isLoading: isLoadingWorkers } =
+    useWorkers();
+  const { updateWorkers } = useUpdateWorkers();
+
+  //handler functions
+  function handleExecuteTask(task: Task) {
+    const workerType = workersTypes[task.type];
+    const taskWorkers = task.workers;
+
+    const workersToUpdate = { [workerType]: workers[workerType] - taskWorkers };
+
+    if (workers[workerType] < taskWorkers) {
+      toast.error("you can not do this! too less resources!", {
+        theme: "colored",
+      });
+
+      return;
+    }
+
+    updateWorkers(workersToUpdate);
+    setExecutinTask(task.id);
+    toast.success("task is being executed! dont leave this page!", {
+      theme: "colored",
+    });
+
+    document.title = `marsColonization - ⭐ executing task ${task.id} `;
+
+    timeoutRef.current = setTimeout(() => {
+      addTask(task.id);
+      setExecutinTask(-1);
+      toast.success("you have successfully done task!", { theme: "colored" });
+
+      document.title = `marsColonization - ⭐ tasks`;
+    }, task.duration * 1000);
+  }
+
+  //hooks
+  useChangeTitle("tasks");
+
+  // useEffect(() => {
+  //   window.onclose = function () {
+  //     if (executingTask !== -1) {
+  //       alert(
+  //         "jezeli teraz wyjdziesz to stracisz workersow i nie uzyskasz zasobow!"
+  //       );
+  //     }
+  //   };
+
+  //   // return () => clearTimeout(timeoutRef.current);
+  // }, [executingTask]);
+
+  if (isLoading || isLoadingWorkers) return <Spinner />;
+
   return (
     <Table columns="4fr 6fr 2fr 2fr 2fr 2fr 1fr">
       <Table.Header>
         <div>title</div>
         <div>description</div>
-        <div>resources</div>
-        <div>coins</div>
-        <div>workers</div>
-        <div>duraion</div>
-        <div>do task</div>
+        <div title="resources to claim after task is done">resources</div>
+        <div title="coins to claim after task is done">coins</div>
+        <div title="workers to get rid of forever">workers</div>
+        <div>duration</div>
+        <div>execute</div>
       </Table.Header>
 
       <Table.Body
         height="70vh"
         data={tasks}
-        render={(task) => <TaskRow key={task.id} task={task as Task} />}
+        render={(task) => (
+          <TaskRow
+            key={task.id}
+            task={task as Task}
+            onClick={() => handleExecuteTask(task as Task)}
+            isExecuting={task.id === executingTask}
+          />
+        )}
       ></Table.Body>
     </Table>
   );

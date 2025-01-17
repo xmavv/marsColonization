@@ -1,0 +1,1 @@
+export const CLAIM_RESOURCES_COUNTER = 5;

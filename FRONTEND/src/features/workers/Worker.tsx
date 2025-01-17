@@ -2,6 +2,9 @@ import styled from "styled-components";
 import IconPlus from "../../ui/IconPlus";
 import Resource from "../resources/Resource";
 import { Quantity } from "../../ui/Quantity";
+import { useUpdateWorkers } from "./useUpdateWorkers";
+import { useResources } from "../resources/useResources";
+import { toast } from "react-toastify";
 
 const StyledWorker = styled.div`
   display: grid;
@@ -40,6 +43,10 @@ const Button = styled.button`
   &:focus {
     transform: scale(1.2);
   }
+
+  &:disabled {
+    filter: grayscale(1);
+  }
 `;
 
 const Img = styled.img`
@@ -52,28 +59,42 @@ const Name = styled.p`
   font-size: 2rem;
 `;
 
+export type WorkerType =
+  | "hydrologist"
+  | "chemist"
+  | "electrician"
+  | "biologist"
+  | "meteorologist";
+
 interface WorkerProps {
-  type:
-    | "hydrologist"
-    | "chemist"
-    | "electrician"
-    | "biologist"
-    | "meteorologist";
+  type: WorkerType;
+  quantity: number;
+  cost: number;
 }
 
-function Worker({ type }: WorkerProps) {
+function Worker({ type, quantity, cost }: WorkerProps) {
+  const { updateWorkers, isPending } = useUpdateWorkers();
+  const { data: resources, isLoading } = useResources();
+
+  function handleAdd() {
+    if (resources.coins >= cost) {
+      const workersToUpdate = { [`${type}s`]: quantity + 1 };
+      updateWorkers(workersToUpdate);
+    } else toast.error("not enought coins!", { theme: "colored" });
+  }
+
   return (
     <StyledWorker>
       <Resource type="coins" size="2rem">
-        $ 500
+        {`${cost}`}
       </Resource>
-      <Button>
+      <Button onClick={handleAdd} disabled={isPending || isLoading}>
         <IconPlus /> add
       </Button>
       <Img src={`/workers/${type}.png`} alt="" />
       <Name>{type}</Name>
       <Quantity color="var(--color-primary)" size="2rem">
-        50
+        {quantity}
       </Quantity>
     </StyledWorker>
   );
