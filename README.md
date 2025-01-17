@@ -1,11 +1,14 @@
-# [marsColonization](https://xmavv-marsColonization.netlify.app/)
+# [marsColonization](https://marscolonization.vercel.app)
+
+# nasza gra dostepna tutaj -> [marsColonization](https://marscolonization.vercel.app)
+(moga wystapic problemy przy pierwszym wejsciu na strone, wynika to z faktu, iz nasz darmowy serwer musi sie uruchomic, aby obsluzyc requesty, zazwyczaj zajmuje to od 10s do 30s, przy starcie aplikacji)
 
 ![design preview](./preview.png)
 design by [xmavv](https://github.com/xmavv)
 
 - [plan](#plan)
 - [baza danych](#baza-danych)
-- [prces](#proces)
+- [proces](#proces)
     - [deployment](#deployment)
     - [frontend](#frontend)
         - [jak uruchomic front](#jak-uruchomic-front)
