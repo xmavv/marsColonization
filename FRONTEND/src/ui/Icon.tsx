@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Type } from "./Resource";
+import { Type } from "../features/resources/Resource";
 
 const StyledIcon = styled.img`
   display: inline-block;

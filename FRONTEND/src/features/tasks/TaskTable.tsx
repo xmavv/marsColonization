@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
 import { useUpdateWorkers } from "../workers/useUpdateWorkers";
@@ -24,11 +24,11 @@ function TaskTable() {
 
   //database info
   const { data: tasks, isLoading } = useTasks();
-  const { addTask, isPending: isPendingTask } = useAddTask();
+  const { addTask } = useAddTask();
 
   const { data: { data: workers } = {}, isLoading: isLoadingWorkers } =
     useWorkers();
-  const { updateWorkers, isPending } = useUpdateWorkers();
+  const { updateWorkers } = useUpdateWorkers();
 
   //handler functions
   function handleExecuteTask(task: Task) {

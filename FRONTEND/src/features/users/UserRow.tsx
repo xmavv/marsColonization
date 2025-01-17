@@ -20,13 +20,13 @@ function UserRow({ user }: { user: User }) {
         <Level>{level}</Level>
       </div>
       <div>
-        <Resource type="coins">{coins}</Resource>
+        <Resource type="coins">{`${coins}`}</Resource>
       </div>
       <div>
-        <Resource type="oxygen">{oxygen}</Resource>
+        <Resource type="oxygen">{`${oxygen}`}</Resource>
       </div>
       <div>
-        <Resource type="temperature">{temperature}</Resource>
+        <Resource type="temperature">{`${temperature}`}</Resource>
       </div>
       <div>{tasks}/1000</div>
     </Table.Row>
