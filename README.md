@@ -3,9 +3,6 @@
 # nasza gra dostepna tutaj -> [marsColonization](https://marscolonization.vercel.app)
 (moga wystapic problemy przy pierwszym wejsciu na strone, wynika to z faktu, iz nasz darmowy serwer musi sie uruchomic, aby obsluzyc requesty, zazwyczaj zajmuje to od 10s do 30s, przy starcie aplikacji)
 
-![design preview](./preview.png)
-design by [xmavv](https://github.com/xmavv)
-
 - [plan](#plan)
 - [baza danych](#baza-danych)
 - [proces](#proces)
@@ -15,6 +12,9 @@ design by [xmavv](https://github.com/xmavv)
         - [architektura](#architektura)
     - [backend](#backend)
         - [jak uruchomic back](#jak-uruchomic-back)
+
+![design preview](./preview.png)
+design by [xmavv](https://github.com/xmavv)
 
 # plan
 
