@@ -6,6 +6,7 @@ design by [xmavv](https://github.com/xmavv)
 - [plan](#plan)
 - [baza danych](#baza-danych)
 - [prces](#proces)
+    - [deployment](#deployment)
     - [frontend](#frontend)
         - [jak uruchomic front](#jak-uruchomic-front)
         - [architektura](#architektura)
@@ -61,6 +62,12 @@ Mechanika:
 ![baza danych](./data_base_diagram.pdf)
 
 # proces
+
+## deployment
+
+- baza danych jest hostowana w serwisie [aiven.io](https://aiven.io/)
+- serwer express do api jest hostowany w serwisie [render.com](https://render.com/)
+- aplikacja front jest hostowana w serwisie [vercel.com](https://vercel.com)
 
 ## frontend
 
