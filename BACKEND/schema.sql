@@ -1,5 +1,5 @@
-CREATE DATABASE mars_colonization;
-USE mars_colonization;
+CREATE DATABASE mars_colonization_2;
+USE mars_colonization_2;
 
 CREATE TABLE Users (
     id integer NOT NULL AUTO_INCREMENT,
