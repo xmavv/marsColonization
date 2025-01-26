@@ -10,7 +10,7 @@ export const capitalizeName = (name: string) =>
   `${name?.charAt(0).toUpperCase()}${name?.slice(1)}`;
 
 export function isCorrectInput(input: string) {
-  const regex = /^[a-zA-z\d]+$/;
+  const regex = /^[a-zA-Z\d]+$/;
 
   return input.match(regex) !== null ? true : false;
 }
