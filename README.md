@@ -14,6 +14,7 @@
         - [jak uruchomic back](#jak-uruchomic-back)
 
 ![design preview](./preview.png)
+![design preview 2](https://github.com/user-attachments/assets/d916d94d-39bc-4133-bfbc-7ead16de2ad1)
 design by [xmavv](https://github.com/xmavv)
 
 # plan
