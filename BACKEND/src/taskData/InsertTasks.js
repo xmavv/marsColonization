@@ -16,8 +16,10 @@ for (let i = 0; i < 100; i++) {
         task.resources,
       ]
     );
-    console.log("Inserted tasks");
+    console.log("Inserted tasks: " + i);
   } catch (err) {
     console.log(err);
   }
 }
+
+process.exit(0)

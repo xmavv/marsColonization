@@ -5,5 +5,4 @@ import { checkBody, getWorkers, updateWorkers } from '../controllers/workerContr
 export const router = express.Router();
 
 router.param('userid',checkUserID);
-
 router.route('/:userid').get(getWorkers).patch(checkBody,updateWorkers);

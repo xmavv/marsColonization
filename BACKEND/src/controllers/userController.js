@@ -41,11 +41,36 @@ export const getUser = async function (req,res) {
     }
 }
 
+export const deleteUser = async function(req, res) {
+    try {
+    const username = req.params.username;
+    const [[{id}]] = await pool.query(`SELECT id FROM Users WHERE username = ?`,[username])
+    await pool.query(`DELETE FROM Buildings WHERE user_id = ?`,[id])
+    await pool.query(`DELETE FROM Resources WHERE user_id = ?`,[id])
+    await pool.query(`DELETE FROM Workers WHERE user_id = ?`,[id])
+    await pool.query(`DELETE FROM Users_Tasks WHERE user_id = ?`,[id])
+    await pool.query(`DELETE FROM Users WHERE username = ?`,[username])
+    res.status(200).json({
+        status: "success",
+        message: "Deleted user",
+        data: {
+            id,
+        }
+    })
+    }
+    catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err,
+        })
+    }
+}
+
 export const checkLogin = async function(req, res) {
     try {
         const username = req.body.username;
         const password = req.body.password;
-        const [[data]] = await pool.query(`SELECT * from Users WHERE username = ? AND password = ?`, [username,password])
+        const [[data]] = await pool.query('SELECT * FROM Users WHERE username = ? AND password = SHA(?)',[username,password])
         if (data){
             res.status(200).json({
                 status: 'success',
@@ -61,7 +86,7 @@ export const checkLogin = async function(req, res) {
                 status: 'fail',
                 message: 'Invalid username or password',
             })
-        }
+        }   
     }
     catch (err) {
         res.status(400).json({
@@ -107,6 +132,7 @@ export const checkUsername = async function (req, res, next) {
 export const createUser = async function(req,res) {
     try {
         const [result] = await pool.query(`INSERT INTO Users(username, password) VALUES(?, ?)`,[req.body.username, req.body.password])
+        await pool.query('UPDATE Users SET password = SHA(?) WHERE username = ?',[req.body.password, req.body.username])
         const userID = result.insertId * 1;
         createBuildings(userID);
         createWorkers(userID);
